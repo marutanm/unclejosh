@@ -17,6 +17,7 @@ gem 'bson_ext', :require => "mongo"
 # Test requirements
 gem 'minitest', "~>2.6.0", :require => "minitest/autorun", :group => "test"
 gem 'rack-test', :require => "rack/test", :group => "test"
+gem 'guard-minitest', :require => false, :group => "test"
 
 # Padrino Stable Gem
 gem 'padrino', '0.10.7'
