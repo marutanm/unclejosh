@@ -24,4 +24,32 @@ class Hero
       hero.agility  = agility
     end
   end
+
+  def fight(challenger)
+    p "#{self.name} vs #{challenger.name}"
+    self[:cost] = 100
+    challenger[:cost] = 100
+    1.upto(1000) do |n|
+      [self, challenger].each do |hero|
+        hero[:cost] = hero[:cost] - hero.agility
+        if hero[:cost] < 0
+          p "#{hero.name} attack"
+          hero == self ?
+            challenger.life = challenger.life - self.strength :
+            self.life = self.life - challenger.strength
+          p "#{self.name} - #{self.life} : #{challenger.name} - #{challenger.life}"
+          hero[:cost] = hero[:cost].abs
+        end
+        break if self.life * challenger.life <= 0
+      end
+      if self.life <= 0
+        p "#{challenger.name} win!!"
+        break
+      end
+      if challenger.life <= 0
+        p "#{self.name} win!!"
+        break
+      end
+    end
+  end
 end
