@@ -11,5 +11,7 @@ describe "Hero Model" do
     @hero = Hero.named name
     assert_equal name, @hero.name
     assert_includes 0..1000, @hero.life
+    assert_includes 0..100, @hero.strength
+    assert_includes 0..100, @hero.agility
   end
 end
