@@ -36,10 +36,10 @@ class Hero
       [self, challenger].each do |hero|
         hero[:cost] = hero[:cost] - hero.agility
         if hero[:cost] < 0
-          p "#{hero.name} attack"
-          hero == self ?
-            challenger.life = challenger.life - self.strength :
-            self.life = self.life - challenger.strength
+          damage = hero.strength + hero.possibility.sample
+          p "#{hero.name} attack, #{damage} damages"
+          enemy = ([self, challenger] - [hero]).first
+          enemy.life = enemy.life - damage
           p "#{self.name} - #{self.life} : #{challenger.name} - #{challenger.life}"
           hero[:cost] = hero[:cost].abs
         end
