@@ -13,5 +13,6 @@ describe "Hero Model" do
     assert_includes 0..1000, @hero.life
     assert_includes 0..100, @hero.strength
     assert_includes 0..100, @hero.agility
+    assert_kind_of Array, @hero.possibility
   end
 end

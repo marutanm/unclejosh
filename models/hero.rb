@@ -7,6 +7,7 @@ class Hero
   field :life, :type => Integer
   field :strength, :type => Integer
   field :agility, :type => Integer
+  field :possibility, :type => Array
 
   validates_presence_of :name, :life, :strength, :agility
 
@@ -16,12 +17,14 @@ class Hero
     life     = (hex_array[0].hex % 1000).succ
     strength = (hex_array[1].hex % 100).succ
     agility  = (hex_array[2].hex % 100).succ
+    possibility = hex.split('').inject([]) { |a, i| a << i.hex; a }
 
     hero = self.new do |hero|
       hero.name     = name
       hero.life     = life
       hero.strength = strength
       hero.agility  = agility
+      hero.possibility = possibility
     end
   end
 
