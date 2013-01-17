@@ -11,6 +11,8 @@ class Hero
 
   validates_presence_of :name, :life, :strength, :agility
 
+  has_many :battles
+
   def self.named(name)
     hex =  Digest::MD5.hexdigest name
     hex_array  = hex.unpack 'A4' * (hex.length / 4)
