@@ -31,29 +31,21 @@ class Hero
   end
 
   def fight(challenger)
-    p "#{self.name} vs #{challenger.name}"
     self[:cost] = 100
     challenger[:cost] = 100
-    1.upto(1000) do |n|
-      [self, challenger].each do |hero|
-        hero[:cost] = hero[:cost] - hero.agility
-        if hero[:cost] < 0
-          damage = hero.strength + hero.possibility.sample
-          p "#{hero.name} attack, #{damage} damages"
-          enemy = ([self, challenger] - [hero]).first
-          enemy.life = enemy.life - damage
-          p "#{self.name} - #{self.life} : #{challenger.name} - #{challenger.life}"
-          hero[:cost] = hero[:cost].abs
+    Battle.create!(master: self, challenger: challenger) do |battle|
+      1.upto(1000) do |n|
+        [self, challenger].each do |hero|
+          hero[:cost] = hero[:cost] - hero.agility
+          if hero[:cost] < 0
+            damage = hero.strength + hero.possibility.sample
+            enemy = ([self, challenger] - [hero]).first
+            enemy.life = enemy.life - damage
+            battle.turns.create!(counter: n, damage: damage, afc: hero == challenger)
+            hero[:cost] = hero[:cost].abs
+          end
+          break if self.life * challenger.life <= 0
         end
-        break if self.life * challenger.life <= 0
-      end
-      if self.life <= 0
-        p "#{challenger.name} win!!"
-        break
-      end
-      if challenger.life <= 0
-        p "#{self.name} win!!"
-        break
       end
     end
   end
