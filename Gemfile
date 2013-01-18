@@ -22,6 +22,9 @@ gem 'guard-minitest', :require => false, :group => "test"
 # Padrino Stable Gem
 gem 'padrino', '0.10.7'
 
+gem 'rabl'
+gem 'oj'
+
 # Or Padrino Edge
 # gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
 
