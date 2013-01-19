@@ -13,6 +13,7 @@ GEM
       bson (~> 1.8.0)
     builder (3.0.4)
     coderay (1.0.8)
+    database_cleaner (0.9.1)
     guard (1.6.1)
       listen (>= 0.6.0)
       lumberjack (>= 1.0.2)
@@ -105,6 +106,7 @@ PLATFORMS
 
 DEPENDENCIES
   bson_ext
+  database_cleaner
   guard-minitest
   haml
   minitest (~> 2.6.0)
