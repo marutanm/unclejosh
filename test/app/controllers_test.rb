@@ -4,7 +4,7 @@ describe "HeroController" do
 
   describe "get /" do
     before do
-      @hero = Hero.create_with_name 'hero name'
+      @hero = Fabricate(:hero)
       get "/hero/#{@hero.id}"
     end
 

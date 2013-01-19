@@ -20,6 +20,8 @@ gem 'rack-test', :require => "rack/test", :group => "test"
 gem 'guard-minitest', :require => false, :group => "test"
 gem 'database_cleaner', :require => false, :group => "test"
 gem "simplecov", :require => false, :group => "test"
+gem "fabrication", :require => false, :group => "test"
+gem "faker", :require => false, :group => "test"
 
 # Padrino Edge
 gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'

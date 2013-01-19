@@ -11,6 +11,8 @@ SimpleCov.start 'coverage'
 require File.expand_path('../../config/boot', __FILE__)
 require File.expand_path('../../app/helpers.rb', __FILE__)
 require 'database_cleaner'
+require 'fabrication'
+require 'faker'
 
 class MiniTest::Unit::TestCase
   include Rack::Test::Methods
