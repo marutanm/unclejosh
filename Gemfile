@@ -29,3 +29,4 @@ gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
 gem 'rabl'
 gem 'oj'
 
+gem 'pry-padrino'
