@@ -4,8 +4,7 @@ describe "HeroController" do
 
   describe "get /" do
     before do
-      @hero = Hero.named 'hero name'
-      @hero.save
+      @hero = Hero.create_with_name 'hero name'
       get "/hero/#{@hero.id}"
     end
 

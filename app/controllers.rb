@@ -6,7 +6,7 @@ Unclejosh.controllers :hero do
   end
 
   post :index do
-    @hero = Hero.named params[:name]
+    @hero = Hero.create_with_name params[:name]
     render 'hero'
   end
 

@@ -13,7 +13,7 @@ class Hero
 
   has_many :battles
 
-  def self.named(name)
+  def self.create_with_name(name)
     hex =  Digest::MD5.hexdigest name
     hex_array  = hex.unpack 'A4' * (hex.length / 4)
     life     = (hex_array[0].hex % 1000).succ
@@ -21,7 +21,7 @@ class Hero
     agility  = (hex_array[2].hex % 100).succ
     possibility = hex.split('').inject([]) { |a, i| a << i.hex; a }
 
-    hero = self.new do |hero|
+    hero = self.create! do |hero|
       hero.name     = name
       hero.life     = life
       hero.strength = strength
