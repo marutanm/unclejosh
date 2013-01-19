@@ -3,26 +3,22 @@ require File.expand_path(File.dirname(__FILE__) + '/../test_config.rb')
 describe "HeroController" do
 
   describe "get /" do
-    before do
-      @hero = Fabricate(:hero)
-      get "/hero/#{@hero.id}"
-    end
+    before { get "/hero/#{hero.id}" }
+    let(:hero) { Fabricate(:hero) }
 
     it "should return the correct hero" do
-      body = JSON.parse(last_response.body)
-      assert_equal body['name'], @hero.name
+      body = JSON.parse last_response.body
+      assert_equal body['name'], hero.name
     end
   end
 
   describe "post /" do
-    before do
-      @name = 'hero name'
-      post "/hero", { name: @name }
-    end
+    let(:name) { Faker::Name.name }
+    before { post "/hero", { name: name } }
 
     it "return created hero" do
-      body = JSON.parse(last_response.body)
-      assert_equal body['name'], @name
+      body = JSON.parse last_response.body
+      assert_equal body['name'], name
     end
   end
 
