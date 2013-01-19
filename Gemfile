@@ -21,16 +21,9 @@ gem 'guard-minitest', :require => false, :group => "test"
 gem 'database_cleaner', :require => false, :group => "test"
 gem "simplecov", :require => false, :group => "test"
 
-# Padrino Stable Gem
-gem 'padrino', '0.10.7'
+# Padrino Edge
+gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
 
 gem 'rabl'
 gem 'oj'
 
-# Or Padrino Edge
-# gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
-
-# Or Individual Gems
-# %w(core gen helpers cache mailer admin).each do |g|
-#   gem 'padrino-' + g, '0.10.7'
-# end
