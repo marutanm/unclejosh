@@ -5,4 +5,9 @@ Unclejosh.controllers :hero do
     render 'hero'
   end
 
+  post :index do
+    @hero = Hero.named params[:name]
+    render 'hero'
+  end
+
 end
