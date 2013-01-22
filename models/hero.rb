@@ -12,6 +12,7 @@ class Hero
   validates_presence_of :name, :life, :strength, :agility
 
   has_many :battles
+  embeds_one :ranking_info, class_name: 'Hero', inverse_of: :hero
 
   def self.create_with_name(name)
     hex =  Digest::MD5.hexdigest name
