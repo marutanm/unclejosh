@@ -11,8 +11,11 @@ class Hero
 
   validates_presence_of :name, :life, :strength, :agility
 
-  has_many :battles
-  embeds_one :ranking_info, class_name: 'Hero', inverse_of: :hero
+  has_many :battles, inverse_of: :master
+  has_many :battles, inverse_of: :challenger
+  belongs_to :battles, inverse_of: :winner
+
+  embeds_one :ranking_info, class_name: 'HeroRanking', inverse_of: :hero
 
   def self.create_with_name(name)
     hex =  Digest::MD5.hexdigest name
@@ -35,17 +38,23 @@ class Hero
     self[:cost] = 100
     challenger[:cost] = 100
     Battle.create!(master: self, challenger: challenger) do |battle|
-      1.upto(1000) do |n|
-        [self, challenger].each do |hero|
-          hero[:cost] = hero[:cost] - hero.agility
-          if hero[:cost] < 0
-            damage = hero.strength + hero.possibility.sample
-            enemy = ([self, challenger] - [hero]).first
-            enemy.life = enemy.life - damage
-            battle.turns.create!(counter: n, damage: damage, afc: hero == challenger)
-            hero[:cost] = hero[:cost].abs
+      catch(:done) do
+        1.upto(1000) do |n|
+          [self, challenger].each do |hero|
+            hero[:cost] = hero[:cost] - hero.agility
+            if hero[:cost] < 0
+              damage = hero.strength + hero.possibility.sample
+              enemy = ([self, challenger] - [hero]).first
+              enemy.life = enemy.life - damage
+              battle.turns.create!(counter: n, damage: damage, afc: hero == challenger)
+              hero[:cost] = hero[:cost].abs
+            end
+            if self.life * challenger.life <= 0
+              battle.winner = hero
+              throw :done
+              break
+            end
           end
-          break if self.life * challenger.life <= 0
         end
       end
     end

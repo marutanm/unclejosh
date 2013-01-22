@@ -4,6 +4,7 @@ class Battle
 
   belongs_to :master, :class_name => 'Hero'
   belongs_to :challenger, :class_name => 'Hero'
+  has_one :winner, :class_name => 'Hero'
 
   embeds_many :turns
 
@@ -20,7 +21,7 @@ class Battle
         m.life = m.life - t.damage
       else
         p "#{m.name} attack, #{t.damage} damages"
-        c.life = m.life - t.damage
+        c.life = c.life - t.damage
       end
 
       p "#{t.counter}: #{m.name}(#{m.life}) - #{c.name}(#{c.life})"
