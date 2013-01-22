@@ -3,6 +3,6 @@ Fabricator(:hero) do
   life { rand(1000) }
   strength { rand(100) }
   agility { rand(100) }
-  agility { rand(100) }
+  possibility { [0] }
 end
 
