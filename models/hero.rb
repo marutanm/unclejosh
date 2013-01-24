@@ -33,30 +33,4 @@ class Hero
       hero.possibility = possibility
     end
   end
-
-  def fight(challenger)
-    self[:cost] = 100
-    challenger[:cost] = 100
-    Battle.create!(master: self, challenger: challenger) do |battle|
-      catch(:done) do
-        1.upto(1000) do |n|
-          [self, challenger].each do |hero|
-            hero[:cost] = hero[:cost] - hero.agility
-            if hero[:cost] < 0
-              damage = hero.strength + hero.possibility.sample
-              enemy = ([self, challenger] - [hero]).first
-              enemy.life = enemy.life - damage
-              battle.turns.create!(counter: n, damage: damage, afc: hero == challenger)
-              hero[:cost] = hero[:cost].abs
-            end
-            if self.life * challenger.life <= 0
-              battle.winner = hero
-              throw :done
-              break
-            end
-          end
-        end
-      end
-    end
-  end
 end

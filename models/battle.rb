@@ -2,13 +2,15 @@ class Battle
   include Mongoid::Document
   include Mongoid::Timestamps # adds created_at and updated_at fields
 
-  belongs_to :master, :class_name => 'Hero'
-  belongs_to :challenger, :class_name => 'Hero'
-  has_one :winner, :class_name => 'Hero'
+  has_and_belongs_to_many :masters,     class_name: 'Hero', inverse_of: nil
+  has_and_belongs_to_many :challengers, class_name: 'Hero', inverse_of: nil
+  has_and_belongs_to_many :winners,     class_name: 'Hero', inverse_of: nil
 
   embeds_many :turns
 
-  validates_presence_of :master, :challenger
+  def master;     self.masters.first     end
+  def challenger; self.challengers.first end
+  def winner;     self.winners.first     end
 
   def play
     m = master.dup
