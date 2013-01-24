@@ -8,9 +8,24 @@ class Battle
 
   embeds_many :turns
 
+  validates_presence_of :masters, :challengers
+
   def master;     self.masters.first     end
   def challenger; self.challengers.first end
   def winner;     self.winners.first     end
+
+  validate :unique_hero, :masters_count, :challengers_count
+
+  def masters_count
+    errors.add :masters, 'count must equal 1' unless masters.count == 1
+  end
+  def challengers_count
+    errors.add :challengers, 'count moust equal 1' unless challengers.count == 1
+  end
+
+  def unique_hero
+    raise if self.class.where(:master_ids => [ masters.first.id ]).where(:challenger_ids => [ challengers.first.id ]).exists?
+  end
 
   def play
     m = master.dup
