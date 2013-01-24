@@ -6,14 +6,14 @@ describe "Hero Model" do
     refute_nil @hero
   end
 
-  it 'can construct with name' do
-    name = 'hero name'
-    @hero = Hero.create_with_name name
-    assert_equal 1, Hero.count
-    assert_equal name, @hero.name
-    assert_includes 0..1000, @hero.life
-    assert_includes 0..100, @hero.strength
-    assert_includes 0..100, @hero.agility
-    assert_kind_of Array, @hero.possibility
+  describe 'create_with_name()' do
+    let (:name) { 'hero name' }
+    subject { Hero.create_with_name name }
+
+    it { subject.name.must_equal name }
+    it { assert_includes 0..1000, subject.life }
+    it { assert_includes 0..100, subject.strength }
+    it { assert_includes 0..100, subject.agility }
+    it { assert_kind_of Array, subject.possibility }
   end
 end
