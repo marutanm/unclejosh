@@ -14,7 +14,8 @@ class Battle
   def challenger; self.challengers.first end
   def winner;     self.winners.first     end
 
-  validate :unique_hero, :masters_count, :challengers_count
+  validate :masters_count, :challengers_count
+  before_save :unique_hero
 
   def masters_count
     errors.add :masters, 'count must equal 1' unless masters.count == 1

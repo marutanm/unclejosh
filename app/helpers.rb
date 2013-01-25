@@ -8,7 +8,7 @@ module UnclejoshHelper
     raise if master == challenger
     master[:cost] = 100
     challenger[:cost] = 100
-    battle = Battle.create!(masters: [master], challengers: [challenger]) do |battle|
+    battle = Battle.create!(masters: [ master ], challengers: [ challenger ]) do |battle|
       catch(:done) do
         1.upto(1000) do |n|
           [master, challenger].each do |hero|
