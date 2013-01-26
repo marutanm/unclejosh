@@ -11,8 +11,7 @@ gem 'sinatra-flash', :require => 'sinatra/flash'
 # Component requirements
 gem 'sass'
 gem 'haml'
-gem "mongoid", "~> 2.5.1"
-gem 'bson_ext', :require => "mongo"
+gem "mongoid"
 
 # Test requirements
 gem 'minitest', "~>2.6.0", :require => "minitest/autorun", :group => "test"
