@@ -28,30 +28,4 @@ class Battle
     raise if self.class.where(:master_ids => [ masters.first.id ]).where(:challenger_ids => [ challengers.first.id ]).exists?
   end
 
-  def play
-    m = master.dup
-    c = challenger.dup
-    p "#{m.name}(#{m.life}) vs #{c.name}(#{c.life})"
-
-    self.turns.order_by([:counter, :asc]).each do |t|
-      if t.afc
-        p "#{c.name} attack, #{t.damage} damages"
-        m.life = m.life - t.damage
-      else
-        p "#{m.name} attack, #{t.damage} damages"
-        c.life = c.life - t.damage
-      end
-
-      p "#{t.counter}: #{m.name}(#{m.life}) - #{c.name}(#{c.life})"
-
-      if m.life <= 0
-        p "#{c.name} win!!"
-        return
-      end
-      if c.life <= 0
-        p "#{m.name} win!!"
-        return
-      end
-    end
-  end
 end
