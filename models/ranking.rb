@@ -6,12 +6,10 @@ class Ranking
   field :rank,      :type => Integer, :default => 1
 
   validates_presence_of :win_count, :rank
+  validates_uniqueness_of :win_count
 
   def self.challenge(count)
-    0.upto count do |c|
-      rank = self.find_or_create_by(win_count: c)
-      return rank.rank if c == count
-      rank.inc(:rank, 1)
-    end
+    0.upto(count - 1) { |c| self.find_or_create_by(win_count: c).inc(:rank, 1) }
+    self.find_or_create_by(:win_count => count).rank
   end
 end
