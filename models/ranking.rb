@@ -10,6 +10,6 @@ class Ranking
 
   def self.challenge(count)
     0.upto(count - 1) { |c| self.find_or_create_by(win_count: c).inc(:rank, 1) }
-    self.find_or_create_by(:win_count => count).rank
+    self.find_or_create_by(:win_count => count)
   end
 end

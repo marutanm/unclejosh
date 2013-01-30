@@ -8,35 +8,33 @@ describe "Ranking Model" do
 
   describe 'challenge()' do
     it 'find or create document and increment rank' do
-      Ranking.challenge(10)
-      Ranking.count.must_equal 11
+      Ranking.challenge(10).rank.must_equal 1
       0.upto(9) do |i|
         Ranking.find_by(win_count: i).rank.must_equal 2
       end
-      Ranking.find_by(win_count: 10).rank.must_equal 1
+      Ranking.count.must_equal 11
 
-      Ranking.challenge(30)
-      Ranking.count.must_equal 31
-      0.upto(9) do |i|
-        Ranking.find_by(win_count: i).rank.must_equal 3
-      end
+      Ranking.challenge(30).rank.must_equal 1
       10.upto(29) do |i|
         Ranking.find_by(win_count: i).rank.must_equal 2
       end
-      Ranking.find_by(win_count: 30).rank.must_equal 1
-
-      Ranking.challenge(20)
-      Ranking.count.must_equal 31
       0.upto(9) do |i|
-        Ranking.find_by(win_count: i).rank.must_equal 4
+        Ranking.find_by(win_count: i).rank.must_equal 3
+      end
+      Ranking.count.must_equal 31
+
+      Ranking.challenge(20).rank.must_equal 2
+      Ranking.find_by(win_count: 30).rank.must_equal 1
+      20.upto(29) do |i|
+        Ranking.find_by(win_count: i).rank.must_equal 2
       end
       10.upto(19) do |i|
         Ranking.find_by(win_count: i).rank.must_equal 3
       end
-      20.upto(29) do |i|
-        Ranking.find_by(win_count: i).rank.must_equal 2
+      0.upto(9) do |i|
+        Ranking.find_by(win_count: i).rank.must_equal 4
       end
-      Ranking.find_by(win_count: 30).rank.must_equal 1
+      Ranking.count.must_equal 31
     end
   end
 end
