@@ -31,6 +31,11 @@ module UnclejoshHelper
     battle
   end
 
+  def rank(hero)
+    ranking = Ranking.challenge hero.ranking_info.initial_win
+    ranking.heros << hero
+    nil
+  end
 end
 
 Unclejosh.helpers UnclejoshHelper

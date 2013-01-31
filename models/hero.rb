@@ -15,6 +15,8 @@ class Hero
   has_many :battles, inverse_of: :challenger
   belongs_to :battles, inverse_of: :winner
 
+  belongs_to :ranking
+
   embeds_one :ranking_info, class_name: 'HeroRanking', inverse_of: :hero
 
   def self.create_with_name(name)
