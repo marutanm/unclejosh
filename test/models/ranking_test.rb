@@ -6,6 +6,26 @@ describe "Ranking Model" do
     refute_nil @ranking
   end
 
+  describe 'rank_of()' do
+    let(:hero1) do
+      Fabricate(:hero) { ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero, :initial_win => 10) } }
+    end
+    let(:hero2) do
+      Fabricate(:hero) { ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero, :initial_win => 10) } }
+    end
+    let(:ranking) { Fabricate(:ranking, win_count: 10, rank: 15) }
+
+    specify do
+      ranking.heros << hero1
+      Ranking.rank_of(hero1).must_equal 15
+      Ranking.rank_of(hero2).must_equal nil
+
+      ranking.heros << hero2
+      Ranking.rank_of(hero1).must_equal 15
+      Ranking.rank_of(hero2).must_equal 16
+    end
+  end
+
   describe 'challenge()' do
     it 'find or create document and increment rank' do
       Ranking.challenge(10).rank.must_equal 1
