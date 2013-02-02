@@ -47,4 +47,27 @@ describe UnclejoshHelper do
       Ranking.rank_of(hero2).must_equal 3
     end
   end
+
+  describe "challenge_rank()" do
+    let(:count) { 10 }
+    let(:challenger) { Fabricate(:hero) }
+    before do
+      0.upto(count - 1) do |i|
+        hero = Fabricate(:hero) do |h|
+          h.name "#{Faker::Name.name} #{i}"
+          h.ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero, :initial_win => i) }
+        end
+        helper.rank hero
+      end
+    end
+    subject { helper.challenge_rank challenger, count }
+
+    specify do
+      count.must_equal 10
+      subject.must_be_kind_of Hash
+      subject.key?(:rank).wont_be_nil
+      subject.key?(:initial_win).wont_be_nil
+      subject[:rank].must_equal 10 - subject[:initial_win] + 1
+    end
+  end
 end

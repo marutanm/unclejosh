@@ -36,6 +36,32 @@ module UnclejoshHelper
     ranking.heros << hero
     nil
   end
+
+  def challenge_rank(challenger, count = 500)
+    top = Ranking.all.desc(:win_count).limit(1).first.win_count
+    win_count = 0
+    while count > 0 do
+      top.downto(0) do |i|
+        heros = Ranking.find_by(win_count: i).heros
+        heros.each do |hero|
+          result = fight hero, challenger
+          if result.winner == challenger
+            win_count += 1
+          else
+            hero.ranking_info.total_win += 1
+          end
+          count -= 1
+          break if count == 0
+        end
+        break if count == 0
+      end
+    end
+    challenger.create_ranking_info initial_win: win_count, total_win: win_count
+
+    rank challenger
+    { rank: Ranking.rank_of(challenger), initial_win: win_count }
+  end
+
 end
 
 Unclejosh.helpers UnclejoshHelper
