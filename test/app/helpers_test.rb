@@ -68,7 +68,7 @@ describe UnclejoshHelper do
         helper.rank hero
       end
     end
-    subject { helper.challenge_rank challenger, count }
+    subject { helper.challenge_rank challenger }
 
     specify do
       count.must_equal 10

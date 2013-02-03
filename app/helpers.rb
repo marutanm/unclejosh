@@ -44,7 +44,7 @@ module UnclejoshHelper
   def challenge_rank(challenger, count = 500)
     top = Ranking.all.desc(:win_count).limit(1).first.win_count
     win_count = 0
-    while count > 0 do
+    catch(:done) do
       top.downto(0) do |i|
         heros = Ranking.find_by(win_count: i).heros
         heros.each do |hero|
@@ -55,9 +55,8 @@ module UnclejoshHelper
             hero.ranking_info.total_win += 1
           end
           count -= 1
-          break if count == 0
+          throw :done if count == 0
         end
-        break if count == 0
       end
     end
     challenger.create_ranking_info initial_win: win_count, total_win: win_count
