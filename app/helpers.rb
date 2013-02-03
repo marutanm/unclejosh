@@ -6,22 +6,26 @@ module UnclejoshHelper
 
   def fight(master, challenger)
     raise if master == challenger
-    master[:cost] = 100
-    challenger[:cost] = 100
+    params = [master, challenger].inject({}) do |params, hero|
+      params[hero.id] = {}
+      params[hero.id][:cost] = 100
+      params[hero.id][:life] = hero.life
+      params
+    end
     battle = Battle.create!(masters: [ master ], challengers: [ challenger ])
     catch(:done) do
       1.upto(1000) do |n|
         [master, challenger].each do |hero|
-          hero[:cost] = hero[:cost] - hero.agility
-          if hero[:cost] < 0
+          params[hero.id][:cost] = params[hero.id][:cost] - hero.agility
+          if params[hero.id][:cost] < 0
             damage = hero.strength + hero.possibility.sample
             enemy = ([master, challenger] - [hero]).first
-            enemy.life = enemy.life - damage
+            params[enemy.id][:life] = params[enemy.id][:life] - damage
             battle.turns.create!(counter: n, damage: damage, afc: hero == challenger)
-            hero[:cost] = hero[:cost].abs
+            params[hero.id][:cost] = params[hero.id][:cost].abs
           end
-          if master.life * challenger.life <= 0
-            battle.winners = [hero]
+          if params[master.id][:life] * params[challenger.id][:life] <= 0
+            battle.winners = [ hero ]
             throw :done
             break
           end

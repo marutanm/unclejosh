@@ -20,6 +20,14 @@ describe UnclejoshHelper do
       subject { helper.fight hero1, hero1 }
       it { proc { subject }.must_raise RuntimeError }
     end
+
+    describe "not effect to hero params" do
+      before { helper.fight hero1, hero2 }
+      specify do
+        hero1.life.must_equal 100
+        hero2.life.must_equal 100
+      end
+    end
   end
 
   describe "rank" do
