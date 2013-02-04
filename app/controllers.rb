@@ -1,4 +1,4 @@
-Unclejosh.controllers :hero do
+Unclejosh.controllers :heros do
 
   get :index, :with => :id do
     @hero = Hero.find(params[:id])
