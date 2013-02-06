@@ -23,3 +23,19 @@ describe "HeroController" do
   end
 
 end
+
+describe "BattleController" do
+  describe "get /" do
+    let(:battle) { Fabricate(:battle) }
+    before { get "/battles/#{battle.id}" }
+
+    it "should return battle" do
+      body = JSON.parse last_response.body
+      body['master']['name'].must_equal battle.master.name
+      body['challenger']['name'].must_equal battle.challenger.name
+      body['winner'].must_be_nil
+
+      body['id'].must_equal battle.id
+    end
+  end
+end
