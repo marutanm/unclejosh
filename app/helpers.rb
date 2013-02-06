@@ -21,7 +21,11 @@ module UnclejoshHelper
             damage = hero.strength + hero.possibility.sample
             enemy = ([master, challenger] - [hero]).first
             params[enemy.id][:life] = params[enemy.id][:life] - damage
-            battle.turns.create!(counter: n, damage: damage, afc: hero == challenger)
+            if hero == master
+              battle.master_attacks << Turn.new(counter: n, damage: damage)
+            else
+              battle.challenger_attacks << Turn.new(counter: n, damage: damage)
+            end
             params[hero.id][:cost] = params[hero.id][:cost].abs
           end
           if params[master.id][:life] * params[challenger.id][:life] <= 0

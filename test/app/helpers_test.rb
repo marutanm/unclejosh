@@ -10,7 +10,8 @@ describe UnclejoshHelper do
 
     describe "valid case" do
       subject { helper.fight hero1, hero2 }
-      it { subject.turns.count.must_equal 4 }
+      it { subject.master_attacks.count.must_equal 4 }
+      it { subject.challenger_attacks.count.must_equal 0 }
       it { subject.master.must_equal hero1 }
       it { subject.challenger.must_equal hero2 }
       it { subject.winner.must_equal hero1 }

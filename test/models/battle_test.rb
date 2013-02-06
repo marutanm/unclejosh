@@ -5,4 +5,13 @@ describe "Battle Model" do
     @battle = Battle.new
     refute_nil @battle
   end
+
+  describe 'accessor' do
+    subject { Fabricate.build(:battle) }
+    specify do
+      subject.master.wont_be_nil
+      subject.challenger.wont_be_nil
+      subject.winner.must_be_nil
+    end
+  end
 end

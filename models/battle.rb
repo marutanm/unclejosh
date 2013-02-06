@@ -8,7 +8,8 @@ class Battle
   has_and_belongs_to_many :challengers, class_name: 'Hero', inverse_of: nil
   has_and_belongs_to_many :winners,     class_name: 'Hero', inverse_of: nil
 
-  embeds_many :turns
+  embeds_many :master_attacks,      class_name: 'Turn'
+  embeds_many :challenger_attacks,  class_name: 'Turn'
 
   validates_presence_of :masters, :challengers
   validates_uniqueness_of :_id
