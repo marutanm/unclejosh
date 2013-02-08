@@ -26,16 +26,25 @@ end
 
 describe "BattleController" do
   describe "get /" do
-    let(:battle) { Fabricate(:battle) }
+    let(:battle) do
+      Fabricate(:battle) do
+          after_create do |battle|
+            10.times do
+              battle.master_attacks << Fabricate.build(:turn)
+              battle.challenger_attacks << Fabricate.build(:turn)
+            end
+          end
+      end
+    end
     before { get "/battles/#{battle.id}" }
 
     it "should return battle" do
       body = JSON.parse last_response.body
+      body['id'].must_equal battle.id
       body['master']['name'].must_equal battle.master.name
       body['challenger']['name'].must_equal battle.challenger.name
       body['winner'].must_be_nil
-
-      body['id'].must_equal battle.id
+      body['turns'].must_be_instance_of Array
     end
   end
 end

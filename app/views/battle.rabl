@@ -13,6 +13,8 @@ node :winner do
   partial("hero", :object => @battle.winner)
 end
 
-child :master_attacks do
-  attributes :counter
+node :turns do
+  @battle.turns.map do |turn|
+    { damage: turn.damage, owner: turn.owner }
+  end
 end

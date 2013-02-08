@@ -20,6 +20,14 @@ class Battle
 
   validate :masters_count, :challengers_count
 
+  def turns
+    turns = [] << master_attacks.clone.each {|t| t['owner'] = 'master' }
+    turns << challenger_attacks.clone.each {|t| t['owner'] = 'challenger' }
+    turns.flatten!.sort! do |a, b|
+      (a.counter <=> b.counter).nonzero? or (b.owner <=> a.owner)
+    end
+  end
+
   private
 
   def default_id
