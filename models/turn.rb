@@ -4,7 +4,6 @@ class Turn
 
   field :counter, :type => Integer
   field :damage, :type => Integer
-  field :afc, :type => Boolean  # means Attack From Challenger
 
   embedded_in :battle
 

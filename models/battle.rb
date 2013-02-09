@@ -8,7 +8,8 @@ class Battle
   has_and_belongs_to_many :challengers, class_name: 'Hero', inverse_of: nil
   has_and_belongs_to_many :winners,     class_name: 'Hero', inverse_of: nil
 
-  embeds_many :turns
+  embeds_many :master_attacks,      class_name: 'Turn'
+  embeds_many :challenger_attacks,  class_name: 'Turn'
 
   validates_presence_of :masters, :challengers
   validates_uniqueness_of :_id
@@ -18,6 +19,14 @@ class Battle
   def winner;     self.winners.first     end
 
   validate :masters_count, :challengers_count
+
+  def turns
+    turns = [] << master_attacks.clone.each {|t| t['owner'] = 'master' }
+    turns << challenger_attacks.clone.each {|t| t['owner'] = 'challenger' }
+    turns.flatten!.sort! do |a, b|
+      (a.counter <=> b.counter).nonzero? or (b.owner <=> a.owner)
+    end
+  end
 
   private
 
