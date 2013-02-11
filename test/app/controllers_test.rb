@@ -48,3 +48,32 @@ describe "BattleController" do
     end
   end
 end
+
+describe "UserController" do
+  describe "post /" do
+    let(:name) { Faker::Name.name }
+
+    describe "name uniqueness validation" do
+      before do
+        User.create name: name
+        post "/users", { name: name }
+      end
+      subject { last_response }
+
+      specify do
+        subject.status.must_equal 503
+        subject.body.must_equal 'user name duplicated'
+      end
+    end
+
+    describe "create user" do
+      before { post "/users", { name: name } }
+      subject { JSON.parse last_response.body }
+
+      specify do
+        subject['id'].wont_be_nil
+        subject['name'].must_equal name
+      end
+    end
+  end
+end

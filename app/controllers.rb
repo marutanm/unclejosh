@@ -18,3 +18,14 @@ Unclejosh.controllers :battles do
     render 'battle', locals: { battle: battle }
   end
 end
+
+Unclejosh.controllers :users do
+  post :index do
+    begin
+      user = User.create! name: params[:name]
+    rescue
+      halt 503, 'user name duplicated'
+    end
+    render 'user', locals: { user: user }
+  end
+end
