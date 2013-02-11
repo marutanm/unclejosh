@@ -14,3 +14,16 @@ describe "User Model" do
     refute_nil @user
   end
 end
+
+describe "name" do
+  let(:name) { Faker::Name.name }
+  let(:user) { Fabricate(:user, :name => name) }
+  let(:no_name_user) { Fabricate(:user, :name => nil) }
+  let(:same_name_user) { Fabricate.build(:user, :name => name) }
+
+  specify do
+    user.name.must_equal name
+    no_name_user.name.must_equal 'NONAME'
+    proc { same_name_user.save! }.must_raise Mongoid::Errors::Validations
+  end
+end
