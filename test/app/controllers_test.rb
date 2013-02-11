@@ -76,4 +76,15 @@ describe "UserController" do
       end
     end
   end
+
+  describe "get /" do
+    let(:user) { Fabricate(:user) }
+    before { get "/users/#{user.id}" }
+    subject { JSON.parse last_response.body }
+
+    specify do
+      subject['id'].must_equal user.id.to_s
+      subject['name'].must_equal user.name
+    end
+  end
 end
