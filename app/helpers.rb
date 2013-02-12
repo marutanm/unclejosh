@@ -69,9 +69,7 @@ module UnclejoshHelper
     { rank: Ranking.rank_of(challenger), initial_win: win_count }
   end
 
-  def current_user(user_id)
-    User.find(user_id)
-  end
+  def current_user(user_id); User.find(user_id) end
 end
 
 Unclejosh.helpers UnclejoshHelper

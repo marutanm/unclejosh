@@ -29,8 +29,9 @@ Unclejosh.controllers :users do
     render 'user', locals: { user: user }
   end
 
-  get :index, :with => :id do
-    user = User.find_by(id: params[:id]) if params[:id]
+  get :index do
+    user = current_user(env['uid'])
+    user = User.find(params[:id]) if params[:id]
     render 'user', locals: { user: user }
   end
 end

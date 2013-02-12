@@ -79,12 +79,27 @@ describe "UserController" do
 
   describe "get /" do
     let(:user) { Fabricate(:user) }
-    before { get "/users/#{user.id}" }
-    subject { JSON.parse last_response.body }
+    let(:header) { { 'uid' => user.id } }
 
-    specify do
-      subject['id'].must_equal user.id.to_s
-      subject['name'].must_equal user.name
+    describe "show current user" do
+      before { get "/users", nil, header }
+      subject { JSON.parse last_response.body }
+
+      specify do
+        subject['id'].must_equal user.id.to_s
+        subject['name'].must_equal user.name
+      end
+    end
+
+    describe "show another user" do
+      let(:another_user) { Fabricate(:user) }
+      before { get "/users", { id: another_user.id }, header }
+      subject { JSON.parse last_response.body }
+
+      specify do
+        subject['id'].must_equal another_user.id.to_s
+        subject['name'].must_equal another_user.name
+      end
     end
   end
 end
