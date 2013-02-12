@@ -79,4 +79,11 @@ describe UnclejoshHelper do
       subject[:rank].must_equal 10 - subject[:initial_win] + 1
     end
   end
+
+  describe "current_user" do
+    let(:user) { Fabricate(:user) }
+    subject { helper.current_user user.id }
+
+    specify { subject.must_equal user }
+  end
 end
