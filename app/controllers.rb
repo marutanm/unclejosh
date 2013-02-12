@@ -5,9 +5,7 @@ Unclejosh.controllers :heros do
   end
 
   post :index do
-    uid = request.env['HTTP_UID']
-    halt 403 unless uid
-    user = current_user(uid)
+    user = current_user(request.env['HTTP_UID'])
     hero = Hero.create_with_name params[:name]
     user.heros << hero
     render 'hero', locals: { hero: hero }
@@ -22,12 +20,12 @@ Unclejosh.controllers :battles do
 end
 
 Unclejosh.controllers :users do
+  error Mongoid::Errors::Validations do
+    halt 503, 'user name duplicated'
+  end
+
   post :index do
-    begin
-      user = User.create! name: params[:name]
-    rescue
-      halt 503, 'user name duplicated'
-    end
+    user = User.create! name: params[:name]
     render 'user', locals: { user: user }
   end
 

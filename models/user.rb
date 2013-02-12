@@ -3,7 +3,7 @@ class User
   include Mongoid::Timestamps # adds created_at and updated_at fields
 
   field :name, :type => String
-  validates :name, uniqueness: true
+  validates_uniqueness_of :name, message: 'user name duplicated'
 
   has_many :heros
 

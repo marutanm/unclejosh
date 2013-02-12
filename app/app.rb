@@ -36,6 +36,7 @@ class Unclejosh < Padrino::Application
   # disable :flash                # Disables sinatra-flash (enabled by default if Sinatra::Flash is defined)
   # layout  :my_layout            # Layout can be in views/layouts/foo.ext or views/foo.ext (default :application)
   #
+  disable :show_exceptions
 
   ##
   # You can configure for a specified environment like:
@@ -46,15 +47,7 @@ class Unclejosh < Padrino::Application
   #   end
   #
 
-  ##
-  # You can manage errors like:
-  #
-  #   error 404 do
-  #     render 'errors/404'
-  #   end
-  #
-  #   error 505 do
-  #     render 'errors/505'
-  #   end
-  #
+  error Mongoid::Errors::InvalidFind do
+    halt 403
+  end
 end
