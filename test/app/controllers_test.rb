@@ -1,10 +1,12 @@
 require File.expand_path(File.dirname(__FILE__) + '/../test_config.rb')
 
 describe "HeroController" do
+  let(:user) { Fabricate(:user) }
+  let(:header) { { 'HTTP_UID' => user.id } }
 
   describe "get /" do
-    before { get "/heros/#{hero.id}" }
     let(:hero) { Fabricate(:hero) }
+    before { get "/heros", { id: hero.id }, header }
 
     it "should return the correct hero" do
       body = JSON.parse last_response.body
@@ -14,14 +16,21 @@ describe "HeroController" do
 
   describe "post /" do
     let(:name) { Faker::Name.name }
-    before { post "/heros", { name: name } }
 
-    it "return created hero" do
-      body = JSON.parse last_response.body
-      assert_equal body['name'], name
+    describe "without header" do
+      before { post "/heros", { name: name } }
+      specify { last_response.status.must_equal 403 }
+    end
+
+    describe "with header" do
+      before { post "/heros", { name: name }, header }
+
+      it "return created hero" do
+        body = JSON.parse last_response.body
+        assert_equal body['name'], name
+      end
     end
   end
-
 end
 
 describe "BattleController" do

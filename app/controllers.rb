@@ -1,15 +1,17 @@
 Unclejosh.controllers :heros do
-
-  get :index, :with => :id do
+  get :index do
     hero = Hero.find(params[:id])
     render 'hero', locals: { hero: hero }
   end
 
   post :index do
+    uid = request.env['HTTP_UID']
+    halt 403 unless uid
+    user = current_user(uid)
     hero = Hero.create_with_name params[:name]
+    user.heros << hero
     render 'hero', locals: { hero: hero }
   end
-
 end
 
 Unclejosh.controllers :battles do

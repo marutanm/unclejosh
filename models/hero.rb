@@ -11,6 +11,8 @@ class Hero
 
   validates_presence_of :name, :life, :strength, :agility
 
+  belongs_to :user
+
   has_many :battles, inverse_of: :master
   has_many :battles, inverse_of: :challenger
   belongs_to :battles, inverse_of: :winner
