@@ -52,6 +52,7 @@ PODS:
   - Nimbus/Core
 
 DEPENDENCIES:
+- AFNetworking (~> 1.1)
 - Nimbus (~> 1.0)
 
 SPEC CHECKSUMS:
