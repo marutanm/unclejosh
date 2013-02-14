@@ -72,6 +72,7 @@ describe "UserController" do
       specify do
         subject.status.must_equal 503
         subject.body.must_equal 'user name duplicated'
+        subject["Content-Type"].must_match /application\/json/
       end
     end
 

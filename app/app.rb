@@ -47,6 +47,8 @@ class Unclejosh < Padrino::Application
   #   end
   #
 
+  before { content_type 'application/json' }
+
   error Mongoid::Errors::InvalidFind do
     halt 403
   end

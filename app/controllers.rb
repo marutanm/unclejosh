@@ -24,7 +24,7 @@ Unclejosh.controllers :users do
     halt 503, 'user name duplicated'
   end
 
-  post :index, :provides => [:json] do
+  post :index do
     user = User.create! name: params[:name]
     render 'user', locals: { user: user }
   end
