@@ -8,7 +8,7 @@
 
 #import "UJAppDelegate.h"
 
-#import "UJHttpClient.h"
+#import "UJHomeViewController.h"
 
 @implementation UJAppDelegate
 
@@ -19,15 +19,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 
-    [[UJHttpClient sharedClient] postPath:@"users"
-          parameters:@{@"name" : @"NEW USER"}
-             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 NIDPRINT(@"responseObject: %@", responseObject);
-             }
-             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                 NIDPRINT(@"Error: %@", error);
-             }
-     ];
+    UJHomeViewController *homeViewController = [[UJHomeViewController alloc] init];
+    [self.window addSubview:homeViewController.view];
 
     return YES;
 }
