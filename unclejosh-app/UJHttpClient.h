@@ -14,4 +14,6 @@
 + (UJHttpClient *)sharedClient;
 - (id)initWithBaseURL:(NSURL *)url;
 
++ (BOOL)isValid;
+
 @end

@@ -29,15 +29,7 @@
 {
     [super viewDidLoad];
 
-    [[UJHttpClient sharedClient] postPath:@"users"
-                               parameters:@{@"name" : @"NEW USER"}
-                                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                      NIDPRINT(@"responseObject: %@", responseObject);
-                                  }
-                                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                      NIDPRINT(@"Error: %@", error);
-                                  }
-     ];
+    NIDPRINT(@"%@", [UJHttpClient isValid] ? @"YES" : @"NO");
 }
 
 - (void)didReceiveMemoryWarning

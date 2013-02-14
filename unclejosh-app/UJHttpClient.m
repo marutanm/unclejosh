@@ -33,4 +33,12 @@
     return self;
 }
 
++ (BOOL)isValid
+{
+    if ([[NSUserDefaults standardUserDefaults] stringForKey:@"UUID"]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
 @end
