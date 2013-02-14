@@ -8,39 +8,7 @@
 
 #import "UJAppDelegate.h"
 
-#import "AFHTTPClient.h"
-#import <AFJSONRequestOperation.h>
-#import <NimbusCore.h>
-
-@interface UJHttpClient : AFHTTPClient
-@end
-
-@implementation UJHttpClient
-
-+ (UJHttpClient *)sharedClient
-{
-    static UJHttpClient *_sharedClient = nil;
-    static dispatch_once_t onceToken;
-    NSURL *baseURL = [NSURL URLWithString:@"http://unclejosh.dev/"];
-    dispatch_once(&onceToken, ^{
-        _sharedClient = [[self alloc] initWithBaseURL:baseURL];
-    });
-
-    return _sharedClient;
-}
-
-- (id)initWithBaseURL:(NSURL *)url
-{
-    self = [super initWithBaseURL:url];
-    if (!self) {
-        return nil;
-    }
-    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    [self setDefaultHeader:@"Accept" value:@"application/json"];
-    return self;
-}
-
-@end
+#import "UJHttpClient.h"
 
 @implementation UJAppDelegate
 
