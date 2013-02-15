@@ -12,6 +12,8 @@
 
 @implementation UJAppDelegate
 
+UJHomeViewController *homeViewController;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -19,7 +21,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 
-    UJHomeViewController *homeViewController = [[UJHomeViewController alloc] init];
+    homeViewController = [[UJHomeViewController alloc] init];
     [self.window addSubview:homeViewController.view];
 
     return YES;

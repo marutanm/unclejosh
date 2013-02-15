@@ -14,9 +14,8 @@
 {
     static UJHttpClient *_sharedClient = nil;
     static dispatch_once_t onceToken;
-    NSURL *baseURL = [NSURL URLWithString:@"http://unclejosh.dev/"];
     dispatch_once(&onceToken, ^{
-        _sharedClient = [[self alloc] initWithBaseURL:baseURL];
+        _sharedClient = [[self alloc] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
     });
 
     return _sharedClient;
