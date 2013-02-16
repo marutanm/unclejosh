@@ -12,7 +12,7 @@
 
 @implementation UJAppDelegate
 
-UJHomeViewController *homeViewController;
+UINavigationController *navigationController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -21,8 +21,9 @@ UJHomeViewController *homeViewController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 
-    homeViewController = [[UJHomeViewController alloc] init];
-    [self.window addSubview:homeViewController.view];
+    UJHomeViewController *homeViewController = [[UJHomeViewController alloc] init];
+    navigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+    [self.window addSubview:navigationController.view];
 
     return YES;
 }
