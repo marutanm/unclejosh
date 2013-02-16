@@ -26,6 +26,20 @@
     return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 210, 31)];
+    textField.borderStyle = UITextBorderStyleRoundedRect;
+    [textField setPlaceholder:@"名前を入力"];
+    textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    textField.returnKeyType = UIReturnKeyDone;
+    textField.delegate = self;
+    self.navigationItem.titleView = textField;
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
