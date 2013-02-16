@@ -13,6 +13,8 @@
 
 @interface UJHomeViewController ()
 
+@property UITextField *textField;
+
 @end
 
 @implementation UJHomeViewController
@@ -30,14 +32,14 @@
 {
     [super viewDidLoad];
 
-    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 210, 31)];
-    textField.borderStyle = UITextBorderStyleRoundedRect;
-    [textField setPlaceholder:@"名前を入力"];
-    textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    textField.autocorrectionType = UITextAutocorrectionTypeNo;
-    textField.returnKeyType = UIReturnKeyDone;
-    textField.delegate = self;
-    self.navigationItem.titleView = textField;
+    _textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 210, 31)];
+    _textField.borderStyle = UITextBorderStyleRoundedRect;
+    _textField.Placeholder = @"名前を入力";
+    _textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    _textField.returnKeyType = UIReturnKeyGo;
+    _textField.delegate = self;
+    self.navigationItem.titleView = _textField;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -54,6 +56,22 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)newHero
+{
+    NIDPRINT(@"%@", _textField.text);
+}
+
+#pragma mark -
+#pragma mark UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if([textField canResignFirstResponder]) [textField resignFirstResponder];
+
+    [self newHero];
+
+    return YES;
 }
 
 @end
