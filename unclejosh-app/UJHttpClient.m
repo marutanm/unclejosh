@@ -35,8 +35,10 @@
 + (BOOL)isValid
 {
     if ([[NSUserDefaults standardUserDefaults] stringForKey:@"UUID"]) {
+        NIDPRINT(@"YES");
         return YES;
     } else {
+        NIDPRINT(@"NO");
         return NO;
     }
 }

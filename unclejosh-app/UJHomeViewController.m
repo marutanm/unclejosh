@@ -44,7 +44,6 @@
 {
     [super viewDidAppear:animated];
 
-    NIDPRINT(@"%@", [UJHttpClient isValid] ? @"YES" : @"NO");
     if (![UJHttpClient isValid]) {
         UJLoginViewController *loginViewController = [[UJLoginViewController alloc] init];
         [self presentViewController:loginViewController animated:YES completion:nil];
