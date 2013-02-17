@@ -24,12 +24,12 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 10, 300, 20)];
-        _textField.placeholder = @"name";
+        _textField.placeholder = NSLocalizedString(@"Input UserName (optional)", @"placeholder of input user name");
         _textField.autocapitalizationType = UITextAutocorrectionTypeNo;
         [_textField becomeFirstResponder];
 
         _button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [_button setTitle:@"SEND" forState:UIControlStateNormal];
+        [_button setTitle:NSLocalizedString(@"Send", @"Label on Send button") forState:UIControlStateNormal];
         _button.frame = CGRectMake(110, 40, 100, 20);
         [_button addTarget:self action:@selector(onSend:) forControlEvents:UIControlEventTouchUpInside];
     }

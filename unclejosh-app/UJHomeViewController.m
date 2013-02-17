@@ -34,7 +34,7 @@
 
     _textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 210, 31)];
     _textField.borderStyle = UITextBorderStyleRoundedRect;
-    _textField.Placeholder = @"名前を入力";
+    _textField.Placeholder = NSLocalizedString(@"Hero's Name", @"placeholder of input hero name");
     _textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _textField.autocorrectionType = UITextAutocorrectionTypeNo;
     _textField.returnKeyType = UIReturnKeyGo;

@@ -58,7 +58,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NIDPRINT(@"%d", [operation.response statusCode]);
         if ([operation.response statusCode] == 503) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"その名前はすでに使われています" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"UserName duplicated.", @"alert on duplicated user name") delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
             [alert show];
         }
     }];
