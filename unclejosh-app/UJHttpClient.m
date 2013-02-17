@@ -44,6 +44,26 @@
     }
 }
 
+- (void)registerUser:(NSString *)name onSuccess:(void (^)())block
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObject:name forKey:@"name"];
+
+    [[[self class] sharedClient] postPath:@"users" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NIDPRINT(@"%@", responseObject);
+        [[NSUserDefaults standardUserDefaults] setValue:responseObject[@"id"] forKey:@"UUID"];
+        [[NSUserDefaults standardUserDefaults] setValue:responseObject[@"name"] forKey:@"USERNAME"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        block();
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NIDPRINT(@"%d", [operation.response statusCode]);
+        if ([operation.response statusCode] == 503) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"その名前はすでに使われています" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            [alert show];
+        }
+    }];
+}
+
 - (void)newHeroWithName:(NSString *)name
 {
     NIDPRINT(@"%@", name);

@@ -25,6 +25,7 @@
     if (self) {
         _textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 10, 300, 20)];
         _textField.placeholder = @"name";
+        _textField.autocapitalizationType = UITextAutocorrectionTypeNo;
         [_textField becomeFirstResponder];
 
         _button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -48,28 +49,9 @@
 {
     NIDPRINT(@"%@", _textField.text);
 
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_URL, @"users"]];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: url];
-    [request setHTTPMethod: @"POST"];
-    NSString *postString = [NSString stringWithFormat:@"name=%@", _textField.text];
-    [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
-
-    void (^onSuccess)(NSURLRequest*, NSHTTPURLResponse*, id) = ^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        NIDPRINT(@"%@", JSON);
-        [[NSUserDefaults standardUserDefaults] setValue:JSON[@"id"] forKey:@"UUID"];
-        [[NSUserDefaults standardUserDefaults] setValue:JSON[@"name"] forKey:@"USERNAME"];
+    [[UJHttpClient sharedClient] registerUser:_textField.text onSuccess:^{
         [self dismissViewControllerAnimated:YES completion:nil];
-    };
-
-    void (^onFailure)(NSURLRequest*, NSHTTPURLResponse*, NSError*, id) = ^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
-        NIDPRINT(@"%d", [response statusCode]);
-        if ([response statusCode] == 503) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"その名前はすでに使われています" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-            [alert show];
-        }
-    };
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:onSuccess failure:onFailure];
-    [operation start];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
