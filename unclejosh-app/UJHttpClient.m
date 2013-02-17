@@ -18,6 +18,7 @@
         _sharedClient = [[self alloc] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
     });
 
+    [_sharedClient setDefaultHeader:@"uid" value:[[NSUserDefaults standardUserDefaults] stringForKey:@"UUID"]];
     return _sharedClient;
 }
 
@@ -29,7 +30,6 @@
     }
     [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [self setDefaultHeader:@"Accept" value:@"application/json"];
-    [self setDefaultHeader:@"uid" value:[[NSUserDefaults standardUserDefaults] stringForKey:@"UUID"]];
     return self;
 }
 
