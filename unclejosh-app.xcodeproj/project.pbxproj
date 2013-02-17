@@ -26,6 +26,7 @@
 		50743EEA16CD23A700EEE644 /* UJHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743EE916CD23A700EEE644 /* UJHomeViewController.m */; };
 		50743EED16CE4C6100EEE644 /* UJLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743EEC16CE4C6100EEE644 /* UJLoginViewController.m */; };
 		50743EFF16D0D97900EEE644 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50743F0116D0D97900EEE644 /* Localizable.strings */; };
+		50743F0516D0FD2400EEE644 /* UJHeroProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743F0416D0FD2400EEE644 /* UJHeroProfileViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,8 @@
 		50743EFC16D0D44300EEE644 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		50743F0016D0D97900EEE644 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		50743F0216D0D9BE00EEE644 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		50743F0316D0FD2400EEE644 /* UJHeroProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UJHeroProfileViewController.h; sourceTree = "<group>"; };
+		50743F0416D0FD2400EEE644 /* UJHeroProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UJHeroProfileViewController.m; sourceTree = "<group>"; };
 		7CFEDCC2874F460191C164F6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		7E2F2A32670242D5AC1311E3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -138,6 +141,8 @@
 				50743EE916CD23A700EEE644 /* UJHomeViewController.m */,
 				50743EEB16CE4C6100EEE644 /* UJLoginViewController.h */,
 				50743EEC16CE4C6100EEE644 /* UJLoginViewController.m */,
+				50743F0316D0FD2400EEE644 /* UJHeroProfileViewController.h */,
+				50743F0416D0FD2400EEE644 /* UJHeroProfileViewController.m */,
 				5005F52B16CBBDEC00E2B216 /* Supporting Files */,
 				50743EE416CD1E3700EEE644 /* UJHttpClient.h */,
 				50743EE516CD1E3700EEE644 /* UJHttpClient.m */,
@@ -311,6 +316,7 @@
 				50743EE616CD1E3700EEE644 /* UJHttpClient.m in Sources */,
 				50743EEA16CD23A700EEE644 /* UJHomeViewController.m in Sources */,
 				50743EED16CE4C6100EEE644 /* UJLoginViewController.m in Sources */,
+				50743F0516D0FD2400EEE644 /* UJHeroProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

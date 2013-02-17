@@ -10,10 +10,12 @@
 
 #import "UJHttpClient.h"
 #import "UJLoginViewController.h"
+#import "UJHeroProfileViewController.h"
 
 @interface UJHomeViewController ()
 
 @property UITextField *textField;
+@property UJHeroProfileViewController *profileViewController;
 
 @end
 
@@ -23,7 +25,17 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        _textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 210, 31)];
+        _textField.borderStyle = UITextBorderStyleRoundedRect;
+        _textField.Placeholder = NSLocalizedString(@"Hero's Name", @"placeholder of input hero name");
+        _textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        _textField.autocorrectionType = UITextAutocorrectionTypeNo;
+        _textField.returnKeyType = UIReturnKeyGo;
+        _textField.delegate = self;
+
+        _profileViewController = [[UJHeroProfileViewController alloc] init];
+        [self addChildViewController:_profileViewController];
+        [_profileViewController didMoveToParentViewController:self];
     }
     return self;
 }
@@ -32,14 +44,8 @@
 {
     [super viewDidLoad];
 
-    _textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 210, 31)];
-    _textField.borderStyle = UITextBorderStyleRoundedRect;
-    _textField.Placeholder = NSLocalizedString(@"Hero's Name", @"placeholder of input hero name");
-    _textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    _textField.autocorrectionType = UITextAutocorrectionTypeNo;
-    _textField.returnKeyType = UIReturnKeyGo;
-    _textField.delegate = self;
     self.navigationItem.titleView = _textField;
+    [self.view addSubview:_profileViewController.view];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -60,7 +66,9 @@
 
 - (void)newHero
 {
-    [[UJHttpClient sharedClient] newHeroWithName:_textField.text];
+    [[UJHttpClient sharedClient] newHeroWithName:_textField.text onSuccess:^(id JSON) {
+        [_profileViewController setHeroInfo:JSON];
+    }];
 }
 
 #pragma mark -

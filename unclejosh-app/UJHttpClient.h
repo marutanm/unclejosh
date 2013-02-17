@@ -17,6 +17,6 @@
 + (BOOL)isValid;
 
 - (void)registerUser:(NSString *)name onSuccess:(void (^)())block;
-- (void)newHeroWithName:(NSString *)name;
+- (void)newHeroWithName:(NSString *)name onSuccess:(void (^)(id JSON))block;
 
 @end
