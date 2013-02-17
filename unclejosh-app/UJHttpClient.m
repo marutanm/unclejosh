@@ -29,6 +29,7 @@
     }
     [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [self setDefaultHeader:@"Accept" value:@"application/json"];
+    [self setDefaultHeader:@"uid" value:[[NSUserDefaults standardUserDefaults] stringForKey:@"UUID"]];
     return self;
 }
 
@@ -42,4 +43,18 @@
         return NO;
     }
 }
+
+- (void)newHeroWithName:(NSString *)name
+{
+    NIDPRINT(@"%@", name);
+
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObject:name forKey:@"name"];
+
+    [[[self class] sharedClient] postPath:@"heros" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NIDPRINT(@"%@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NIDPRINT(@"%@", error);
+    }];
+}
+
 @end

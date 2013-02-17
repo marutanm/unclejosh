@@ -60,7 +60,7 @@
 
 - (void)newHero
 {
-    NIDPRINT(@"%@", _textField.text);
+    [[UJHttpClient sharedClient] newHeroWithName:_textField.text];
 }
 
 #pragma mark -

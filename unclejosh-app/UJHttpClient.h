@@ -16,4 +16,6 @@
 
 + (BOOL)isValid;
 
+- (void)newHeroWithName:(NSString *)name;
+
 @end
