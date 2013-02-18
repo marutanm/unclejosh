@@ -35,3 +35,12 @@ Unclejosh.controllers :users do
     render 'user', locals: { user: user }
   end
 end
+
+Unclejosh.controllers :rankings do
+  post :index do
+    user = current_user(request.env['HTTP_UID'])
+    hero = user.heros.find(params[:hero_id])
+    result = challenge_rank hero, 100
+    render 'challenge_result', locals: { result: result }
+  end
+end

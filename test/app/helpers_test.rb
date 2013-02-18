@@ -73,10 +73,9 @@ describe UnclejoshHelper do
 
     specify do
       count.must_equal 10
-      subject.must_be_kind_of Hash
-      subject.key?(:rank).wont_be_nil
-      subject.key?(:initial_win).wont_be_nil
-      subject[:rank].must_equal 10 - subject[:initial_win] + 1
+      subject.rank.wont_be_nil
+      subject.initial_win.wont_be_nil
+      subject.rank.must_equal 10 - subject.initial_win + 1
     end
   end
 

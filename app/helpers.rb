@@ -66,7 +66,9 @@ module UnclejoshHelper
     challenger.create_ranking_info initial_win: win_count, total_win: win_count
 
     rank challenger
-    { rank: Ranking.rank_of(challenger), initial_win: win_count }
+
+    result =  { rank: Ranking.rank_of(challenger), initial_win: win_count }
+    OpenStruct.new result
   end
 
   def current_user(user_id); User.find(user_id) end
