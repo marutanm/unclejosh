@@ -10,4 +10,6 @@
 
 @interface UJHeroTableViewController : UITableViewController
 
+- (void)addHero:(id)hero;
+
 @end

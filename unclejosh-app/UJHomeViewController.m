@@ -77,6 +77,7 @@
 {
     [[UJHttpClient sharedClient] newHeroWithName:_textField.text onSuccess:^(id JSON) {
         [_profileViewController setHeroInfo:JSON];
+        [_tableViewController addHero:JSON];
     }];
 }
 
