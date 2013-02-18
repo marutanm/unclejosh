@@ -24,10 +24,13 @@ describe "HeroController" do
 
     describe "with header" do
       before { post "/heros", { name: name }, header }
+      subject { OpenStruct.new JSON.parse(last_response.body) }
 
-      it "return created hero" do
-        body = JSON.parse last_response.body
-        assert_equal body['name'], name
+      it "return created hero" do subject.name.must_equal name end
+      specify "response format" do
+        %w[name life strength agility id].each do |key|
+          subject.must_respond_to key
+        end
       end
     end
   end

@@ -1,4 +1,4 @@
 object @hero
 
-attributes :name, :life, :strength, :agility
+attributes :id, :name, :life, :strength, :agility
 
