@@ -11,11 +11,13 @@
 #import "UJHttpClient.h"
 #import "UJLoginViewController.h"
 #import "UJHeroProfileViewController.h"
+#import "UJHeroTableViewController.h"
 
 @interface UJHomeViewController ()
 
 @property UITextField *textField;
 @property UJHeroProfileViewController *profileViewController;
+@property UJHeroTableViewController *tableViewController;
 
 @end
 
@@ -36,6 +38,10 @@
         _profileViewController = [[UJHeroProfileViewController alloc] init];
         [self addChildViewController:_profileViewController];
         [_profileViewController didMoveToParentViewController:self];
+
+        _tableViewController = [[UJHeroTableViewController alloc] initWithStyle:UITableViewStylePlain];
+        [self addChildViewController:_tableViewController];
+        [_tableViewController didMoveToParentViewController:self];
     }
     return self;
 }
@@ -46,6 +52,9 @@
 
     self.navigationItem.titleView = _textField;
     [self.view addSubview:_profileViewController.view];
+
+    _tableViewController.view.frame = CGRectMake(0, _profileViewController.view.frame.origin.y + _profileViewController.view.frame.size.height + self.navigationController.navigationBar.frame.size.height, 320, 480);
+    [self.view addSubview:_tableViewController.view];
 }
 
 - (void)viewDidAppear:(BOOL)animated
