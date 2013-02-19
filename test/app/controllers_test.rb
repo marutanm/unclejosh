@@ -14,6 +14,21 @@ describe "HeroController" do
     end
   end
 
+  describe "get /:id/challenges" do
+    let(:hero) { Fabricate(:hero) }
+    let(:battle) { Fabricate(:battle, challengers: [ hero ]) }
+    before { get "/heros/#{hero.id}/challenges", nil, header }
+    subject { OpenStruct.new JSON.parse(last_response.body) }
+
+    it "should return results of challenges" do
+      subject.each do |result|
+        %w[id master_id win].each do |key|
+          result.must_respond_to key
+        end
+      end
+    end
+  end
+
   describe "post /" do
     let(:name) { Faker::Name.name }
 
