@@ -18,6 +18,7 @@
 @property UITextField *textField;
 @property UJHeroProfileViewController *profileViewController;
 @property UJHeroTableViewController *tableViewController;
+@property UIView *clearView;
 
 @end
 
@@ -42,6 +43,10 @@
         _tableViewController = [[UJHeroTableViewController alloc] initWithStyle:UITableViewStylePlain];
         [self addChildViewController:_tableViewController];
         [_tableViewController didMoveToParentViewController:self];
+
+        _clearView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        _clearView.userInteractionEnabled = YES;
+        [_clearView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)]];
     }
     return self;
 }
@@ -55,6 +60,9 @@
 
     _tableViewController.view.frame = CGRectMake(0, _profileViewController.view.frame.origin.y + _profileViewController.view.frame.size.height + self.navigationController.navigationBar.frame.size.height, 320, 480);
     [self.view addSubview:_tableViewController.view];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasHidden) name:UIKeyboardDidHideNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -79,6 +87,23 @@
         [_profileViewController setHeroInfo:JSON];
         [_tableViewController addHero:JSON];
     }];
+}
+
+- (void)keyboardWasShown;
+{
+    [self.view addSubview:_clearView];
+}
+
+- (void)keyboardWasHidden;
+{
+    [_clearView removeFromSuperview];
+}
+
+- (void)hideKeyboard;
+{
+    if (_textField.editing) {
+        [_textField resignFirstResponder];
+    }
 }
 
 #pragma mark -
