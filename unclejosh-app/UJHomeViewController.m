@@ -83,9 +83,14 @@
 
 - (void)newHero
 {
-    [[UJHttpClient sharedClient] newHeroWithName:_textField.text onSuccess:^(id JSON) {
-        [_profileViewController setHeroInfo:JSON];
-        [_tableViewController addHero:JSON];
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObject:_textField.text forKey:@"name"];
+
+    [[UJHttpClient sharedClient] postPath:@"heros" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NIDPRINT(@"%@", responseObject);
+        [_profileViewController setHeroInfo:responseObject];
+        [_tableViewController addHero:responseObject];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NIDPRINT(@"%@", error);
     }];
 }
 

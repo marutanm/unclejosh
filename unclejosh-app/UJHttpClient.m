@@ -64,18 +64,4 @@
     }];
 }
 
-- (void)newHeroWithName:(NSString *)name onSuccess:(void (^)(id JSON))block;
-{
-    NIDPRINT(@"%@", name);
-
-    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObject:name forKey:@"name"];
-
-    [[[self class] sharedClient] postPath:@"heros" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NIDPRINT(@"%@", responseObject);
-        block(responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NIDPRINT(@"%@", error);
-    }];
-}
-
 @end
