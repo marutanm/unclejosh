@@ -91,6 +91,13 @@
 - (void)showResults;
 {
     NIDPRINTMETHODNAME();
+
+    NSString *path = [NSString stringWithFormat:@"heros/%@/challenges", _heroId];
+    [[UJHttpClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NIDPRINT(@"%@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NIDPRINT(@"%@", error);
+    }];
 }
 
 - (void)setHeroInfo:(id)info
