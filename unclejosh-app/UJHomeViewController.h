@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UJHomeViewController : UIViewController <UITextFieldDelegate>
+#import "UJHomeProfileView.h"
+
+@interface UJHomeViewController : UIViewController <UITextFieldDelegate, UJHomeProfileViewDelegate>
 
 @end

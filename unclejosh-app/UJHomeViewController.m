@@ -10,8 +10,8 @@
 
 #import "UJHttpClient.h"
 #import "UJLoginViewController.h"
-#import "UJHomeProfileView.h"
 #import "UJHeroTableViewController.h"
+#import "UJResultTableViewController.h"
 
 @interface UJHomeViewController ()
 
@@ -113,14 +113,32 @@
     }
 }
 
-- (void)challengeRanking:(id)sender
+#pragma mark -
+#pragma mark UJHomeProfileViewDelegate
+- (void)challengeRanking;
 {
-    NIDPRINT(@"%@", sender);
-
+    NIDPRINTMETHODNAME();
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObject:[_heroInfo objectForKey:@"id"] forKey:@"hero_id"];
 
     [[UJHttpClient sharedClient] postPath:@"rankings" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NIDPRINT(@"%@", responseObject);
+        NSString *localized = NSLocalizedString(@"win:%@ ranking:%@", @"Result of challenge ranking");
+        [_profileView setResult:[NSString stringWithFormat:localized, [responseObject objectForKey:@"initial_win"], [responseObject objectForKey:@"rank"]]];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NIDPRINT(@"%@", error);
+    }];
+}
+
+- (void)showResults;
+{
+    NIDPRINTMETHODNAME();
+
+    NSString *path = [NSString stringWithFormat:@"heros/%@/challenges", [_heroInfo objectForKey:@"id"]];
+    [[UJHttpClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NIDPRINT(@"%@", responseObject);
+        UJResultTableViewController *resultTableViewController = [[UJResultTableViewController alloc] init];
+        resultTableViewController.results = responseObject;
+        [self.navigationController pushViewController:resultTableViewController animated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NIDPRINT(@"%@", error);
     }];

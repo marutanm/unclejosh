@@ -14,11 +14,11 @@
 @property UILabel *lifeLabel;
 @property UILabel *strengthLabel;
 @property UILabel *agilityLabel;
-@property NSString *heroId;
 
 @property UIButton *challengebutton;
-@property UILabel *resultLabel;
 @property UIButton *resultButton;
+
+@property UILabel *resultLabel;
 
 @end
 
@@ -28,8 +28,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor blackColor];
-
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 140, 20)];
         [self addSubview:_nameLabel];
 
@@ -46,11 +44,8 @@
         [_challengebutton setTitle:NSLocalizedString(@"FIGHT", @"Label on challenge ranking button") forState:UIControlStateNormal];
         _challengebutton.frame = CGRectMake(10, 40, 140, 20);
         _challengebutton.hidden = YES;
-        [_challengebutton addTarget:_delegate action:@selector(challengeRanking:) forControlEvents:UIControlEventTouchUpInside];
+        [_challengebutton addTarget:_delegate action:@selector(challengeRanking) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_challengebutton];
-
-        _resultLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 70, 140, 20)];
-        [self addSubview:_resultLabel];
 
         _resultButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [_resultButton setTitle:NSLocalizedString(@"RESULT", @"Label on show challenge result button") forState:UIControlStateNormal];
@@ -59,20 +54,29 @@
         [_resultButton addTarget:_delegate action:@selector(showResults) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_resultButton];
 
+        _resultLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 70, 140, 20)];
+        [self addSubview:_resultLabel];
     }
     return self;
 }
 
-- (void)setHeroInfo:(id)info;
+- (void)setHeroInfo:(NSDictionary *)heroInfo;
 {
-    NIDPRINT(@"%@", info);
-    _heroId = [info objectForKey:@"id"];
-    _nameLabel.text = [info objectForKey:@"name"];
-    _lifeLabel.text = [[info objectForKey:@"life"] stringValue];
-    _strengthLabel.text = [[info objectForKey:@"strength"] stringValue];
-    _agilityLabel.text = [[info objectForKey:@"agility"] stringValue];
+    NIDPRINT(@"%@", heroInfo);
+    _nameLabel.text = [heroInfo objectForKey:@"name"];
+    _lifeLabel.text = [[heroInfo objectForKey:@"life"] stringValue];
+    _strengthLabel.text = [[heroInfo objectForKey:@"strength"] stringValue];
+    _agilityLabel.text = [[heroInfo objectForKey:@"agility"] stringValue];
 
     _challengebutton.hidden = NO;
+}
+
+- (void)setResult:(NSString *)result;
+{
+    _resultLabel.text = result;
+
+    _challengebutton.hidden = YES;
+    _resultButton.hidden = NO;
 }
 
 @end
