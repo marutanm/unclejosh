@@ -134,3 +134,31 @@ describe "UserController" do
     end
   end
 end
+
+describe "RankingController" do
+  let(:hero) { Fabricate(:hero) }
+  let(:user) { Fabricate(:user) }
+  let(:master) do
+    Fabricate(:hero) do
+      ranking_info { |master| Fabricate(:hero_ranking, :hero => master) }
+    end
+  end
+  let(:header) { { 'HTTP_UID' => user.id } }
+
+  before do
+    user.heros << hero
+    ranking = Ranking.challenge master.ranking_info.initial_win
+    ranking.heros << master
+  end
+
+  subject { OpenStruct.new JSON.parse(last_response.body) }
+  describe "post /" do
+    before { post "/rankings", { hero_id: hero.id }, header }
+
+    specify do
+      %w[rank initial_win].each do |key|
+        subject.must_respond_to key
+      end
+    end
+  end
+end
