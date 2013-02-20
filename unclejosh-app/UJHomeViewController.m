@@ -10,15 +10,17 @@
 
 #import "UJHttpClient.h"
 #import "UJLoginViewController.h"
-#import "UJHeroProfileViewController.h"
+#import "UJHomeProfileView.h"
 #import "UJHeroTableViewController.h"
 
 @interface UJHomeViewController ()
 
 @property UITextField *textField;
-@property UJHeroProfileViewController *profileViewController;
+@property UJHomeProfileView *profileView;
 @property UJHeroTableViewController *tableViewController;
 @property UIView *clearView;
+
+@property NSDictionary *heroInfo;
 
 @end
 
@@ -36,9 +38,8 @@
         _textField.returnKeyType = UIReturnKeyGo;
         _textField.delegate = self;
 
-        _profileViewController = [[UJHeroProfileViewController alloc] init];
-        [self addChildViewController:_profileViewController];
-        [_profileViewController didMoveToParentViewController:self];
+        _profileView = [[UJHomeProfileView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
+        _profileView.delegate = self;
 
         _tableViewController = [[UJHeroTableViewController alloc] initWithStyle:UITableViewStylePlain];
         [self addChildViewController:_tableViewController];
@@ -56,9 +57,9 @@
     [super viewDidLoad];
 
     self.navigationItem.titleView = _textField;
-    [self.view addSubview:_profileViewController.view];
+    [self.view addSubview:_profileView];
 
-    _tableViewController.view.frame = CGRectMake(0, _profileViewController.view.frame.origin.y + _profileViewController.view.frame.size.height + self.navigationController.navigationBar.frame.size.height, 320, 480);
+    _tableViewController.view.frame = CGRectMake(0, _profileView.frame.origin.y + _profileView.frame.size.height + self.navigationController.navigationBar.frame.size.height, 320, 480);
     [self.view addSubview:_tableViewController.view];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown) name:UIKeyboardDidShowNotification object:nil];
@@ -87,8 +88,9 @@
 
     [[UJHttpClient sharedClient] postPath:@"heros" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NIDPRINT(@"%@", responseObject);
-        [_profileViewController setHeroInfo:responseObject];
-        [_tableViewController addHero:responseObject];
+        _heroInfo = responseObject;
+        [_profileView setHeroInfo:_heroInfo];
+        [_tableViewController addHero:_heroInfo];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NIDPRINT(@"%@", error);
     }];
@@ -109,6 +111,19 @@
     if (_textField.editing) {
         [_textField resignFirstResponder];
     }
+}
+
+- (void)challengeRanking:(id)sender
+{
+    NIDPRINT(@"%@", sender);
+
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObject:[_heroInfo objectForKey:@"id"] forKey:@"hero_id"];
+
+    [[UJHttpClient sharedClient] postPath:@"rankings" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NIDPRINT(@"%@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NIDPRINT(@"%@", error);
+    }];
 }
 
 #pragma mark -
