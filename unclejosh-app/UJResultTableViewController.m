@@ -14,6 +14,8 @@
 
 @implementation UJResultTableViewController
 
+NSInteger resultOnOneRow = 5;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -36,6 +38,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setResults:(NSArray *)results
+{
+    NIDPRINT(@"%d = %d / %d + %d", results.count/resultOnOneRow, results.count, resultOnOneRow, results.count%resultOnOneRow);
+    NSMutableArray *copy = [NSMutableArray arrayWithArray:results];
+    NSMutableArray *temp = [NSMutableArray array];
+    for (int i = 0; i < results.count / resultOnOneRow; i++) {
+        [temp addObject:[copy subarrayWithRange:NSMakeRange(0, resultOnOneRow)]];
+        [copy removeObjectsInRange:NSMakeRange(0, resultOnOneRow)];
+    }
+    if (copy.count) {
+        [temp addObject:copy];
+    }
+    _results = [NSArray arrayWithArray:temp];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -53,7 +70,7 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-    cell.textLabel.text = [[_results objectAtIndex:indexPath.row] objectForKey:@"id"];
+    cell.textLabel.text = [[_results objectAtIndex:indexPath.row][0] objectForKey:@"id"];
 
     return cell;
 }
