@@ -22,8 +22,11 @@ describe "HeroController" do
 
     it "should return results of challenges" do
       subject.each do |result|
-        %w[id master_id win].each do |key|
+        %w[id master win].each do |key|
           result.must_respond_to key
+        end
+        %w[id name life strength agility].each do |key|
+          result.master.must_respond_to key
         end
       end
     end
