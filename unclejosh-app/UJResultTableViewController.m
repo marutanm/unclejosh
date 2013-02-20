@@ -10,6 +10,8 @@
 
 @interface UJResultTableViewController ()
 
+@property (readonly) NSArray *results;
+
 @end
 
 @implementation UJResultTableViewController
@@ -53,6 +55,23 @@ NSInteger resultOnOneRow = 5;
     _results = [NSArray arrayWithArray:temp];
 }
 
+- (NSString *)resultsLabelOf:(NSInteger)index
+{
+    NIDPRINT(@"%d", index);
+    NSMutableString *string = [NSMutableString string];
+    if (_results) {
+        NIDPRINT(@"%@", _results[index]);
+        for (NSDictionary *result in _results[index]) {
+            if ([[result objectForKey:@"win"] boolValue]) {
+                [string appendString:@"O"];
+            } else {
+                [string appendString:@"X"];
+            }
+        }
+    }
+    return string;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -70,7 +89,7 @@ NSInteger resultOnOneRow = 5;
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-    cell.textLabel.text = [[_results objectAtIndex:indexPath.row][0] objectForKey:@"id"];
+    cell.textLabel.text = [self resultsLabelOf:indexPath.row];
 
     return cell;
 }

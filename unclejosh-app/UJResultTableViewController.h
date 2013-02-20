@@ -10,6 +10,6 @@
 
 @interface UJResultTableViewController : UITableViewController
 
-@property NSArray *results;
+- (void)setResults:(NSArray *)results;
 
 @end
