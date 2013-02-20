@@ -8,6 +8,7 @@
 
 #import "UJHeroProfileViewController.h"
 #import "UJHttpClient.h"
+#import "UJResultTableViewController.h"
 
 @interface UJHeroProfileViewController ()
 
@@ -95,6 +96,9 @@
     NSString *path = [NSString stringWithFormat:@"heros/%@/challenges", _heroId];
     [[UJHttpClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NIDPRINT(@"%@", responseObject);
+        UJResultTableViewController *resultTableViewController = [[UJResultTableViewController alloc] init];
+        resultTableViewController.results = responseObject;
+        [self.navigationController pushViewController:resultTableViewController animated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NIDPRINT(@"%@", error);
     }];
