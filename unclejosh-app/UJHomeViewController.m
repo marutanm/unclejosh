@@ -10,14 +10,16 @@
 
 #import "UJHttpClient.h"
 #import "UJLoginViewController.h"
-#import "UJHeroTableViewController.h"
 #import "UJResultTableViewController.h"
+#import "UJHeroTableView.h"
 
 @interface UJHomeViewController ()
 
+@property NSMutableArray *heros;
+@property UITableView* tableView;
+
 @property UITextField *textField;
 @property UJHomeProfileView *profileView;
-@property UJHeroTableViewController *tableViewController;
 @property UIView *clearView;
 
 @property NSDictionary *heroInfo;
@@ -41,9 +43,9 @@
         _profileView = [[UJHomeProfileView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
         _profileView.delegate = self;
 
-        _tableViewController = [[UJHeroTableViewController alloc] initWithStyle:UITableViewStylePlain];
-        [self addChildViewController:_tableViewController];
-        [_tableViewController didMoveToParentViewController:self];
+        _tableView = [[UJHeroTableView alloc] initWithFrame:CGRectMake(0, _profileView.frame.origin.y + _profileView.frame.size.height + self.navigationController.navigationBar.frame.size.height, 320, 480)];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
 
         _clearView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         _clearView.userInteractionEnabled = YES;
@@ -56,14 +58,22 @@
 {
     [super viewDidLoad];
 
+    [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+    [self.view addSubview:_tableView];
+
     self.navigationItem.titleView = _textField;
     [self.view addSubview:_profileView];
 
-    _tableViewController.view.frame = CGRectMake(0, _profileView.frame.origin.y + _profileView.frame.size.height + self.navigationController.navigationBar.frame.size.height, 320, 480);
-    [self.view addSubview:_tableViewController.view];
+    _heros = [[NSUserDefaults standardUserDefaults] mutableArrayValueForKey:@"HEROS"];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasHidden) name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [_tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -90,7 +100,11 @@
         NIDPRINT(@"%@", responseObject);
         _heroInfo = responseObject;
         [_profileView setHeroInfo:_heroInfo];
-        [_tableViewController addHero:_heroInfo];
+
+        [_heros addObject:_heroInfo];
+        [[NSUserDefaults standardUserDefaults] setObject:_heros forKey:@"HEROS"];
+        [_tableView reloadData];
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NIDPRINT(@"%@", error);
     }];
@@ -153,6 +167,35 @@
     [self newHero];
 
     return YES;
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _heros.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+
+    cell.textLabel.text = [[_heros objectAtIndex:indexPath.row] objectForKey:@"name"];
+
+    return cell;
+}
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
