@@ -10,12 +10,19 @@
 
 #import "UJHttpClient.h"
 #import "UJLoginViewController.h"
-#import "UJHeroProfileViewController.h"
+#import "UJResultTableViewController.h"
+#import "UJHeroTableView.h"
 
 @interface UJHomeViewController ()
 
+@property NSMutableArray *heros;
+@property UITableView* tableView;
+
 @property UITextField *textField;
-@property UJHeroProfileViewController *profileViewController;
+@property UJHomeProfileView *profileView;
+@property UIView *clearView;
+
+@property NSDictionary *heroInfo;
 
 @end
 
@@ -33,9 +40,16 @@
         _textField.returnKeyType = UIReturnKeyGo;
         _textField.delegate = self;
 
-        _profileViewController = [[UJHeroProfileViewController alloc] init];
-        [self addChildViewController:_profileViewController];
-        [_profileViewController didMoveToParentViewController:self];
+        _profileView = [[UJHomeProfileView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
+        _profileView.delegate = self;
+
+        _tableView = [[UJHeroTableView alloc] initWithFrame:CGRectMake(0, _profileView.frame.origin.y + _profileView.frame.size.height + self.navigationController.navigationBar.frame.size.height, 320, 480)];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+
+        _clearView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        _clearView.userInteractionEnabled = YES;
+        [_clearView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)]];
     }
     return self;
 }
@@ -44,8 +58,22 @@
 {
     [super viewDidLoad];
 
+    [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+    [self.view addSubview:_tableView];
+
     self.navigationItem.titleView = _textField;
-    [self.view addSubview:_profileViewController.view];
+    [self.view addSubview:_profileView];
+
+    _heros = [[NSUserDefaults standardUserDefaults] mutableArrayValueForKey:@"HEROS"];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasHidden) name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [_tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -66,8 +94,67 @@
 
 - (void)newHero
 {
-    [[UJHttpClient sharedClient] newHeroWithName:_textField.text onSuccess:^(id JSON) {
-        [_profileViewController setHeroInfo:JSON];
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObject:_textField.text forKey:@"name"];
+
+    [[UJHttpClient sharedClient] postPath:@"heros" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NIDPRINT(@"%@", responseObject);
+        _heroInfo = responseObject;
+        [_profileView setHeroInfo:_heroInfo];
+
+        [_heros addObject:_heroInfo];
+        [[NSUserDefaults standardUserDefaults] setObject:_heros forKey:@"HEROS"];
+        [_tableView reloadData];
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NIDPRINT(@"%@", error);
+    }];
+}
+
+- (void)keyboardWasShown;
+{
+    [self.view addSubview:_clearView];
+}
+
+- (void)keyboardWasHidden;
+{
+    [_clearView removeFromSuperview];
+}
+
+- (void)hideKeyboard;
+{
+    if (_textField.editing) {
+        [_textField resignFirstResponder];
+    }
+}
+
+#pragma mark -
+#pragma mark UJHomeProfileViewDelegate
+- (void)challengeRanking;
+{
+    NIDPRINTMETHODNAME();
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObject:[_heroInfo objectForKey:@"id"] forKey:@"hero_id"];
+
+    [[UJHttpClient sharedClient] postPath:@"rankings" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NIDPRINT(@"%@", responseObject);
+        NSString *localized = NSLocalizedString(@"win:%@ ranking:%@", @"Result of challenge ranking");
+        [_profileView setResult:[NSString stringWithFormat:localized, [responseObject objectForKey:@"initial_win"], [responseObject objectForKey:@"rank"]]];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NIDPRINT(@"%@", error);
+    }];
+}
+
+- (void)showResults;
+{
+    NIDPRINTMETHODNAME();
+
+    NSString *path = [NSString stringWithFormat:@"heros/%@/challenges", [_heroInfo objectForKey:@"id"]];
+    [[UJHttpClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NIDPRINT(@"%@", responseObject);
+        UJResultTableViewController *resultTableViewController = [[UJResultTableViewController alloc] init];
+        resultTableViewController.results = responseObject;
+        [self.navigationController pushViewController:resultTableViewController animated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NIDPRINT(@"%@", error);
     }];
 }
 
@@ -80,6 +167,35 @@
     [self newHero];
 
     return YES;
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _heros.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+
+    cell.textLabel.text = [[_heros objectAtIndex:indexPath.row] objectForKey:@"name"];
+
+    return cell;
+}
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end
