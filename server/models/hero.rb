@@ -13,10 +13,6 @@ class Hero
 
   belongs_to :user
 
-  has_many :battles, inverse_of: :master
-  has_many :battles, inverse_of: :challenger
-  belongs_to :battles, inverse_of: :winner
-
   belongs_to :ranking
 
   embeds_one :ranking_info, class_name: 'HeroRanking', inverse_of: :hero

@@ -12,6 +12,14 @@ Unclejosh.controllers :heros do
   end
 end
 
+Unclejosh.controllers :challenges, :parent => :heros do
+  get :index do
+    hero = Hero.find(params[:hero_id])
+    challenges = Battle.challenges_of(hero.id)
+    render 'challenges', locals: { challenges: challenges, hero: hero }
+  end
+end
+
 Unclejosh.controllers :battles do
   get :index, :with => :id do
     battle = Battle.find_by(id: params[:id])

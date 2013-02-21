@@ -28,6 +28,11 @@ class Battle
     end
   end
 
+  def self.challenges_of(challenger_id)
+    regex = Regexp.new("#{challenger_id}$")
+    where(id: regex)
+  end
+
   private
 
   def default_id
