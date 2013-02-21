@@ -10,6 +10,6 @@
 
 #import "UJHomeProfileView.h"
 
-@interface UJHomeViewController : UIViewController <UITextFieldDelegate, UJHomeProfileViewDelegate>
+@interface UJHomeViewController : UIViewController <UITextFieldDelegate, UJHomeProfileViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @end

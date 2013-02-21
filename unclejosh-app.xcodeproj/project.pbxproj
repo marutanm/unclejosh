@@ -27,8 +27,8 @@
 		50743EEA16CD23A700EEE644 /* UJHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743EE916CD23A700EEE644 /* UJHomeViewController.m */; };
 		50743EED16CE4C6100EEE644 /* UJLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743EEC16CE4C6100EEE644 /* UJLoginViewController.m */; };
 		50743EFF16D0D97900EEE644 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50743F0116D0D97900EEE644 /* Localizable.strings */; };
-		50743F0816D260AD00EEE644 /* UJHeroTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743F0716D260AC00EEE644 /* UJHeroTableViewController.m */; };
 		50743F2B16D511DF00EEE644 /* UJHomeProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743F2A16D511DF00EEE644 /* UJHomeProfileView.m */; };
+		50743F2F16D652D500EEE644 /* UJHeroTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743F2E16D652D500EEE644 /* UJHeroTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,10 +73,10 @@
 		50743EFC16D0D44300EEE644 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		50743F0016D0D97900EEE644 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		50743F0216D0D9BE00EEE644 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		50743F0616D260AC00EEE644 /* UJHeroTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UJHeroTableViewController.h; sourceTree = "<group>"; };
-		50743F0716D260AC00EEE644 /* UJHeroTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UJHeroTableViewController.m; sourceTree = "<group>"; };
 		50743F2916D511DF00EEE644 /* UJHomeProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UJHomeProfileView.h; sourceTree = "<group>"; };
 		50743F2A16D511DF00EEE644 /* UJHomeProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UJHomeProfileView.m; sourceTree = "<group>"; };
+		50743F2D16D652D500EEE644 /* UJHeroTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UJHeroTableView.h; sourceTree = "<group>"; };
+		50743F2E16D652D500EEE644 /* UJHeroTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UJHeroTableView.m; sourceTree = "<group>"; };
 		7CFEDCC2874F460191C164F6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		7E2F2A32670242D5AC1311E3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -147,10 +147,10 @@
 				50743EE916CD23A700EEE644 /* UJHomeViewController.m */,
 				50743F2916D511DF00EEE644 /* UJHomeProfileView.h */,
 				50743F2A16D511DF00EEE644 /* UJHomeProfileView.m */,
+				50743F2D16D652D500EEE644 /* UJHeroTableView.h */,
+				50743F2E16D652D500EEE644 /* UJHeroTableView.m */,
 				50743EEB16CE4C6100EEE644 /* UJLoginViewController.h */,
 				50743EEC16CE4C6100EEE644 /* UJLoginViewController.m */,
-				50743F0616D260AC00EEE644 /* UJHeroTableViewController.h */,
-				50743F0716D260AC00EEE644 /* UJHeroTableViewController.m */,
 				5028639E16D4842900231855 /* UJResultTableViewController.h */,
 				5028639F16D4842900231855 /* UJResultTableViewController.m */,
 				5005F52B16CBBDEC00E2B216 /* Supporting Files */,
@@ -326,9 +326,9 @@
 				50743EE616CD1E3700EEE644 /* UJHttpClient.m in Sources */,
 				50743EEA16CD23A700EEE644 /* UJHomeViewController.m in Sources */,
 				50743EED16CE4C6100EEE644 /* UJLoginViewController.m in Sources */,
-				50743F0816D260AD00EEE644 /* UJHeroTableViewController.m in Sources */,
 				502863A016D4842900231855 /* UJResultTableViewController.m in Sources */,
 				50743F2B16D511DF00EEE644 /* UJHomeProfileView.m in Sources */,
+				50743F2F16D652D500EEE644 /* UJHeroTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
