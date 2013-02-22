@@ -40,7 +40,7 @@ module UnclejoshHelper
   end
 
   def rank(hero)
-    ranking = Ranking.challenge hero.ranking_info.initial_win
+    ranking = Ranking.challenge hero.ranking_info.win_point
     ranking.heros << hero
     nil
   end
@@ -63,11 +63,11 @@ module UnclejoshHelper
         end
       end
     end
-    challenger.create_ranking_info initial_win: win_count, total_win: win_count
+    challenger.create_ranking_info win_point: win_count, total_win: win_count
 
     rank challenger
 
-    result =  { rank: Ranking.rank_of(challenger), initial_win: win_count }
+    result =  { rank: Ranking.rank_of(challenger), win_point: win_count }
     OpenStruct.new result
   end
 

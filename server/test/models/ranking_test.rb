@@ -8,10 +8,10 @@ describe "Ranking Model" do
 
   describe 'rank_of()' do
     let(:hero1) do
-      Fabricate(:hero) { ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero, :initial_win => 10) } }
+      Fabricate(:hero) { ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero, :win_point => 10) } }
     end
     let(:hero2) do
-      Fabricate(:hero) { ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero, :initial_win => 10) } }
+      Fabricate(:hero) { ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero, :win_point => 10) } }
     end
     let(:ranking) { Fabricate(:ranking, win_count: 10, rank: 15) }
 

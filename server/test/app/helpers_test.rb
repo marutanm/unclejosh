@@ -33,13 +33,13 @@ describe UnclejoshHelper do
 
   describe "rank" do
     let(:hero1) do
-      Fabricate(:hero) { ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero, :initial_win => 10) } }
+      Fabricate(:hero) { ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero, :win_point => 10) } }
     end
     let(:hero2) do
-      Fabricate(:hero) { ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero, :initial_win => 10) } }
+      Fabricate(:hero) { ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero, :win_point => 10) } }
     end
     let(:hero3) do
-      Fabricate(:hero) { ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero, :initial_win => 20) } }
+      Fabricate(:hero) { ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero, :win_point => 20) } }
     end
 
     specify do
@@ -64,7 +64,7 @@ describe UnclejoshHelper do
       0.upto(count - 1) do |i|
         hero = Fabricate(:hero) do |h|
           h.name "#{Faker::Name.name} #{i}"
-          h.ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero, :initial_win => i) }
+          h.ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero, :win_point => i) }
         end
         helper.rank hero
       end
@@ -74,8 +74,8 @@ describe UnclejoshHelper do
     specify do
       count.must_equal 10
       subject.rank.wont_be_nil
-      subject.initial_win.wont_be_nil
-      subject.rank.must_equal 10 - subject.initial_win + 1
+      subject.win_point.wont_be_nil
+      subject.rank.must_equal 10 - subject.win_point + 1
     end
   end
 

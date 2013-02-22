@@ -16,13 +16,13 @@ namespace :develop do
         result = helper.fight master, challenger
         win_count += 1 if result.winner == challenger
       end
-      challenger.create_ranking_info initial_win: win_count, total_win: win_count
+      challenger.create_ranking_info win_point: win_count, total_win: win_count
       helper.rank challenger
       heros
     end
     heros.each do |h|
       next unless h
-      p "rank: #{Ranking.rank_of(h)}(win_count: #{h.ranking_info.initial_win}), name: #{h.name}(#{h.id})"
+      p "rank: #{Ranking.rank_of(h)}(win_count: #{h.ranking_info.win_point}), name: #{h.name}(#{h.id})"
     end
   end
 

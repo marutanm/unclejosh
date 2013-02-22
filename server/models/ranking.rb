@@ -11,7 +11,7 @@ class Ranking
   has_many :heros
 
   def self.rank_of(hero)
-    ranking = find_by(win_count: hero.ranking_info.initial_win)
+    ranking = find_by(win_count: hero.ranking_info.win_point)
     return nil unless ranking.heros.index(hero)
     ranking.rank + ranking.heros.index(hero)
   end
