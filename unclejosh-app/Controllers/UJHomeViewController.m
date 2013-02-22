@@ -137,7 +137,7 @@
     [[UJHttpClient sharedClient] postPath:@"rankings" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NIDPRINT(@"%@", responseObject);
         NSString *localized = NSLocalizedString(@"win:%@ ranking:%@", @"Result of challenge ranking");
-        [_profileView setResult:[NSString stringWithFormat:localized, [responseObject objectForKey:@"initial_win"], [responseObject objectForKey:@"rank"]]];
+        [_profileView setResult:[NSString stringWithFormat:localized, [responseObject objectForKey:@"win_point"], [responseObject objectForKey:@"rank"]]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NIDPRINT(@"%@", error);
     }];
