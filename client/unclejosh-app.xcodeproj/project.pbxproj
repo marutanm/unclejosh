@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		478C2BE6200C4718AD38E2E0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E2F2A32670242D5AC1311E3 /* libPods.a */; };
 		5005F52516CBBDEC00E2B216 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005F52416CBBDEC00E2B216 /* UIKit.framework */; };
 		5005F52716CBBDEC00E2B216 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005F52616CBBDEC00E2B216 /* Foundation.framework */; };
 		5005F52916CBBDEC00E2B216 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005F52816CBBDEC00E2B216 /* CoreGraphics.framework */; };
@@ -17,11 +16,6 @@
 		5005F53716CBBDEC00E2B216 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5005F53616CBBDEC00E2B216 /* Default.png */; };
 		5005F53916CBBDEC00E2B216 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5005F53816CBBDEC00E2B216 /* Default@2x.png */; };
 		5005F53B16CBBDEC00E2B216 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5005F53A16CBBDEC00E2B216 /* Default-568h@2x.png */; };
-		5005F54316CBBDEC00E2B216 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005F54216CBBDEC00E2B216 /* SenTestingKit.framework */; };
-		5005F54416CBBDEC00E2B216 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005F52416CBBDEC00E2B216 /* UIKit.framework */; };
-		5005F54516CBBDEC00E2B216 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005F52616CBBDEC00E2B216 /* Foundation.framework */; };
-		5005F54D16CBBDEC00E2B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5005F54B16CBBDEC00E2B216 /* InfoPlist.strings */; };
-		5005F55016CBBDEC00E2B216 /* unclejosh_appTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5005F54F16CBBDEC00E2B216 /* unclejosh_appTests.m */; };
 		502863A016D4842900231855 /* UJResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5028639F16D4842900231855 /* UJResultTableViewController.m */; };
 		50743EE616CD1E3700EEE644 /* UJHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743EE516CD1E3700EEE644 /* UJHttpClient.m */; };
 		50743EEA16CD23A700EEE644 /* UJHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743EE916CD23A700EEE644 /* UJHomeViewController.m */; };
@@ -29,17 +23,15 @@
 		50743EFF16D0D97900EEE644 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50743F0116D0D97900EEE644 /* Localizable.strings */; };
 		50743F2B16D511DF00EEE644 /* UJHomeProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743F2A16D511DF00EEE644 /* UJHomeProfileView.m */; };
 		50743F2F16D652D500EEE644 /* UJHeroTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743F2E16D652D500EEE644 /* UJHeroTableView.m */; };
+		50C6662916D7A4120032D86E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005F52416CBBDEC00E2B216 /* UIKit.framework */; };
+		50C6662A16D7A4120032D86E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005F52616CBBDEC00E2B216 /* Foundation.framework */; };
+		50C6662B16D7A4120032D86E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005F52816CBBDEC00E2B216 /* CoreGraphics.framework */; };
+		50C6663316D7A4120032D86E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C6663216D7A4120032D86E /* main.m */; };
+		50C6665816D7A8EE0032D86E /* UJHomeProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743F2A16D511DF00EEE644 /* UJHomeProfileView.m */; };
+		50C6665A16D7AA2B0032D86E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C6665916D7AA2B0032D86E /* libPods.a */; };
+		50C6666716D7BB050032D86E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C6665916D7AA2B0032D86E /* libPods.a */; };
+		EE18474E0EAA4C9DA5C52DB9 /* libPods-unclejoshTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9D4DB3BD70409585514DC0 /* libPods-unclejoshTests.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		5005F54616CBBDEC00E2B216 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5005F51716CBBDEC00E2B216 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5005F51F16CBBDEC00E2B216;
-			remoteInfo = "unclejosh-app";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5005F52016CBBDEC00E2B216 /* unclejosh-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "unclejosh-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,30 +47,30 @@
 		5005F53616CBBDEC00E2B216 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		5005F53816CBBDEC00E2B216 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		5005F53A16CBBDEC00E2B216 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		5005F54116CBBDEC00E2B216 /* unclejosh-appTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "unclejosh-appTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5005F54216CBBDEC00E2B216 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		5005F54A16CBBDEC00E2B216 /* unclejosh-appTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "unclejosh-appTests-Info.plist"; sourceTree = "<group>"; };
-		5005F54C16CBBDEC00E2B216 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		5005F54E16CBBDEC00E2B216 /* unclejosh_appTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = unclejosh_appTests.h; sourceTree = "<group>"; };
-		5005F54F16CBBDEC00E2B216 /* unclejosh_appTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = unclejosh_appTests.m; sourceTree = "<group>"; };
-		5028639E16D4842900231855 /* UJResultTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UJResultTableViewController.h; sourceTree = "<group>"; };
-		5028639F16D4842900231855 /* UJResultTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UJResultTableViewController.m; sourceTree = "<group>"; };
+		5028639E16D4842900231855 /* UJResultTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UJResultTableViewController.h; path = Controllers/UJResultTableViewController.h; sourceTree = "<group>"; };
+		5028639F16D4842900231855 /* UJResultTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UJResultTableViewController.m; path = Controllers/UJResultTableViewController.m; sourceTree = "<group>"; };
 		50743EE416CD1E3700EEE644 /* UJHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UJHttpClient.h; sourceTree = "<group>"; };
 		50743EE516CD1E3700EEE644 /* UJHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UJHttpClient.m; sourceTree = "<group>"; };
-		50743EE816CD23A700EEE644 /* UJHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UJHomeViewController.h; sourceTree = "<group>"; };
-		50743EE916CD23A700EEE644 /* UJHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UJHomeViewController.m; sourceTree = "<group>"; };
-		50743EEB16CE4C6100EEE644 /* UJLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UJLoginViewController.h; sourceTree = "<group>"; };
-		50743EEC16CE4C6100EEE644 /* UJLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UJLoginViewController.m; sourceTree = "<group>"; };
+		50743EE816CD23A700EEE644 /* UJHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UJHomeViewController.h; path = "unclejosh-app/Controllers/UJHomeViewController.h"; sourceTree = SOURCE_ROOT; };
+		50743EE916CD23A700EEE644 /* UJHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UJHomeViewController.m; path = "unclejosh-app/Controllers/UJHomeViewController.m"; sourceTree = SOURCE_ROOT; };
+		50743EEB16CE4C6100EEE644 /* UJLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UJLoginViewController.h; path = Controllers/UJLoginViewController.h; sourceTree = "<group>"; };
+		50743EEC16CE4C6100EEE644 /* UJLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UJLoginViewController.m; path = Controllers/UJLoginViewController.m; sourceTree = "<group>"; };
 		50743EFA16D0D44300EEE644 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		50743EFC16D0D44300EEE644 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		50743F0016D0D97900EEE644 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		50743F0216D0D9BE00EEE644 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		50743F2916D511DF00EEE644 /* UJHomeProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UJHomeProfileView.h; sourceTree = "<group>"; };
-		50743F2A16D511DF00EEE644 /* UJHomeProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UJHomeProfileView.m; sourceTree = "<group>"; };
-		50743F2D16D652D500EEE644 /* UJHeroTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UJHeroTableView.h; sourceTree = "<group>"; };
-		50743F2E16D652D500EEE644 /* UJHeroTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UJHeroTableView.m; sourceTree = "<group>"; };
+		50743F2916D511DF00EEE644 /* UJHomeProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UJHomeProfileView.h; path = "unclejosh-app/Views/UJHomeProfileView.h"; sourceTree = SOURCE_ROOT; };
+		50743F2A16D511DF00EEE644 /* UJHomeProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UJHomeProfileView.m; path = "unclejosh-app/Views/UJHomeProfileView.m"; sourceTree = SOURCE_ROOT; };
+		50743F2D16D652D500EEE644 /* UJHeroTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UJHeroTableView.h; path = "unclejosh-app/Views/UJHeroTableView.h"; sourceTree = SOURCE_ROOT; };
+		50743F2E16D652D500EEE644 /* UJHeroTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UJHeroTableView.m; path = "unclejosh-app/Views/UJHeroTableView.m"; sourceTree = SOURCE_ROOT; };
+		50C6662716D7A4120032D86E /* unclejoshTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unclejoshTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50C6662E16D7A4120032D86E /* unclejoshTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "unclejoshTests-Info.plist"; sourceTree = "<group>"; };
+		50C6663216D7A4120032D86E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		50C6663416D7A4120032D86E /* unclejoshTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "unclejoshTests-Prefix.pch"; sourceTree = "<group>"; };
+		50C6665916D7AA2B0032D86E /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Release-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		633F412FB0C34601A1E05D55 /* Pods-unclejoshTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unclejoshTests.xcconfig"; path = "Pods/Pods-unclejoshTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		7CFEDCC2874F460191C164F6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
-		7E2F2A32670242D5AC1311E3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE9D4DB3BD70409585514DC0 /* libPods-unclejoshTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-unclejoshTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,20 +78,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50C6666716D7BB050032D86E /* libPods.a in Frameworks */,
 				5005F52516CBBDEC00E2B216 /* UIKit.framework in Frameworks */,
 				5005F52716CBBDEC00E2B216 /* Foundation.framework in Frameworks */,
 				5005F52916CBBDEC00E2B216 /* CoreGraphics.framework in Frameworks */,
-				478C2BE6200C4718AD38E2E0 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5005F53D16CBBDEC00E2B216 /* Frameworks */ = {
+		50C6662416D7A4120032D86E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5005F54316CBBDEC00E2B216 /* SenTestingKit.framework in Frameworks */,
-				5005F54416CBBDEC00E2B216 /* UIKit.framework in Frameworks */,
-				5005F54516CBBDEC00E2B216 /* Foundation.framework in Frameworks */,
+				50C6662916D7A4120032D86E /* UIKit.framework in Frameworks */,
+				50C6662A16D7A4120032D86E /* Foundation.framework in Frameworks */,
+				50C6662B16D7A4120032D86E /* CoreGraphics.framework in Frameworks */,
+				50C6665A16D7AA2B0032D86E /* libPods.a in Frameworks */,
+				EE18474E0EAA4C9DA5C52DB9 /* libPods-unclejoshTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,10 +104,11 @@
 			isa = PBXGroup;
 			children = (
 				5005F52A16CBBDEC00E2B216 /* unclejosh-app */,
-				5005F54816CBBDEC00E2B216 /* unclejosh-appTests */,
+				50C6662C16D7A4120032D86E /* unclejoshTests */,
 				5005F52316CBBDEC00E2B216 /* Frameworks */,
 				5005F52116CBBDEC00E2B216 /* Products */,
 				7CFEDCC2874F460191C164F6 /* Pods.xcconfig */,
+				633F412FB0C34601A1E05D55 /* Pods-unclejoshTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,7 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				5005F52016CBBDEC00E2B216 /* unclejosh-app.app */,
-				5005F54116CBBDEC00E2B216 /* unclejosh-appTests.octest */,
+				50C6662716D7A4120032D86E /* unclejoshTests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,7 +128,8 @@
 				5005F52616CBBDEC00E2B216 /* Foundation.framework */,
 				5005F52816CBBDEC00E2B216 /* CoreGraphics.framework */,
 				5005F54216CBBDEC00E2B216 /* SenTestingKit.framework */,
-				7E2F2A32670242D5AC1311E3 /* libPods.a */,
+				50C6665916D7AA2B0032D86E /* libPods.a */,
+				AE9D4DB3BD70409585514DC0 /* libPods-unclejoshTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -143,19 +139,14 @@
 			children = (
 				5005F53316CBBDEC00E2B216 /* UJAppDelegate.h */,
 				5005F53416CBBDEC00E2B216 /* UJAppDelegate.m */,
-				50743EE816CD23A700EEE644 /* UJHomeViewController.h */,
-				50743EE916CD23A700EEE644 /* UJHomeViewController.m */,
-				50743F2916D511DF00EEE644 /* UJHomeProfileView.h */,
-				50743F2A16D511DF00EEE644 /* UJHomeProfileView.m */,
-				50743F2D16D652D500EEE644 /* UJHeroTableView.h */,
-				50743F2E16D652D500EEE644 /* UJHeroTableView.m */,
+				50743EE416CD1E3700EEE644 /* UJHttpClient.h */,
+				50743EE516CD1E3700EEE644 /* UJHttpClient.m */,
+				50743F3316D669C400EEE644 /* HomeView */,
 				50743EEB16CE4C6100EEE644 /* UJLoginViewController.h */,
 				50743EEC16CE4C6100EEE644 /* UJLoginViewController.m */,
 				5028639E16D4842900231855 /* UJResultTableViewController.h */,
 				5028639F16D4842900231855 /* UJResultTableViewController.m */,
 				5005F52B16CBBDEC00E2B216 /* Supporting Files */,
-				50743EE416CD1E3700EEE644 /* UJHttpClient.h */,
-				50743EE516CD1E3700EEE644 /* UJHttpClient.m */,
 			);
 			path = "unclejosh-app";
 			sourceTree = "<group>";
@@ -175,21 +166,33 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		5005F54816CBBDEC00E2B216 /* unclejosh-appTests */ = {
+		50743F3316D669C400EEE644 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				5005F54E16CBBDEC00E2B216 /* unclejosh_appTests.h */,
-				5005F54F16CBBDEC00E2B216 /* unclejosh_appTests.m */,
-				5005F54916CBBDEC00E2B216 /* Supporting Files */,
+				50743EE816CD23A700EEE644 /* UJHomeViewController.h */,
+				50743EE916CD23A700EEE644 /* UJHomeViewController.m */,
+				50743F2916D511DF00EEE644 /* UJHomeProfileView.h */,
+				50743F2A16D511DF00EEE644 /* UJHomeProfileView.m */,
+				50743F2D16D652D500EEE644 /* UJHeroTableView.h */,
+				50743F2E16D652D500EEE644 /* UJHeroTableView.m */,
 			);
-			path = "unclejosh-appTests";
+			name = HomeView;
 			sourceTree = "<group>";
 		};
-		5005F54916CBBDEC00E2B216 /* Supporting Files */ = {
+		50C6662C16D7A4120032D86E /* unclejoshTests */ = {
 			isa = PBXGroup;
 			children = (
-				5005F54A16CBBDEC00E2B216 /* unclejosh-appTests-Info.plist */,
-				5005F54B16CBBDEC00E2B216 /* InfoPlist.strings */,
+				50C6662D16D7A4120032D86E /* Supporting Files */,
+			);
+			path = unclejoshTests;
+			sourceTree = "<group>";
+		};
+		50C6662D16D7A4120032D86E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				50C6662E16D7A4120032D86E /* unclejoshTests-Info.plist */,
+				50C6663216D7A4120032D86E /* main.m */,
+				50C6663416D7A4120032D86E /* unclejoshTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -215,24 +218,24 @@
 			productReference = 5005F52016CBBDEC00E2B216 /* unclejosh-app.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5005F54016CBBDEC00E2B216 /* unclejosh-appTests */ = {
+		50C6662616D7A4120032D86E /* unclejoshTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5005F55616CBBDEC00E2B216 /* Build configuration list for PBXNativeTarget "unclejosh-appTests" */;
+			buildConfigurationList = 50C6664016D7A4120032D86E /* Build configuration list for PBXNativeTarget "unclejoshTests" */;
 			buildPhases = (
-				5005F53C16CBBDEC00E2B216 /* Sources */,
-				5005F53D16CBBDEC00E2B216 /* Frameworks */,
-				5005F53E16CBBDEC00E2B216 /* Resources */,
-				5005F53F16CBBDEC00E2B216 /* ShellScript */,
+				50C6662316D7A4120032D86E /* Sources */,
+				50C6662416D7A4120032D86E /* Frameworks */,
+				50C6662516D7A4120032D86E /* Resources */,
+				B8E8AA72B4914FE7BC2EEBD6 /* Copy Pods Resources */,
+				50C6665D16D7B6B30032D86E /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5005F54716CBBDEC00E2B216 /* PBXTargetDependency */,
 			);
-			name = "unclejosh-appTests";
-			productName = "unclejosh-appTests";
-			productReference = 5005F54116CBBDEC00E2B216 /* unclejosh-appTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			name = unclejoshTests;
+			productName = unclejoshTests;
+			productReference = 50C6662716D7A4120032D86E /* unclejoshTests.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -258,7 +261,7 @@
 			projectRoot = "";
 			targets = (
 				5005F51F16CBBDEC00E2B216 /* unclejosh-app */,
-				5005F54016CBBDEC00E2B216 /* unclejosh-appTests */,
+				50C6662616D7A4120032D86E /* unclejoshTests */,
 			);
 		};
 /* End PBXProject section */
@@ -276,18 +279,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5005F53E16CBBDEC00E2B216 /* Resources */ = {
+		50C6662516D7A4120032D86E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5005F54D16CBBDEC00E2B216 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5005F53F16CBBDEC00E2B216 /* ShellScript */ = {
+		50C6665D16D7B6B30032D86E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -298,7 +300,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+			shellScript = "\"${SRCROOT}/unclejoshTests/PrepareUITests.sh\"\n";
 		};
 		91362A4DB0254E759C0DEF34 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -313,6 +315,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+		B8E8AA72B4914FE7BC2EEBD6 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-unclejoshTests-resources.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -332,23 +348,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5005F53C16CBBDEC00E2B216 /* Sources */ = {
+		50C6662316D7A4120032D86E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5005F55016CBBDEC00E2B216 /* unclejosh_appTests.m in Sources */,
+				50C6665816D7A8EE0032D86E /* UJHomeProfileView.m in Sources */,
+				50C6663316D7A4120032D86E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5005F54716CBBDEC00E2B216 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5005F51F16CBBDEC00E2B216 /* unclejosh-app */;
-			targetProxy = 5005F54616CBBDEC00E2B216 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5005F52D16CBBDEC00E2B216 /* InfoPlist.strings */ = {
@@ -356,15 +365,6 @@
 			children = (
 				5005F52E16CBBDEC00E2B216 /* en */,
 				50743EFA16D0D44300EEE644 /* ja */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		5005F54B16CBBDEC00E2B216 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5005F54C16CBBDEC00E2B216 /* en */,
-				50743EFC16D0D44300EEE644 /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -439,6 +439,10 @@
 				GCC_PREFIX_HEADER = "unclejosh-app/unclejosh-app-Prefix.pch";
 				INFOPLIST_FILE = "unclejosh-app/unclejosh-app-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Pods/build/Release-iphoneos\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -452,42 +456,38 @@
 				GCC_PREFIX_HEADER = "unclejosh-app/unclejosh-app-Prefix.pch";
 				INFOPLIST_FILE = "unclejosh-app/unclejosh-app-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Pods/build/Release-iphoneos\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
-		5005F55716CBBDEC00E2B216 /* Debug */ = {
+		50C6663E16D7A4120032D86E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7CFEDCC2874F460191C164F6 /* Pods.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/unclejosh-app.app/unclejosh-app";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "unclejosh-app/unclejosh-app-Prefix.pch";
-				INFOPLIST_FILE = "unclejosh-appTests/unclejosh-appTests-Info.plist";
+				GCC_PREFIX_HEADER = "unclejoshTests/unclejoshTests-Prefix.pch";
+				INFOPLIST_FILE = "unclejoshTests/unclejoshTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
-		5005F55816CBBDEC00E2B216 /* Release */ = {
+		50C6663F16D7A4120032D86E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 633F412FB0C34601A1E05D55 /* Pods-unclejoshTests.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/unclejosh-app.app/unclejosh-app";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "unclejosh-app/unclejosh-app-Prefix.pch";
-				INFOPLIST_FILE = "unclejosh-appTests/unclejosh-appTests-Info.plist";
+				GCC_PREFIX_HEADER = "unclejoshTests/unclejoshTests-Prefix.pch";
+				INFOPLIST_FILE = "unclejoshTests/unclejoshTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -512,11 +512,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5005F55616CBBDEC00E2B216 /* Build configuration list for PBXNativeTarget "unclejosh-appTests" */ = {
+		50C6664016D7A4120032D86E /* Build configuration list for PBXNativeTarget "unclejoshTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5005F55716CBBDEC00E2B216 /* Debug */,
-				5005F55816CBBDEC00E2B216 /* Release */,
+				50C6663E16D7A4120032D86E /* Debug */,
+				50C6663F16D7A4120032D86E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
