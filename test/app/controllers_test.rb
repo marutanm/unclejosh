@@ -147,7 +147,7 @@ describe "RankingController" do
 
   before do
     user.heros << hero
-    ranking = Ranking.challenge master.ranking_info.initial_win
+    ranking = Ranking.challenge master.ranking_info.win_point
     ranking.heros << master
   end
 
@@ -156,7 +156,7 @@ describe "RankingController" do
     before { post "/rankings", { hero_id: hero.id }, header }
 
     specify do
-      %w[rank initial_win].each do |key|
+      %w[rank win_point].each do |key|
         subject.must_respond_to key
       end
     end

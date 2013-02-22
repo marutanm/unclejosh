@@ -1,2 +1,2 @@
 object @result
-attributes :rank, :initial_win
+attributes :rank, :win_point
