@@ -29,6 +29,7 @@
 		50C6663316D7A4120032D86E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C6663216D7A4120032D86E /* main.m */; };
 		50C6665816D7A8EE0032D86E /* UJHomeProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743F2A16D511DF00EEE644 /* UJHomeProfileView.m */; };
 		50C6665A16D7AA2B0032D86E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C6665916D7AA2B0032D86E /* libPods.a */; };
+		50C6666716D7BB050032D86E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C6665916D7AA2B0032D86E /* libPods.a */; };
 		EE18474E0EAA4C9DA5C52DB9 /* libPods-unclejoshTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9D4DB3BD70409585514DC0 /* libPods-unclejoshTests.a */; };
 /* End PBXBuildFile section */
 
@@ -66,7 +67,7 @@
 		50C6662E16D7A4120032D86E /* unclejoshTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "unclejoshTests-Info.plist"; sourceTree = "<group>"; };
 		50C6663216D7A4120032D86E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		50C6663416D7A4120032D86E /* unclejoshTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "unclejoshTests-Prefix.pch"; sourceTree = "<group>"; };
-		50C6665916D7AA2B0032D86E /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libPods.a; path = "Pods/build/Release-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		50C6665916D7AA2B0032D86E /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Release-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		633F412FB0C34601A1E05D55 /* Pods-unclejoshTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unclejoshTests.xcconfig"; path = "Pods/Pods-unclejoshTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		7CFEDCC2874F460191C164F6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		AE9D4DB3BD70409585514DC0 /* libPods-unclejoshTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-unclejoshTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50C6666716D7BB050032D86E /* libPods.a in Frameworks */,
 				5005F52516CBBDEC00E2B216 /* UIKit.framework in Frameworks */,
 				5005F52716CBBDEC00E2B216 /* Foundation.framework in Frameworks */,
 				5005F52916CBBDEC00E2B216 /* CoreGraphics.framework in Frameworks */,
@@ -437,6 +439,10 @@
 				GCC_PREFIX_HEADER = "unclejosh-app/unclejosh-app-Prefix.pch";
 				INFOPLIST_FILE = "unclejosh-app/unclejosh-app-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Pods/build/Release-iphoneos\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -450,6 +456,10 @@
 				GCC_PREFIX_HEADER = "unclejosh-app/unclejosh-app-Prefix.pch";
 				INFOPLIST_FILE = "unclejosh-app/unclejosh-app-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Pods/build/Release-iphoneos\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
