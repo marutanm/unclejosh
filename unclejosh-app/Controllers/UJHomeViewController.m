@@ -96,11 +96,11 @@
 
     [[UJHttpClient sharedClient] postPath:@"heros" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NIDPRINT(@"%@", responseObject);
-        [_profileView setHeroInfo:responseObject];
 
         [_heros insertObject:responseObject atIndex:0];
         [[NSUserDefaults standardUserDefaults] setObject:_heros forKey:@"HEROS"];
         [_tableView reloadData];
+        [self tableView:_tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NIDPRINT(@"%@", error);
