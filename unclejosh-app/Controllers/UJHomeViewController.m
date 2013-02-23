@@ -101,7 +101,7 @@
         _heroInfo = responseObject;
         [_profileView setHeroInfo:_heroInfo];
 
-        [_heros addObject:_heroInfo];
+        [_heros insertObject:_heroInfo atIndex:0];
         [[NSUserDefaults standardUserDefaults] setObject:_heros forKey:@"HEROS"];
         [_tableView reloadData];
 
