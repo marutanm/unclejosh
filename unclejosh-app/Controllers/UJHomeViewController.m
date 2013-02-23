@@ -22,8 +22,6 @@
 @property UJHomeProfileView *profileView;
 @property UIView *clearView;
 
-@property NSDictionary *heroInfo;
-
 @end
 
 @implementation UJHomeViewController
@@ -98,10 +96,9 @@
 
     [[UJHttpClient sharedClient] postPath:@"heros" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NIDPRINT(@"%@", responseObject);
-        _heroInfo = responseObject;
-        [_profileView setHeroInfo:_heroInfo];
+        [_profileView setHeroInfo:responseObject];
 
-        [_heros insertObject:_heroInfo atIndex:0];
+        [_heros insertObject:responseObject atIndex:0];
         [[NSUserDefaults standardUserDefaults] setObject:_heros forKey:@"HEROS"];
         [_tableView reloadData];
 
@@ -132,7 +129,8 @@
 - (void)challengeRanking;
 {
     NIDPRINTMETHODNAME();
-    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObject:[_heroInfo objectForKey:@"id"] forKey:@"hero_id"];
+    NSDictionary *selectedHero = [_heros objectAtIndex:[[_tableView indexPathForSelectedRow] row]];
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObject:[selectedHero objectForKey:@"id"] forKey:@"hero_id"];
 
     [[UJHttpClient sharedClient] postPath:@"rankings" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NIDPRINT(@"%@", responseObject);
@@ -147,7 +145,9 @@
 {
     NIDPRINTMETHODNAME();
 
-    NSString *path = [NSString stringWithFormat:@"heros/%@/challenges", [_heroInfo objectForKey:@"id"]];
+    NSDictionary *selectedHero = [_heros objectAtIndex:[[_tableView indexPathForSelectedRow] row]];
+    NSString *path = [NSString stringWithFormat:@"heros/%@/challenges", [selectedHero objectForKey:@"id"]];
+
     [[UJHttpClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NIDPRINT(@"%@", responseObject);
         UJResultTableViewController *resultTableViewController = [[UJResultTableViewController alloc] init];
