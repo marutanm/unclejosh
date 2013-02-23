@@ -196,6 +196,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    [_profileView setHeroInfo:[_heros objectAtIndex:indexPath.row]];
 }
 
 @end
