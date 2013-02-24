@@ -20,6 +20,5 @@
 @property (nonatomic) id <UJHomeProfileViewDelegate> delegate;
 
 - (void)setHeroInfo:(NSDictionary *)heroInfo;
-- (void)setResult:(NSString *)result;
 
 @end

@@ -68,15 +68,20 @@
     _strengthLabel.text = [[heroInfo objectForKey:@"strength"] stringValue];
     _agilityLabel.text = [[heroInfo objectForKey:@"agility"] stringValue];
 
-    _challengebutton.hidden = NO;
-}
+    if (heroInfo[@"result"]) {
+        NIDPRINT(@"%@", heroInfo[@"result"]);
 
-- (void)setResult:(NSString *)result;
-{
-    _resultLabel.text = result;
+        NSString *localized = NSLocalizedString(@"win:%@ ranking:%@", @"Result of challenge ranking");
+        _resultLabel.text = [NSString stringWithFormat:localized, [heroInfo[@"result"] objectForKey:@"win_point"], [heroInfo[@"result"] objectForKey:@"rank"]];
 
-    _challengebutton.hidden = YES;
-    _resultButton.hidden = NO;
+        _challengebutton.hidden = YES;
+        _resultButton.hidden = NO;
+    } else {
+
+        _resultLabel.text = nil;
+        _challengebutton.hidden = NO;
+        _resultButton.hidden = YES;
+    }
 }
 
 @end
