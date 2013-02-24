@@ -17,6 +17,7 @@
 
 @property NSMutableArray *heros;
 @property UITableView* tableView;
+@property NSInteger selectedRow;
 
 @property UITextField *textField;
 @property UJHomeProfileView *profileView;
@@ -127,12 +128,12 @@
 #pragma mark UJHomeProfileViewDelegate
 - (void)challengeRanking;
 {
-    NIDPRINTMETHODNAME();
-    NSMutableDictionary *selectedHero = [_heros objectAtIndex:[[_tableView indexPathForSelectedRow] row]];
+    NSMutableDictionary *selectedHero = [_heros objectAtIndex:_selectedRow];
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObject:[selectedHero objectForKey:@"id"] forKey:@"hero_id"];
 
     [[UJHttpClient sharedClient] postPath:@"rankings" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [selectedHero setObject:responseObject forKey:@"result"];
+        NIDPRINT(@"%@", selectedHero);
         [_profileView setHeroInfo:selectedHero];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -142,8 +143,6 @@
 
 - (void)showResults;
 {
-    NIDPRINTMETHODNAME();
-
     NSDictionary *selectedHero = [_heros objectAtIndex:[[_tableView indexPathForSelectedRow] row]];
     NSString *path = [NSString stringWithFormat:@"heros/%@/challenges", [selectedHero objectForKey:@"id"]];
 
@@ -195,6 +194,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    _selectedRow = indexPath.row;
 
     [_profileView setHeroInfo:[_heros objectAtIndex:indexPath.row]];
 }

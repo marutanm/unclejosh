@@ -62,14 +62,12 @@
 
 - (void)setHeroInfo:(NSDictionary *)heroInfo;
 {
-    NIDPRINT(@"%@", heroInfo);
     _nameLabel.text = [heroInfo objectForKey:@"name"];
     _lifeLabel.text = [[heroInfo objectForKey:@"life"] stringValue];
     _strengthLabel.text = [[heroInfo objectForKey:@"strength"] stringValue];
     _agilityLabel.text = [[heroInfo objectForKey:@"agility"] stringValue];
 
     if (heroInfo[@"result"]) {
-        NIDPRINT(@"%@", heroInfo[@"result"]);
 
         NSString *localized = NSLocalizedString(@"win:%@ ranking:%@", @"Result of challenge ranking");
         _resultLabel.text = [NSString stringWithFormat:localized, [heroInfo[@"result"] objectForKey:@"win_point"], [heroInfo[@"result"] objectForKey:@"rank"]];
