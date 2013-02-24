@@ -67,8 +67,7 @@ module UnclejoshHelper
 
     rank challenger
 
-    result =  { rank: Ranking.rank_of(challenger), win_point: win_count }
-    OpenStruct.new result
+    nil
   end
 
   def current_user(user_id); User.find(user_id) end

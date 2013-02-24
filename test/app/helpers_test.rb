@@ -72,10 +72,8 @@ describe UnclejoshHelper do
     subject { helper.challenge_rank challenger }
 
     specify do
-      count.must_equal 10
-      subject.rank.wont_be_nil
-      subject.win_point.wont_be_nil
-      subject.rank.must_equal 10 - subject.win_point + 1
+      subject.must_be_nil
+      challenger.ranking_info.wont_be_nil
     end
   end
 

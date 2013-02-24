@@ -160,5 +160,15 @@ describe "RankingController" do
         subject.must_respond_to key
       end
     end
+
+    describe "call again" do
+      before { post "/rankings", { hero_id: hero.id }, header }
+
+      specify do
+        %w[rank win_point].each do |key|
+          subject.must_respond_to key
+        end
+      end
+    end
   end
 end
