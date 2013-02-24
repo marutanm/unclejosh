@@ -62,8 +62,7 @@
     self.navigationItem.titleView = _textField;
     [self.view addSubview:_profileView];
 
-    _heros = [[NSUserDefaults standardUserDefaults] mutableArrayValueForKey:@"HEROS"];
-
+    _heros = (__bridge_transfer NSMutableArray *)CFPropertyListCreateDeepCopy(NULL, (CFArrayRef)[[NSUserDefaults standardUserDefaults] arrayForKey:@"HEROS"], kCFPropertyListMutableContainers);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasHidden) name:UIKeyboardDidHideNotification object:nil];
 }
@@ -97,7 +96,7 @@
     [[UJHttpClient sharedClient] postPath:@"heros" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NIDPRINT(@"%@", responseObject);
 
-        [_heros insertObject:responseObject atIndex:0];
+        [_heros insertObject:[NSMutableDictionary dictionaryWithDictionary:responseObject] atIndex:0];
         [[NSUserDefaults standardUserDefaults] setObject:_heros forKey:@"HEROS"];
         [_tableView reloadData];
         [self tableView:_tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
@@ -129,13 +128,15 @@
 - (void)challengeRanking;
 {
     NIDPRINTMETHODNAME();
-    NSDictionary *selectedHero = [_heros objectAtIndex:[[_tableView indexPathForSelectedRow] row]];
+    NSMutableDictionary *selectedHero = [_heros objectAtIndex:[[_tableView indexPathForSelectedRow] row]];
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObject:[selectedHero objectForKey:@"id"] forKey:@"hero_id"];
 
     [[UJHttpClient sharedClient] postPath:@"rankings" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NIDPRINT(@"%@", responseObject);
+        [selectedHero setObject:responseObject forKey:@"result"];
+
         NSString *localized = NSLocalizedString(@"win:%@ ranking:%@", @"Result of challenge ranking");
         [_profileView setResult:[NSString stringWithFormat:localized, [responseObject objectForKey:@"win_point"], [responseObject objectForKey:@"rank"]]];
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NIDPRINT(@"%@", error);
     }];
