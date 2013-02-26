@@ -38,7 +38,8 @@ NSInteger resultOnOneRow = 5;
 
     [[UJHttpClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NIDPRINT(@"%@", responseObject);
-        [self setResults:responseObject];
+        _results = [self parseResults:responseObject];
+        [self.tableView reloadData];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NIDPRINT(@"%@", error);
@@ -53,7 +54,7 @@ NSInteger resultOnOneRow = 5;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setResults:(NSArray *)results
+- (NSArray *)parseResults:(NSArray *)results
 {
     NIDPRINT(@"%d = %d / %d + %d", results.count/resultOnOneRow, results.count, resultOnOneRow, results.count%resultOnOneRow);
     NSMutableArray *copy = [NSMutableArray arrayWithArray:results];
@@ -65,8 +66,7 @@ NSInteger resultOnOneRow = 5;
     if (copy.count) {
         [temp addObject:copy];
     }
-    _results = [NSArray arrayWithArray:temp];
-    [self.tableView reloadData];
+    return temp;
 }
 
 - (NSString *)resultsLabelOf:(NSInteger)index
