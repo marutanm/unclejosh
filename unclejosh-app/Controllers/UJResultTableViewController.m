@@ -7,6 +7,8 @@
 //
 
 #import "UJResultTableViewController.h"
+
+#import "UJHttpClient.h"
 #import "UJResultDetailTableViewController.h"
 
 @interface UJResultTableViewController ()
@@ -32,6 +34,16 @@ NSInteger resultOnOneRow = 5;
 {
     [super viewDidLoad];
 
+    NSString *path = [NSString stringWithFormat:@"heros/%@/challenges", _heroId];
+
+    [[UJHttpClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NIDPRINT(@"%@", responseObject);
+        [self setResults:responseObject];
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NIDPRINT(@"%@", error);
+    }];
+
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
 }
 
@@ -54,6 +66,7 @@ NSInteger resultOnOneRow = 5;
         [temp addObject:copy];
     }
     _results = [NSArray arrayWithArray:temp];
+    [self.tableView reloadData];
 }
 
 - (NSString *)resultsLabelOf:(NSInteger)index

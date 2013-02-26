@@ -143,17 +143,9 @@
 
 - (void)showResults;
 {
-    NSDictionary *selectedHero = [_heros objectAtIndex:[[_tableView indexPathForSelectedRow] row]];
-    NSString *path = [NSString stringWithFormat:@"heros/%@/challenges", [selectedHero objectForKey:@"id"]];
-
-    [[UJHttpClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NIDPRINT(@"%@", responseObject);
-        UJResultTableViewController *resultTableViewController = [[UJResultTableViewController alloc] init];
-        resultTableViewController.results = responseObject;
-        [self.navigationController pushViewController:resultTableViewController animated:YES];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NIDPRINT(@"%@", error);
-    }];
+    UJResultTableViewController *resultTableViewController = [[UJResultTableViewController alloc] init];
+    resultTableViewController.heroId = [[_heros objectAtIndex:[[_tableView indexPathForSelectedRow] row]] objectForKey:@"id"];
+    [self.navigationController pushViewController:resultTableViewController animated:YES];
 }
 
 #pragma mark -
