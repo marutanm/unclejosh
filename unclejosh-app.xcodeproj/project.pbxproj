@@ -23,6 +23,7 @@
 		50743EFF16D0D97900EEE644 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 50743F0116D0D97900EEE644 /* Localizable.strings */; };
 		50743F2B16D511DF00EEE644 /* UJHomeProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743F2A16D511DF00EEE644 /* UJHomeProfileView.m */; };
 		50743F2F16D652D500EEE644 /* UJHeroTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743F2E16D652D500EEE644 /* UJHeroTableView.m */; };
+		509C34CD16DC386100BF6A7A /* UJResultDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 509C34CC16DC386100BF6A7A /* UJResultDetailTableViewController.m */; };
 		50C6662916D7A4120032D86E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005F52416CBBDEC00E2B216 /* UIKit.framework */; };
 		50C6662A16D7A4120032D86E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005F52616CBBDEC00E2B216 /* Foundation.framework */; };
 		50C6662B16D7A4120032D86E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5005F52816CBBDEC00E2B216 /* CoreGraphics.framework */; };
@@ -66,6 +67,8 @@
 		50743F2A16D511DF00EEE644 /* UJHomeProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UJHomeProfileView.m; path = "unclejosh-app/Views/UJHomeProfileView.m"; sourceTree = SOURCE_ROOT; };
 		50743F2D16D652D500EEE644 /* UJHeroTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UJHeroTableView.h; path = "unclejosh-app/Views/UJHeroTableView.h"; sourceTree = SOURCE_ROOT; };
 		50743F2E16D652D500EEE644 /* UJHeroTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UJHeroTableView.m; path = "unclejosh-app/Views/UJHeroTableView.m"; sourceTree = SOURCE_ROOT; };
+		509C34CB16DC386100BF6A7A /* UJResultDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UJResultDetailTableViewController.h; path = Controllers/UJResultDetailTableViewController.h; sourceTree = "<group>"; };
+		509C34CC16DC386100BF6A7A /* UJResultDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UJResultDetailTableViewController.m; path = Controllers/UJResultDetailTableViewController.m; sourceTree = "<group>"; };
 		50C6662716D7A4120032D86E /* unclejoshTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unclejoshTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50C6662E16D7A4120032D86E /* unclejoshTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "unclejoshTests-Info.plist"; sourceTree = "<group>"; };
 		50C6663216D7A4120032D86E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -147,10 +150,9 @@
 				50743EE416CD1E3700EEE644 /* UJHttpClient.h */,
 				50743EE516CD1E3700EEE644 /* UJHttpClient.m */,
 				50743F3316D669C400EEE644 /* HomeView */,
+				509C34CF16DC3AC900BF6A7A /* ResultTableView */,
 				50743EEB16CE4C6100EEE644 /* UJLoginViewController.h */,
 				50743EEC16CE4C6100EEE644 /* UJLoginViewController.m */,
-				5028639E16D4842900231855 /* UJResultTableViewController.h */,
-				5028639F16D4842900231855 /* UJResultTableViewController.m */,
 				5005F52B16CBBDEC00E2B216 /* Supporting Files */,
 			);
 			path = "unclejosh-app";
@@ -182,6 +184,17 @@
 				50743F2E16D652D500EEE644 /* UJHeroTableView.m */,
 			);
 			name = HomeView;
+			sourceTree = "<group>";
+		};
+		509C34CF16DC3AC900BF6A7A /* ResultTableView */ = {
+			isa = PBXGroup;
+			children = (
+				5028639E16D4842900231855 /* UJResultTableViewController.h */,
+				5028639F16D4842900231855 /* UJResultTableViewController.m */,
+				509C34CB16DC386100BF6A7A /* UJResultDetailTableViewController.h */,
+				509C34CC16DC386100BF6A7A /* UJResultDetailTableViewController.m */,
+			);
+			name = ResultTableView;
 			sourceTree = "<group>";
 		};
 		50C6662C16D7A4120032D86E /* unclejoshTests */ = {
@@ -352,6 +365,7 @@
 				502863A016D4842900231855 /* UJResultTableViewController.m in Sources */,
 				50743F2B16D511DF00EEE644 /* UJHomeProfileView.m in Sources */,
 				50743F2F16D652D500EEE644 /* UJHeroTableView.m in Sources */,
+				509C34CD16DC386100BF6A7A /* UJResultDetailTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

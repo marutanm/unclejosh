@@ -7,6 +7,7 @@
 //
 
 #import "UJResultTableViewController.h"
+#import "UJResultDetailTableViewController.h"
 
 @interface UJResultTableViewController ()
 
@@ -99,6 +100,10 @@ NSInteger resultOnOneRow = 5;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    UJResultDetailTableViewController *detailTableViewController = [[UJResultDetailTableViewController alloc] init];
+    detailTableViewController.results = [_results objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:detailTableViewController animated:YES];
 }
 
 @end
