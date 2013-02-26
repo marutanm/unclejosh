@@ -10,4 +10,6 @@
 
 @interface UJBattleResultViewController : UIViewController
 
+@property (nonatomic, copy) NSString* battleId;
+
 @end

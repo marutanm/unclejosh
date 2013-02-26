@@ -7,6 +7,7 @@
 //
 
 #import "UJBattleResultViewController.h"
+#import "UJHttpClient.h"
 
 @interface UJBattleResultViewController ()
 
@@ -26,7 +27,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+
+    NSString *path = [NSString stringWithFormat:@"battles/%@", _battleId];
+    [[UJHttpClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NIDPRINT(@"%@", responseObject);
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NIDPRINT(@"%@", error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning

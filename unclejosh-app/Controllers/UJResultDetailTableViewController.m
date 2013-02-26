@@ -74,6 +74,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     UJBattleResultViewController *resultViewController = [[UJBattleResultViewController alloc] init];
+    resultViewController.battleId = [[_results objectAtIndex:indexPath.row] objectForKey:@"id"];
     [self.navigationController pushViewController:resultViewController animated:YES];
 }
 
