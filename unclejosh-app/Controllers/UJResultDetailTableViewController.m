@@ -7,6 +7,7 @@
 //
 
 #import "UJResultDetailTableViewController.h"
+#import "UJBattleResultViewController.h"
 
 @interface UJResultDetailTableViewController ()
 
@@ -71,6 +72,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    UJBattleResultViewController *resultViewController = [[UJBattleResultViewController alloc] init];
+    [self.navigationController pushViewController:resultViewController animated:YES];
 }
 
 @end
