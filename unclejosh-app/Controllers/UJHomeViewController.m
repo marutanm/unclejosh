@@ -39,10 +39,10 @@
         _textField.returnKeyType = UIReturnKeyGo;
         _textField.delegate = self;
 
-        _profileView = [[UJHomeProfileView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
+        _profileView = [[UJHomeProfileView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
         _profileView.delegate = self;
 
-        _tableView = [[UJHeroTableView alloc] initWithFrame:CGRectMake(0, _profileView.frame.origin.y + _profileView.frame.size.height + self.navigationController.navigationBar.frame.size.height, 320, 480)];
+        _tableView = [[UJHeroTableView alloc] initWithFrame:CGRectMake(0, _profileView.frame.origin.y + _profileView.frame.size.height, 320, [[UIScreen mainScreen] applicationFrame].size.height - (44 + _profileView.frame.size.height))];
         _tableView.delegate = self;
         _tableView.dataSource = self;
 
