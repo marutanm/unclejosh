@@ -17,6 +17,8 @@
 @property UILabel *agilityLabel;
 
 @property UJParameterView *lifeGauge;
+@property UJParameterView *strengthGauge;
+@property UJParameterView *agilityGauge;
 
 @property UIButton *challengebutton;
 @property UIButton *resultButton;
@@ -31,7 +33,11 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        UIColor *zuruiBackColor = RGBCOLOR(0xF8, 0xF8, 0xF8);
+        self.backgroundColor = zuruiBackColor;
+
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 140, 20)];
+        _nameLabel.backgroundColor = zuruiBackColor;
         [self addSubview:_nameLabel];
 
         _lifeGauge = [[UJParameterView alloc] initWithFrame:CGRectMake(170, 10, 140, 20)];
@@ -42,10 +48,18 @@
         _lifeLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_lifeLabel];
 
+        _strengthGauge = [[UJParameterView alloc] initWithFrame:CGRectMake(170, 40, 140, 20)];
+        [self addSubview:_strengthGauge];
+
         _strengthLabel = [[UILabel alloc] initWithFrame:CGRectMake(170, 40, 140, 20)];
+        _strengthLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_strengthLabel];
 
+        _agilityGauge = [[UJParameterView alloc] initWithFrame:CGRectMake(170, 70, 140, 20)];
+        [self addSubview:_agilityGauge];
+
         _agilityLabel = [[UILabel alloc] initWithFrame:CGRectMake(170, 70, 140, 20)];
+        _agilityLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_agilityLabel];
 
         _challengebutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -63,6 +77,7 @@
         [self addSubview:_resultButton];
 
         _resultLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 70, 140, 20)];
+        _resultLabel.backgroundColor = zuruiBackColor;
         [self addSubview:_resultLabel];
     }
     return self;
@@ -76,6 +91,8 @@
     _agilityLabel.text = [[heroInfo objectForKey:@"agility"] stringValue];
 
     _lifeGauge.value = [[heroInfo objectForKey:@"life"] intValue];
+    _strengthGauge.value = [[heroInfo objectForKey:@"strength"] intValue];
+    _agilityGauge.value = [[heroInfo objectForKey:@"agility"] intValue];
 
     if (heroInfo[@"result"]) {
 
