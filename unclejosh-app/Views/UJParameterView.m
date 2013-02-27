@@ -24,6 +24,7 @@
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
+    self.backgroundColor = RGBCOLOR(0xEE, 0xEE, 0xEE);
 
     CGContextRef context = UIGraphicsGetCurrentContext();
 
