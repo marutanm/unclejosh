@@ -7,6 +7,7 @@
 //
 
 #import "UJHomeProfileView.h"
+#import "UJParameterView.h"
 
 @interface UJHomeProfileView ()
 
@@ -14,6 +15,8 @@
 @property UILabel *lifeLabel;
 @property UILabel *strengthLabel;
 @property UILabel *agilityLabel;
+
+@property UJParameterView *lifeGauge;
 
 @property UIButton *challengebutton;
 @property UIButton *resultButton;
@@ -31,7 +34,12 @@
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 140, 20)];
         [self addSubview:_nameLabel];
 
+        _lifeGauge = [[UJParameterView alloc] initWithFrame:CGRectMake(170, 10, 140, 20)];
+        _lifeGauge.max = 1000;
+        [self addSubview:_lifeGauge];
+
         _lifeLabel = [[UILabel alloc] initWithFrame:CGRectMake(170, 10, 140, 20)];
+        _lifeLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_lifeLabel];
 
         _strengthLabel = [[UILabel alloc] initWithFrame:CGRectMake(170, 40, 140, 20)];
@@ -66,6 +74,8 @@
     _lifeLabel.text = [[heroInfo objectForKey:@"life"] stringValue];
     _strengthLabel.text = [[heroInfo objectForKey:@"strength"] stringValue];
     _agilityLabel.text = [[heroInfo objectForKey:@"agility"] stringValue];
+
+    _lifeGauge.value = [[heroInfo objectForKey:@"life"] intValue];
 
     if (heroInfo[@"result"]) {
 
