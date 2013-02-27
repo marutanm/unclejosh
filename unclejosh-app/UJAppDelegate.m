@@ -23,6 +23,7 @@ UINavigationController *navigationController;
 
     UJHomeViewController *homeViewController = [[UJHomeViewController alloc] init];
     navigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+    navigationController.navigationBar.tintColor = [UIColor lightGrayColor];
     [self.window addSubview:navigationController.view];
 
     return YES;
