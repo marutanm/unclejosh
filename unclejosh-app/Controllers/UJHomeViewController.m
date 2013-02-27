@@ -39,7 +39,7 @@
         _textField.returnKeyType = UIReturnKeyGo;
         _textField.delegate = self;
 
-        _profileView = [[UJHomeProfileView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
+        _profileView = [[UJHomeProfileView alloc] initWithFrame:CGRectMake(0, 0, 320, 140)];
         _profileView.delegate = self;
 
         _tableView = [[UJHeroTableView alloc] initWithFrame:CGRectMake(0, _profileView.frame.origin.y + _profileView.frame.size.height, 320, [[UIScreen mainScreen] applicationFrame].size.height - (44 + _profileView.frame.size.height))];

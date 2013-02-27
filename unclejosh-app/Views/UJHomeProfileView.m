@@ -36,47 +36,58 @@
         UIColor *zuruiBackColor = RGBCOLOR(0xF8, 0xF8, 0xF8);
         self.backgroundColor = zuruiBackColor;
 
-        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 140, 20)];
+        NSInteger padding = 10;
+        NSInteger screenWidth = [[UIScreen mainScreen] applicationFrame].size.width;
+
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, padding, screenWidth - padding*2, 30)];
         _nameLabel.backgroundColor = zuruiBackColor;
+        _nameLabel.textAlignment = NSTextAlignmentCenter;
+        _nameLabel.font = [UIFont boldSystemFontOfSize:30];
+        _nameLabel.adjustsFontSizeToFitWidth = YES;
+        _nameLabel.minimumScaleFactor = 0.6;
+        _nameLabel.shadowColor = RGBACOLOR(255, 255, 255, 1);
         [self addSubview:_nameLabel];
 
-        _lifeGauge = [[UJParameterView alloc] initWithFrame:CGRectMake(170, 10, 140, 20)];
+        NSInteger parameterWidth = screenWidth * 0.6 - padding*2;
+        _lifeGauge = [[UJParameterView alloc] initWithFrame:CGRectMake(padding, 50, parameterWidth, 20)];
         _lifeGauge.max = 1000;
         [self addSubview:_lifeGauge];
 
-        _lifeLabel = [[UILabel alloc] initWithFrame:CGRectMake(170, 10, 140, 20)];
+        _lifeLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 50, parameterWidth, 20)];
         _lifeLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_lifeLabel];
 
-        _strengthGauge = [[UJParameterView alloc] initWithFrame:CGRectMake(170, 40, 140, 20)];
+        _strengthGauge = [[UJParameterView alloc] initWithFrame:CGRectMake(padding, 80, parameterWidth, 20)];
         [self addSubview:_strengthGauge];
 
-        _strengthLabel = [[UILabel alloc] initWithFrame:CGRectMake(170, 40, 140, 20)];
+        _strengthLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 80, parameterWidth, 20)];
         _strengthLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_strengthLabel];
 
-        _agilityGauge = [[UJParameterView alloc] initWithFrame:CGRectMake(170, 70, 140, 20)];
+        _agilityGauge = [[UJParameterView alloc] initWithFrame:CGRectMake(padding, 110, parameterWidth, 20)];
         [self addSubview:_agilityGauge];
 
-        _agilityLabel = [[UILabel alloc] initWithFrame:CGRectMake(170, 70, 140, 20)];
+        _agilityLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 110, parameterWidth, 20)];
         _agilityLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_agilityLabel];
 
+        NSInteger rightOffset = screenWidth * 0.6;
+        NSInteger controlWidth = screenWidth - rightOffset - padding;
         _challengebutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [_challengebutton setTitle:NSLocalizedString(@"FIGHT", @"Label on challenge ranking button") forState:UIControlStateNormal];
-        _challengebutton.frame = CGRectMake(10, 40, 140, 20);
+        _challengebutton.frame = CGRectMake(rightOffset, 50, controlWidth, 20);
         _challengebutton.hidden = YES;
         [_challengebutton addTarget:_delegate action:@selector(challengeRanking) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_challengebutton];
 
         _resultButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [_resultButton setTitle:NSLocalizedString(@"RESULT", @"Label on show challenge result button") forState:UIControlStateNormal];
-        _resultButton.frame = CGRectMake(10, 40, 140, 20);
+        _resultButton.frame = CGRectMake(rightOffset, 50, controlWidth, 20);
         _resultButton.hidden = YES;
         [_resultButton addTarget:_delegate action:@selector(showResults) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_resultButton];
 
-        _resultLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 70, 140, 20)];
+        _resultLabel = [[UILabel alloc] initWithFrame:CGRectMake(rightOffset, 80, controlWidth, 20)];
         _resultLabel.backgroundColor = zuruiBackColor;
         [self addSubview:_resultLabel];
     }
@@ -107,6 +118,24 @@
         _challengebutton.hidden = NO;
         _resultButton.hidden = YES;
     }
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 1.0);
+
+    CGContextSetStrokeColorWithColor(context, RGBACOLOR(0, 0, 0, 0.1).CGColor);
+    CGContextMoveToPoint(context, 10, 40);
+    CGContextAddLineToPoint(context, 310, 40);
+    CGContextStrokePath(context);
+
+    CGContextSetStrokeColorWithColor(context, RGBACOLOR(255, 255, 255, 0.1).CGColor);
+    CGContextMoveToPoint(context, 10, 42);
+    CGContextAddLineToPoint(context, 310, 42);
+    CGContextStrokePath(context);
 }
 
 @end
