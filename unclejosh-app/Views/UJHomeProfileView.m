@@ -53,6 +53,7 @@
         _lifeGauge = [[DPMeterView alloc] init];
         _lifeGauge.frame =  CGRectMake(padding, 50, parameterWidth, 20);
         _lifeGauge.meterType = DPMeterTypeLinearHorizontal;
+        _lifeGauge.progressTintColor = RGBCOLOR(255, 175, 57);
         [self addSubview:_lifeGauge];
 
         _lifeLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 50, parameterWidth, 20)];
@@ -62,6 +63,7 @@
         _strengthGauge = [[DPMeterView alloc] init];
         _strengthGauge.frame = CGRectMake(padding, 80, parameterWidth, 20);
         _strengthGauge.meterType = DPMeterTypeLinearHorizontal;
+        _strengthGauge.progressTintColor = RGBCOLOR(255, 57, 114);
         [self addSubview:_strengthGauge];
 
         _strengthLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 80, parameterWidth, 20)];
@@ -75,6 +77,7 @@
 
         _agilityLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 110, parameterWidth, 20)];
         _agilityLabel.backgroundColor = [UIColor clearColor];
+        _agilityGauge.progressTintColor = RGBCOLOR(70, 255, 215);
         [self addSubview:_agilityLabel];
 
         NSInteger rightOffset = screenWidth * 0.6;
@@ -98,7 +101,6 @@
         [self addSubview:_resultLabel];
 
         [[DPMeterView appearance] setTrackTintColor:[UIColor lightGrayColor]];
-        [[DPMeterView appearance] setProgressTintColor:[UIColor darkGrayColor]];
 }
     return self;
 }
