@@ -34,15 +34,19 @@ NSInteger resultOnOneRow = 5;
 {
     [super viewDidLoad];
 
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.dimBackground = YES;
     NSString *path = [NSString stringWithFormat:@"heros/%@/challenges", _heroId];
 
     [[UJHttpClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NIDPRINT(@"%@", responseObject);
         _results = [self parseResults:responseObject];
         [self.tableView reloadData];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NIDPRINT(@"%@", error);
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
 
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];

@@ -144,7 +144,9 @@
 - (void)showResults;
 {
     UJResultTableViewController *resultTableViewController = [[UJResultTableViewController alloc] init];
-    resultTableViewController.heroId = [[_heros objectAtIndex:[[_tableView indexPathForSelectedRow] row]] objectForKey:@"id"];
+    NSMutableDictionary *selectedHero = [_heros objectAtIndex:[[_tableView indexPathForSelectedRow] row]];
+    resultTableViewController.heroId = [selectedHero objectForKey:@"id"];
+    resultTableViewController.title = [selectedHero objectForKey:@"name"];
     [self.navigationController pushViewController:resultTableViewController animated:YES];
 }
 
