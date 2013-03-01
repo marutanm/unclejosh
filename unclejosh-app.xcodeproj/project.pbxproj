@@ -35,8 +35,6 @@
 		50C6666B16D8445C0032D86E /* UJLoginViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C6666A16D8445C0032D86E /* UJLoginViewControllerTest.m */; };
 		50C6666C16D844760032D86E /* UJLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743EEC16CE4C6100EEE644 /* UJLoginViewController.m */; };
 		50C6666D16D846AD0032D86E /* UJHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743EE516CD1E3700EEE644 /* UJHttpClient.m */; };
-		50D97D3C16DDB8120036342E /* UJParameterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D97D3B16DDB8120036342E /* UJParameterView.m */; };
-		50D97D3D16DDB8120036342E /* UJParameterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D97D3B16DDB8120036342E /* UJParameterView.m */; };
 		EE18474E0EAA4C9DA5C52DB9 /* libPods-unclejoshTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9D4DB3BD70409585514DC0 /* libPods-unclejoshTests.a */; };
 /* End PBXBuildFile section */
 
@@ -81,8 +79,6 @@
 		50C6665916D7AA2B0032D86E /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Release-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		50C6666916D8445C0032D86E /* UJLoginViewControllerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UJLoginViewControllerTest.h; sourceTree = "<group>"; };
 		50C6666A16D8445C0032D86E /* UJLoginViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UJLoginViewControllerTest.m; sourceTree = "<group>"; };
-		50D97D3A16DDB8120036342E /* UJParameterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UJParameterView.h; path = Views/UJParameterView.h; sourceTree = "<group>"; };
-		50D97D3B16DDB8120036342E /* UJParameterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UJParameterView.m; path = Views/UJParameterView.m; sourceTree = "<group>"; };
 		633F412FB0C34601A1E05D55 /* Pods-unclejoshTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unclejoshTests.xcconfig"; path = "Pods/Pods-unclejoshTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		7CFEDCC2874F460191C164F6 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		AE9D4DB3BD70409585514DC0 /* libPods-unclejoshTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-unclejoshTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -188,8 +184,6 @@
 				50743EE916CD23A700EEE644 /* UJHomeViewController.m */,
 				50743F2916D511DF00EEE644 /* UJHomeProfileView.h */,
 				50743F2A16D511DF00EEE644 /* UJHomeProfileView.m */,
-				50D97D3A16DDB8120036342E /* UJParameterView.h */,
-				50D97D3B16DDB8120036342E /* UJParameterView.m */,
 				50743F2D16D652D500EEE644 /* UJHeroTableView.h */,
 				50743F2E16D652D500EEE644 /* UJHeroTableView.m */,
 			);
@@ -386,7 +380,6 @@
 				50743F2F16D652D500EEE644 /* UJHeroTableView.m in Sources */,
 				509C34CD16DC386100BF6A7A /* UJResultDetailTableViewController.m in Sources */,
 				509C34D316DC3B9200BF6A7A /* UJBattleResultViewController.m in Sources */,
-				50D97D3C16DDB8120036342E /* UJParameterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,7 +392,6 @@
 				50C6665816D7A8EE0032D86E /* UJHomeProfileView.m in Sources */,
 				50C6663316D7A4120032D86E /* main.m in Sources */,
 				50C6666B16D8445C0032D86E /* UJLoginViewControllerTest.m in Sources */,
-				50D97D3D16DDB8120036342E /* UJParameterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

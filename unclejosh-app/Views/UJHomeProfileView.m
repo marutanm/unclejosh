@@ -7,7 +7,7 @@
 //
 
 #import "UJHomeProfileView.h"
-#import "UJParameterView.h"
+#import "DPMeterView.h"
 
 @interface UJHomeProfileView ()
 
@@ -16,9 +16,9 @@
 @property UILabel *strengthLabel;
 @property UILabel *agilityLabel;
 
-@property UJParameterView *lifeGauge;
-@property UJParameterView *strengthGauge;
-@property UJParameterView *agilityGauge;
+@property DPMeterView *lifeGauge;
+@property DPMeterView *strengthGauge;
+@property DPMeterView *agilityGauge;
 
 @property UIButton *challengebutton;
 @property UIButton *resultButton;
@@ -49,26 +49,35 @@
         [self addSubview:_nameLabel];
 
         NSInteger parameterWidth = screenWidth * 0.6 - padding*2;
-        _lifeGauge = [[UJParameterView alloc] initWithFrame:CGRectMake(padding, 50, parameterWidth, 20)];
-        _lifeGauge.max = 1000;
+
+        _lifeGauge = [[DPMeterView alloc] init];
+        _lifeGauge.frame =  CGRectMake(padding, 50, parameterWidth, 20);
+        _lifeGauge.meterType = DPMeterTypeLinearHorizontal;
+        _lifeGauge.progressTintColor = RGBCOLOR(255, 175, 57);
         [self addSubview:_lifeGauge];
 
         _lifeLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 50, parameterWidth, 20)];
         _lifeLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_lifeLabel];
 
-        _strengthGauge = [[UJParameterView alloc] initWithFrame:CGRectMake(padding, 80, parameterWidth, 20)];
+        _strengthGauge = [[DPMeterView alloc] init];
+        _strengthGauge.frame = CGRectMake(padding, 80, parameterWidth, 20);
+        _strengthGauge.meterType = DPMeterTypeLinearHorizontal;
+        _strengthGauge.progressTintColor = RGBCOLOR(255, 57, 114);
         [self addSubview:_strengthGauge];
 
         _strengthLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 80, parameterWidth, 20)];
         _strengthLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_strengthLabel];
 
-        _agilityGauge = [[UJParameterView alloc] initWithFrame:CGRectMake(padding, 110, parameterWidth, 20)];
+        _agilityGauge = [[DPMeterView alloc] init];
+        _agilityGauge.frame = CGRectMake(padding, 110, parameterWidth, 20);
+        _agilityGauge.meterType = DPMeterTypeLinearHorizontal;
         [self addSubview:_agilityGauge];
 
         _agilityLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 110, parameterWidth, 20)];
         _agilityLabel.backgroundColor = [UIColor clearColor];
+        _agilityGauge.progressTintColor = RGBCOLOR(70, 255, 215);
         [self addSubview:_agilityLabel];
 
         NSInteger rightOffset = screenWidth * 0.6;
@@ -90,7 +99,9 @@
         _resultLabel = [[UILabel alloc] initWithFrame:CGRectMake(rightOffset, 80, controlWidth, 20)];
         _resultLabel.backgroundColor = zuruiBackColor;
         [self addSubview:_resultLabel];
-    }
+
+        [[DPMeterView appearance] setTrackTintColor:[UIColor lightGrayColor]];
+}
     return self;
 }
 
@@ -101,9 +112,9 @@
     _strengthLabel.text = [[heroInfo objectForKey:@"strength"] stringValue];
     _agilityLabel.text = [[heroInfo objectForKey:@"agility"] stringValue];
 
-    _lifeGauge.value = [[heroInfo objectForKey:@"life"] intValue];
-    _strengthGauge.value = [[heroInfo objectForKey:@"strength"] intValue];
-    _agilityGauge.value = [[heroInfo objectForKey:@"agility"] intValue];
+    [_lifeGauge setProgress:[[heroInfo objectForKey:@"life"] floatValue] / 1000.0 animated:YES];
+    [_strengthGauge setProgress:[[heroInfo objectForKey:@"strength"] floatValue] / 100.0 animated:YES];
+    [_agilityGauge setProgress:[[heroInfo objectForKey:@"agility"] floatValue] / 100.0 animated:YES];
 
     if (heroInfo[@"result"]) {
 
