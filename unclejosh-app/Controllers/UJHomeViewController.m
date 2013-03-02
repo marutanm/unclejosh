@@ -11,7 +11,7 @@
 #import "UJHttpClient.h"
 #import "UJLoginViewController.h"
 #import "UJResultTableViewController.h"
-#import "UJHeroTableView.h"
+#import "UJHeroTableViewCell.h"
 
 @interface UJHomeViewController ()
 
@@ -42,7 +42,7 @@
         _profileView = [[UJHomeProfileView alloc] initWithFrame:CGRectMake(0, 0, 320, 140)];
         _profileView.delegate = self;
 
-        _tableView = [[UJHeroTableView alloc] initWithFrame:CGRectMake(0, _profileView.frame.origin.y + _profileView.frame.size.height, 320, [[UIScreen mainScreen] applicationFrame].size.height - (44 + _profileView.frame.size.height))];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, _profileView.frame.origin.y + _profileView.frame.size.height, 320, [[UIScreen mainScreen] applicationFrame].size.height - (44 + _profileView.frame.size.height))];
         _tableView.delegate = self;
         _tableView.dataSource = self;
 
@@ -57,7 +57,7 @@
 {
     [super viewDidLoad];
 
-    [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+    [_tableView registerClass:[UJHeroTableViewCell class] forCellReuseIdentifier:@"Cell"];
     [self.view addSubview:_tableView];
 
     self.navigationItem.titleView = _textField;
@@ -176,7 +176,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UJHeroTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
     cell.textLabel.text = [[_heros objectAtIndex:indexPath.row] objectForKey:@"name"];
 
