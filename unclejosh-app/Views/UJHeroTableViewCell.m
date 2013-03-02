@@ -61,7 +61,18 @@
 {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+    _lifeGauge.backgroundColor = LIFE_COLOR;
+    _strengthGauge.backgroundColor = STRENGTH_COLOR;
+    _agilityGauge.backgroundColor = AGILIITY_COLOR;
+}
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
+{
+    [super setHighlighted:highlighted animated:animated];
+
+    _lifeGauge.backgroundColor = LIFE_COLOR;
+    _strengthGauge.backgroundColor = STRENGTH_COLOR;
+    _agilityGauge.backgroundColor = AGILIITY_COLOR;
 }
 
 - (void)setHero:(NSDictionary *)hero
