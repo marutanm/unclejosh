@@ -64,6 +64,9 @@
     [self.view addSubview:_profileView];
 
     _heros = (__bridge_transfer NSMutableArray *)CFPropertyListCreateDeepCopy(NULL, (CFArrayRef)[[NSUserDefaults standardUserDefaults] arrayForKey:@"HEROS"], kCFPropertyListMutableContainers);
+    if (!_heros) {
+        _heros = [NSMutableArray array];
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasHidden) name:UIKeyboardDidHideNotification object:nil];
 }
