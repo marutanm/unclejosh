@@ -14,7 +14,6 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.contentView.backgroundColor = [UIColor redColor];
         self.textLabel.backgroundColor = [UIColor clearColor];
     }
     return self;
@@ -25,6 +24,12 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setHero:(NSDictionary *)hero
+{
+    _hero = hero;
+    self.textLabel.text = [hero objectForKey:@"name"];
 }
 
 @end

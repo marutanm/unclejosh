@@ -10,4 +10,6 @@
 
 @interface UJHeroTableViewCell : UITableViewCell
 
+@property (nonatomic, copy) NSDictionary* hero;
+
 @end
