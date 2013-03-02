@@ -181,7 +181,7 @@
     static NSString *CellIdentifier = @"Cell";
     UJHeroTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-    cell.textLabel.text = [[_heros objectAtIndex:indexPath.row] objectForKey:@"name"];
+    cell.hero = [_heros objectAtIndex:indexPath.row];
 
     return cell;
 }

@@ -17,3 +17,6 @@
 #endif
 
 #define BASE_URL @"http://unclejosh.dev/"
+#define LIFE_COLOR      RGBCOLOR(255, 175, 57)
+#define STRENGTH_COLOR  RGBCOLOR(255, 57, 114)
+#define AGILIITY_COLOR  RGBCOLOR(70, 255, 215)
