@@ -23,23 +23,29 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleGray;
+
         _nameLabel = [[UILabel alloc] init];
         _nameLabel.backgroundColor = [UIColor clearColor];
         _nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _nameLabel.shadowColor = ZURUI_LIGHT_COLOR;
         [self.contentView addSubview:_nameLabel];
 
         _lifeGauge = [[UIView alloc] init];
         _lifeGauge.backgroundColor = LIFE_COLOR;
+        _lifeGauge.alpha = 0.2;
         _lifeGauge.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_lifeGauge];
 
         _strengthGauge = [[UIView alloc] init];
         _strengthGauge.backgroundColor = STRENGTH_COLOR;
+        _strengthGauge.alpha = 0.2;
         _strengthGauge.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_strengthGauge];
 
         _agilityGauge = [[UIView alloc] init];
         _agilityGauge.backgroundColor = AGILIITY_COLOR;
+        _agilityGauge.alpha = 0.2;
         _agilityGauge.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_agilityGauge];
 
