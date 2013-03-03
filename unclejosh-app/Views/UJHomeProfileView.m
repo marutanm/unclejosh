@@ -33,14 +33,13 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        UIColor *zuruiBackColor = RGBCOLOR(0xF8, 0xF8, 0xF8);
-        self.backgroundColor = zuruiBackColor;
+        self.backgroundColor = ZURUI_LIGHT_COLOR;
 
         NSInteger padding = 10;
         NSInteger screenWidth = [[UIScreen mainScreen] applicationFrame].size.width;
 
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, padding, screenWidth - padding*2, 30)];
-        _nameLabel.backgroundColor = zuruiBackColor;
+        _nameLabel.backgroundColor = ZURUI_LIGHT_COLOR;
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         _nameLabel.font = [UIFont boldSystemFontOfSize:30];
         _nameLabel.adjustsFontSizeToFitWidth = YES;
@@ -97,7 +96,7 @@
         [self addSubview:_resultButton];
 
         _resultLabel = [[UILabel alloc] initWithFrame:CGRectMake(rightOffset, 80, controlWidth, 20)];
-        _resultLabel.backgroundColor = zuruiBackColor;
+        _resultLabel.backgroundColor = ZURUI_LIGHT_COLOR;
         [self addSubview:_resultLabel];
 
         [[DPMeterView appearance] setTrackTintColor:[UIColor lightGrayColor]];
