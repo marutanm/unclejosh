@@ -15,6 +15,8 @@
 @property (nonatomic) UIView *strengthGauge;
 @property (nonatomic) UIView *agilityGauge;
 
+@property (nonatomic) UILabel *rankLabel;
+
 @end
 
 @implementation UJHeroTableViewCell
@@ -49,9 +51,18 @@
         _agilityGauge.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_agilityGauge];
 
+        _rankLabel = [[UILabel alloc] init];
+        _rankLabel.backgroundColor = [UIColor clearColor];
+        _rankLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _rankLabel.shadowColor = ZURUI_LIGHT_COLOR;
+        _rankLabel.textColor = [UIColor redColor];
+        [self.contentView addSubview:_rankLabel];
+
         NSMutableArray *constraints = [NSMutableArray array];
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_nameLabel]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_nameLabel)]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[_nameLabel]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_nameLabel)]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"[_rankLabel]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_rankLabel)]];
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_nameLabel]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_nameLabel)]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_rankLabel]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_rankLabel)]];
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"|[_lifeGauge][_strengthGauge][_agilityGauge]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_lifeGauge, _strengthGauge, _agilityGauge)]];
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_lifeGauge]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_lifeGauge)]];
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_strengthGauge]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_strengthGauge)]];
@@ -83,6 +94,7 @@
 
 - (void)setHero:(NSDictionary *)hero
 {
+    NIDPRINT(@"%@", hero);
     _hero = hero;
     _nameLabel.text = [hero objectForKey:@"name"];
 
@@ -97,6 +109,11 @@
     [_lifeGauge addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[_lifeGauge(lifeGaugeWidth)]" options:0 metrics:NSDictionaryOfVariableBindings(lifeGaugeWidth) views:NSDictionaryOfVariableBindings(_lifeGauge)]];
     [_strengthGauge addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[_strengthGauge(strengthGaugeWidth)]" options:0 metrics:NSDictionaryOfVariableBindings(strengthGaugeWidth) views:NSDictionaryOfVariableBindings(_strengthGauge)]];
     [_agilityGauge addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[_agilityGauge(agilityGaugeWidth)]" options:0 metrics:NSDictionaryOfVariableBindings(agilityGaugeWidth) views:NSDictionaryOfVariableBindings(_agilityGauge)]];
+
+    _rankLabel.text = nil;
+    if ([hero objectForKey:@"result"]) {
+        _rankLabel.text = [NSString stringWithFormat:@"%@", [[hero objectForKey:@"result"] objectForKey:@"rank"]];
+    }
 }
 
 @end
