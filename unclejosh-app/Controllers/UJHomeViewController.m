@@ -138,6 +138,7 @@
         [selectedHero setObject:responseObject forKey:@"result"];
         NIDPRINT(@"%@", selectedHero);
         [_profileView setHeroInfo:selectedHero];
+        [[NSUserDefaults standardUserDefaults] setObject:_heros forKey:@"HEROS"];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NIDPRINT(@"%@", error);
