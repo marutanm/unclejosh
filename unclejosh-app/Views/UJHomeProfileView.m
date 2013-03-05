@@ -83,6 +83,7 @@
         NSInteger controlWidth = screenWidth - rightOffset - padding;
         _challengebutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [_challengebutton setTitle:NSLocalizedString(@"FIGHT", @"Label on challenge ranking button") forState:UIControlStateNormal];
+        [_challengebutton setTitle:NSLocalizedString(@"CHALLENGING", @"Labeo on challenge ranking button, state: disabled") forState:UIControlStateDisabled];
         _challengebutton.frame = CGRectMake(rightOffset, 50, controlWidth, 20);
         _challengebutton.hidden = YES;
         [_challengebutton addTarget:_delegate action:@selector(challengeRanking) forControlEvents:UIControlEventTouchUpInside];
@@ -115,18 +116,36 @@
     [_strengthGauge setProgress:[[heroInfo objectForKey:@"strength"] floatValue] / 100.0 animated:YES];
     [_agilityGauge setProgress:[[heroInfo objectForKey:@"agility"] floatValue] / 100.0 animated:YES];
 
+    [self setState:BEFORE_CHALLENGE];
     if (heroInfo[@"result"]) {
+        [self setState:FINISHED];
 
         NSString *localized = NSLocalizedString(@"win:%@ ranking:%@", @"Result of challenge ranking");
         _resultLabel.text = [NSString stringWithFormat:localized, [heroInfo[@"result"] objectForKey:@"win_point"], [heroInfo[@"result"] objectForKey:@"rank"]];
+    }
+}
 
-        _challengebutton.hidden = YES;
-        _resultButton.hidden = NO;
-    } else {
+- (void)setState:(State)state;
+{
+    switch (state) {
+        case BEFORE_CHALLENGE:
+            _resultLabel.text = nil;
+            _challengebutton.hidden = NO;
+            _challengebutton.enabled = YES;
+            _resultButton.hidden = YES;
+            break;
 
-        _resultLabel.text = nil;
-        _challengebutton.hidden = NO;
-        _resultButton.hidden = YES;
+        case CHALLENGING:
+            _challengebutton.enabled = NO;
+            break;
+
+        case FINISHED:
+            _challengebutton.enabled = YES;
+            _resultButton.hidden = NO;
+            break;
+
+        default:
+            break;
     }
 }
 

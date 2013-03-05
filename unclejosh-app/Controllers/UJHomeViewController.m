@@ -131,6 +131,7 @@
 #pragma mark UJHomeProfileViewDelegate
 - (void)challengeRanking;
 {
+    [_profileView setState:CHALLENGING];
     NSMutableDictionary *selectedHero = [_heros objectAtIndex:_selectedRow];
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObject:[selectedHero objectForKey:@"id"] forKey:@"hero_id"];
 
@@ -142,6 +143,7 @@
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NIDPRINT(@"%@", error);
+        [_profileView setState:BEFORE_CHALLENGE];
     }];
 }
 
