@@ -18,6 +18,7 @@
 		5005F53B16CBBDEC00E2B216 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5005F53A16CBBDEC00E2B216 /* Default-568h@2x.png */; };
 		502863A016D4842900231855 /* UJResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5028639F16D4842900231855 /* UJResultTableViewController.m */; };
 		504AD33D16E5742E00CD28C6 /* UJResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 504AD33C16E5742E00CD28C6 /* UJResultTableViewCell.m */; };
+		504AD33F16E618B800CD28C6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504AD33E16E618B800CD28C6 /* QuartzCore.framework */; };
 		50743EE616CD1E3700EEE644 /* UJHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743EE516CD1E3700EEE644 /* UJHttpClient.m */; };
 		50743EEA16CD23A700EEE644 /* UJHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743EE916CD23A700EEE644 /* UJHomeViewController.m */; };
 		50743EED16CE4C6100EEE644 /* UJLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743EEC16CE4C6100EEE644 /* UJLoginViewController.m */; };
@@ -58,6 +59,7 @@
 		5028639F16D4842900231855 /* UJResultTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UJResultTableViewController.m; path = Controllers/UJResultTableViewController.m; sourceTree = "<group>"; };
 		504AD33B16E5742E00CD28C6 /* UJResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UJResultTableViewCell.h; path = Views/UJResultTableViewCell.h; sourceTree = "<group>"; };
 		504AD33C16E5742E00CD28C6 /* UJResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UJResultTableViewCell.m; path = Views/UJResultTableViewCell.m; sourceTree = "<group>"; };
+		504AD33E16E618B800CD28C6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		50743EE416CD1E3700EEE644 /* UJHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UJHttpClient.h; sourceTree = "<group>"; };
 		50743EE516CD1E3700EEE644 /* UJHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UJHttpClient.m; sourceTree = "<group>"; };
 		50743EE816CD23A700EEE644 /* UJHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UJHomeViewController.h; path = "unclejosh-app/Controllers/UJHomeViewController.h"; sourceTree = SOURCE_ROOT; };
@@ -90,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				504AD33F16E618B800CD28C6 /* QuartzCore.framework in Frameworks */,
 				50C6666716D7BB050032D86E /* libPods.a in Frameworks */,
 				5005F52516CBBDEC00E2B216 /* UIKit.framework in Frameworks */,
 				5005F52716CBBDEC00E2B216 /* Foundation.framework in Frameworks */,
@@ -136,6 +139,7 @@
 		5005F52316CBBDEC00E2B216 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				504AD33E16E618B800CD28C6 /* QuartzCore.framework */,
 				5005F52416CBBDEC00E2B216 /* UIKit.framework */,
 				5005F52616CBBDEC00E2B216 /* Foundation.framework */,
 				5005F52816CBBDEC00E2B216 /* CoreGraphics.framework */,
