@@ -98,11 +98,12 @@
     _hero = hero;
     _nameLabel.text = [hero objectForKey:@"name"];
 
-    float defaultWidth = self.contentView.frame.size.width / 3.f;
-
-    NSNumber *lifeGaugeWidth = @(defaultWidth * [[hero objectForKey:@"life"] floatValue] / 1000);
-    NSNumber *strengthGaugeWidth = @(defaultWidth * [[hero objectForKey:@"strength"] floatValue] / 100);
-    NSNumber *agilityGaugeWidth = @(defaultWidth * [[hero objectForKey:@"agility"] floatValue] / 100);
+    NSDictionary *defaultWidth = @{@"life":     @(self.contentView.frame.size.width * 0.5),
+                                   @"strength": @(self.contentView.frame.size.width * 0.25),
+                                   @"agility":  @(self.contentView.frame.size.width * 0.25)};
+    NSNumber *lifeGaugeWidth = @([defaultWidth[@"life"] intValue] * [[hero objectForKey:@"life"] floatValue] / 1000);
+    NSNumber *strengthGaugeWidth = @([defaultWidth[@"strength"] intValue] * [[hero objectForKey:@"strength"] floatValue] / 100);
+    NSNumber *agilityGaugeWidth = @([defaultWidth[@"agility"] intValue] * [[hero objectForKey:@"agility"] floatValue] / 100);
     [_lifeGauge removeConstraints:_lifeGauge.constraints];
     [_strengthGauge removeConstraints:_strengthGauge.constraints];
     [_agilityGauge removeConstraints:_agilityGauge.constraints];
