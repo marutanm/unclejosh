@@ -100,7 +100,7 @@
         [self addSubview:_resultLabel];
 
         [[DPMeterView appearance] setTrackTintColor:[UIColor lightGrayColor]];
-}
+    }
     return self;
 }
 
