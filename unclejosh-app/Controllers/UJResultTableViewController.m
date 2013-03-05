@@ -8,6 +8,7 @@
 
 #import "UJResultTableViewController.h"
 #import "UJBattleResultViewController.h"
+#import "UJResultTableViewCell.h"
 
 #import "UJHttpClient.h"
 
@@ -49,7 +50,7 @@ NSInteger resultOnOneRow = 5;
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
 
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+    [self.tableView registerClass:[UJResultTableViewCell class] forCellReuseIdentifier:@"Cell"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,7 +74,7 @@ NSInteger resultOnOneRow = 5;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UJResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
     cell.textLabel.text = [[[_results objectAtIndex:indexPath.row] objectForKey:@"master"] objectForKey:@"name"];
 
