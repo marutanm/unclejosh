@@ -57,6 +57,7 @@
 
         _lifeLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 50, parameterWidth, 20)];
         _lifeLabel.backgroundColor = [UIColor clearColor];
+        _lifeLabel.textColor = ZURUI_DARK_COLOR;
         [self addSubview:_lifeLabel];
 
         _strengthGauge = [[DPMeterView alloc] init];
@@ -67,16 +68,18 @@
 
         _strengthLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 80, parameterWidth, 20)];
         _strengthLabel.backgroundColor = [UIColor clearColor];
+        _strengthLabel.textColor = ZURUI_DARK_COLOR;
         [self addSubview:_strengthLabel];
 
         _agilityGauge = [[DPMeterView alloc] init];
         _agilityGauge.frame = CGRectMake(padding, 110, parameterWidth, 20);
         _agilityGauge.meterType = DPMeterTypeLinearHorizontal;
+        _agilityGauge.progressTintColor = AGILIITY_COLOR;
         [self addSubview:_agilityGauge];
 
         _agilityLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 110, parameterWidth, 20)];
         _agilityLabel.backgroundColor = [UIColor clearColor];
-        _agilityGauge.progressTintColor = AGILIITY_COLOR;
+        _agilityLabel.textColor = ZURUI_DARK_COLOR;
         [self addSubview:_agilityLabel];
 
         NSInteger rightOffset = screenWidth * 0.6;
