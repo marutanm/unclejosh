@@ -56,9 +56,14 @@
 {
     NIDPRINT(@"%@", result);
 
-    if ([[result objectForKey:@"win"] boolValue]) {
+    if (![result objectForKey:@"winner_id"]) {
+        _resultLabel.text = NSLocalizedString(@"DRAW", @"label of result table: draw");
+        _resultLabel.textColor = [UIColor greenColor];
+
+    } else if ([[result objectForKey:@"winner_id"] isEqualToString:[[result objectForKey:@"master"] objectForKey:@"id"]]) {
         _resultLabel.text = NSLocalizedString(@"WIN", @"label of result table: win");
         _resultLabel.textColor = [UIColor redColor];
+
     } else {
         _resultLabel.text = NSLocalizedString(@"LOSE", @"label of result table: lose");
         _resultLabel.textColor = [UIColor blueColor];
