@@ -76,7 +76,7 @@ NSInteger resultOnOneRow = 5;
     static NSString *CellIdentifier = @"Cell";
     UJResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-    cell.textLabel.text = [[[_results objectAtIndex:indexPath.row] objectForKey:@"master"] objectForKey:@"name"];
+    cell.result = [_results objectAtIndex:indexPath.row];
 
     return cell;
 }
