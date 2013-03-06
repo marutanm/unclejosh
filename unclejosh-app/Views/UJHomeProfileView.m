@@ -35,18 +35,19 @@
     if (self) {
         self.backgroundColor = ZURUI_LIGHT_COLOR;
 
-        NSInteger padding = 10;
         NSInteger screenWidth = [[UIScreen mainScreen] applicationFrame].size.width;
 
-        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, padding, screenWidth - padding*2, 30)];
+        _nameLabel = [[UILabel alloc] init];
         _nameLabel.backgroundColor = ZURUI_LIGHT_COLOR;
         _nameLabel.textAlignment = NSTextAlignmentCenter;
         _nameLabel.font = [UIFont boldSystemFontOfSize:30];
         _nameLabel.adjustsFontSizeToFitWidth = YES;
         _nameLabel.minimumScaleFactor = 0.6;
         _nameLabel.shadowColor = RGBACOLOR(255, 255, 255, 1);
+        _nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_nameLabel];
 
+        int padding = 10;
         NSInteger parameterWidth = screenWidth * 0.6 - padding*2;
 
         _lifeGauge = [[DPMeterView alloc] init];
@@ -106,6 +107,23 @@
         [[DPMeterView appearance] setTrackTintColor:[UIColor lightGrayColor]];
     }
     return self;
+}
+
+- (void)updateConstraints
+{
+    [super updateConstraints];
+
+    NSNumber *padding = @10;
+    NSDictionary *paddingDictionary = NSDictionaryOfVariableBindings(padding);
+
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(padding)-[_nameLabel]-(padding)-|"
+                                                                 options:0
+                                                                 metrics:paddingDictionary
+                                                                   views:NSDictionaryOfVariableBindings(_nameLabel)]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(padding)-[_nameLabel]"
+                                                                 options:0
+                                                                 metrics:paddingDictionary
+                                                                   views:NSDictionaryOfVariableBindings(_nameLabel)]];
 }
 
 - (void)setHeroInfo:(NSDictionary *)heroInfo;
