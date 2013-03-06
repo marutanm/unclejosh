@@ -12,6 +12,7 @@
 @interface UJHomeProfileView ()
 
 @property UILabel *nameLabel;
+@property UIView  *nameBorder;
 @property UILabel *lifeLabel;
 @property UILabel *strengthLabel;
 @property UILabel *agilityLabel;
@@ -46,6 +47,13 @@
         _nameLabel.shadowColor = RGBACOLOR(255, 255, 255, 1);
         _nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_nameLabel];
+
+        _nameBorder = [[UIView alloc] init];
+        _nameBorder.translatesAutoresizingMaskIntoConstraints = NO;
+        _nameBorder.layer.borderColor = RGBACOLOR(0, 0, 0, 0.1).CGColor;
+        _nameBorder.layer.borderWidth = 1;
+        [self addSubview:_nameBorder];
+        _nameBorder.hidden = YES;
 
         int padding = 10;
         NSInteger parameterWidth = screenWidth * 0.6 - padding*2;
@@ -116,19 +124,21 @@
     NSNumber *padding = @10;
     NSDictionary *paddingDictionary = NSDictionaryOfVariableBindings(padding);
 
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(padding)-[_nameLabel]-(padding)-|"
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(padding)-[_nameLabel(==_nameBorder)]-(padding)-|"
                                                                  options:0
                                                                  metrics:paddingDictionary
-                                                                   views:NSDictionaryOfVariableBindings(_nameLabel)]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(padding)-[_nameLabel]"
+                                                                   views:NSDictionaryOfVariableBindings(_nameLabel, _nameBorder)]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_nameBorder attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_nameLabel attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(padding)-[_nameLabel][_nameBorder(==1)]"
                                                                  options:0
                                                                  metrics:paddingDictionary
-                                                                   views:NSDictionaryOfVariableBindings(_nameLabel)]];
+                                                                   views:NSDictionaryOfVariableBindings(_nameLabel, _nameBorder)]];
 }
 
 - (void)setHeroInfo:(NSDictionary *)heroInfo;
 {
     _nameLabel.text = [heroInfo objectForKey:@"name"];
+    _nameBorder.hidden = NO;
     _lifeLabel.text = [[heroInfo objectForKey:@"life"] stringValue];
     _strengthLabel.text = [[heroInfo objectForKey:@"strength"] stringValue];
     _agilityLabel.text = [[heroInfo objectForKey:@"agility"] stringValue];
@@ -168,24 +178,6 @@
         default:
             break;
     }
-}
-
-- (void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(context, 1.0);
-
-    CGContextSetStrokeColorWithColor(context, RGBACOLOR(0, 0, 0, 0.1).CGColor);
-    CGContextMoveToPoint(context, 10, 40);
-    CGContextAddLineToPoint(context, 310, 40);
-    CGContextStrokePath(context);
-
-    CGContextSetStrokeColorWithColor(context, RGBACOLOR(255, 255, 255, 0.1).CGColor);
-    CGContextMoveToPoint(context, 10, 42);
-    CGContextAddLineToPoint(context, 310, 42);
-    CGContextStrokePath(context);
 }
 
 @end
