@@ -36,8 +36,6 @@
     if (self) {
         self.backgroundColor = ZURUI_LIGHT_COLOR;
 
-        NSInteger screenWidth = [[UIScreen mainScreen] applicationFrame].size.width;
-
         _nameLabel = [[UILabel alloc] init];
         _nameLabel.backgroundColor = ZURUI_LIGHT_COLOR;
         _nameLabel.textAlignment = NSTextAlignmentCenter;
@@ -91,25 +89,24 @@
         _agilityLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_agilityLabel];
 
-        NSInteger rightOffset = screenWidth * 0.6;
-        NSInteger controlWidth = screenWidth - rightOffset - 10;
         _challengebutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [_challengebutton setTitle:NSLocalizedString(@"FIGHT", @"Label on challenge ranking button") forState:UIControlStateNormal];
         [_challengebutton setTitle:NSLocalizedString(@"CHALLENGING", @"Labeo on challenge ranking button, state: disabled") forState:UIControlStateDisabled];
-        _challengebutton.frame = CGRectMake(rightOffset, 50, controlWidth, 20);
         _challengebutton.hidden = YES;
+        _challengebutton.translatesAutoresizingMaskIntoConstraints = NO;
         [_challengebutton addTarget:_delegate action:@selector(challengeRanking) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_challengebutton];
 
         _resultButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [_resultButton setTitle:NSLocalizedString(@"RESULT", @"Label on show challenge result button") forState:UIControlStateNormal];
-        _resultButton.frame = CGRectMake(rightOffset, 50, controlWidth, 20);
         _resultButton.hidden = YES;
+        _resultButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_resultButton addTarget:_delegate action:@selector(showResults) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_resultButton];
 
-        _resultLabel = [[UILabel alloc] initWithFrame:CGRectMake(rightOffset, 80, controlWidth, 20)];
+        _resultLabel = [[UILabel alloc] init];
         _resultLabel.backgroundColor = ZURUI_LIGHT_COLOR;
+        _resultLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_resultLabel];
 
         [[DPMeterView appearance] setTrackTintColor:[UIColor lightGrayColor]];
@@ -130,10 +127,12 @@
                                                                  metrics:paddingDictionary
                                                                    views:NSDictionaryOfVariableBindings(_nameLabel, _nameBorder)]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_nameBorder attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_nameLabel attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(padding)-[_lifeGauge(==_strengthGauge,==_agilityGauge,==gaugeWidth)]"
+
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(padding)-[_lifeGauge(==_strengthGauge,==_agilityGauge,==gaugeWidth)]-[_challengebutton(==_resultButton,==_resultLabel)]-|"
                                                                  options:0
                                                                  metrics:paddingDictionary
-                                                                   views:NSDictionaryOfVariableBindings(_lifeGauge, _strengthGauge, _agilityGauge)]];
+                                                                   views:NSDictionaryOfVariableBindings(_lifeGauge, _strengthGauge, _agilityGauge, _challengebutton, _resultButton, _resultLabel)]];
+
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_strengthGauge attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_lifeGauge attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_agilityGauge attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_lifeGauge attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0]];
 
@@ -146,10 +145,20 @@
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_agilityLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_agilityGauge attribute:NSLayoutAttributeLeft multiplier:1.5 constant:0]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_agilityLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_agilityGauge attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
 
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_resultButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_challengebutton attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_resultLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_challengebutton attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+
+
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(padding)-[_nameLabel][_nameBorder(==1)]-(padding)-[_lifeGauge(==20)]-(padding)-[_strengthGauge(==20)]-(padding)-[_agilityGauge(==20)]-(padding)-|"
                                                                  options:0
                                                                  metrics:paddingDictionary
                                                                    views:NSDictionaryOfVariableBindings(_nameLabel, _nameBorder, _lifeGauge, _strengthGauge, _agilityGauge)]];
+
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_nameBorder(==1)]-[_challengebutton(==_resultButton)]-[_resultLabel]-(padding)-|"
+                                                                 options:0
+                                                                 metrics:paddingDictionary
+                                                                   views:NSDictionaryOfVariableBindings(_nameBorder, _challengebutton, _resultButton, _resultLabel)]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_resultButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_challengebutton attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
 }
 
 - (void)setHeroInfo:(NSDictionary *)heroInfo;
