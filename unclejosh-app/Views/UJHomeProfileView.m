@@ -55,18 +55,16 @@
         [self addSubview:_nameBorder];
         _nameBorder.hidden = YES;
 
-        int padding = 10;
-        NSInteger parameterWidth = screenWidth * 0.6 - padding*2;
-
         _lifeGauge = [[DPMeterView alloc] init];
         _lifeGauge.meterType = DPMeterTypeLinearHorizontal;
         _lifeGauge.progressTintColor = LIFE_COLOR;
         _lifeGauge.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_lifeGauge];
 
-        _lifeLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 50, parameterWidth, 20)];
+        _lifeLabel = [[UILabel alloc] init];
         _lifeLabel.backgroundColor = [UIColor clearColor];
         _lifeLabel.textColor = ZURUI_DARK_COLOR;
+        _lifeLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_lifeLabel];
 
         _strengthGauge = [[DPMeterView alloc] init];
@@ -75,9 +73,10 @@
         _strengthGauge.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_strengthGauge];
 
-        _strengthLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 80, parameterWidth, 20)];
+        _strengthLabel = [[UILabel alloc] init];
         _strengthLabel.backgroundColor = [UIColor clearColor];
         _strengthLabel.textColor = ZURUI_DARK_COLOR;
+        _strengthLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_strengthLabel];
 
         _agilityGauge = [[DPMeterView alloc] init];
@@ -86,13 +85,14 @@
         _agilityGauge.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_agilityGauge];
 
-        _agilityLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 110, parameterWidth, 20)];
+        _agilityLabel = [[UILabel alloc] init];
         _agilityLabel.backgroundColor = [UIColor clearColor];
         _agilityLabel.textColor = ZURUI_DARK_COLOR;
+        _agilityLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_agilityLabel];
 
         NSInteger rightOffset = screenWidth * 0.6;
-        NSInteger controlWidth = screenWidth - rightOffset - padding;
+        NSInteger controlWidth = screenWidth - rightOffset - 10;
         _challengebutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [_challengebutton setTitle:NSLocalizedString(@"FIGHT", @"Label on challenge ranking button") forState:UIControlStateNormal];
         [_challengebutton setTitle:NSLocalizedString(@"CHALLENGING", @"Labeo on challenge ranking button, state: disabled") forState:UIControlStateDisabled];
@@ -136,6 +136,16 @@
                                                                    views:NSDictionaryOfVariableBindings(_lifeGauge, _strengthGauge, _agilityGauge)]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_strengthGauge attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_lifeGauge attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_agilityGauge attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_lifeGauge attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0]];
+
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_lifeLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_lifeGauge attribute:NSLayoutAttributeLeft multiplier:1.5 constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_lifeLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_lifeGauge attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_strengthLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_strengthGauge attribute:NSLayoutAttributeLeft multiplier:1.5 constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_strengthLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_strengthGauge attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_agilityLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_agilityGauge attribute:NSLayoutAttributeLeft multiplier:1.5 constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_agilityLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_agilityGauge attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(padding)-[_nameLabel][_nameBorder(==1)]-(padding)-[_lifeGauge(==20)]-(padding)-[_strengthGauge(==20)]-(padding)-[_agilityGauge(==20)]-(padding)-|"
                                                                  options:0
                                                                  metrics:paddingDictionary
