@@ -68,12 +68,12 @@
         _resultLabel.layer.shadowColor = [UIColor greenColor].CGColor;
 
     } else if ([[result objectForKey:@"winner_id"] isEqualToString:[[result objectForKey:@"master"] objectForKey:@"id"]]) {
-        _resultLabel.text = NSLocalizedString(@"WIN", @"label of result table: win");
-        _resultLabel.layer.shadowColor = [UIColor redColor].CGColor;
-
-    } else {
         _resultLabel.text = NSLocalizedString(@"LOSE", @"label of result table: lose");
         _resultLabel.layer.shadowColor = [UIColor blueColor].CGColor;
+
+    } else {
+        _resultLabel.text = NSLocalizedString(@"WIN", @"label of result table: win");
+        _resultLabel.layer.shadowColor = [UIColor redColor].CGColor;
     }
 
     _nameLabel.text = [[result objectForKey:@"master"] objectForKey:@"name"];
