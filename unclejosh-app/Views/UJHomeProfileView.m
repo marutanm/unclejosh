@@ -59,9 +59,9 @@
         NSInteger parameterWidth = screenWidth * 0.6 - padding*2;
 
         _lifeGauge = [[DPMeterView alloc] init];
-        _lifeGauge.frame =  CGRectMake(padding, 50, parameterWidth, 20);
         _lifeGauge.meterType = DPMeterTypeLinearHorizontal;
         _lifeGauge.progressTintColor = LIFE_COLOR;
+        _lifeGauge.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_lifeGauge];
 
         _lifeLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 50, parameterWidth, 20)];
@@ -70,9 +70,9 @@
         [self addSubview:_lifeLabel];
 
         _strengthGauge = [[DPMeterView alloc] init];
-        _strengthGauge.frame = CGRectMake(padding, 80, parameterWidth, 20);
         _strengthGauge.meterType = DPMeterTypeLinearHorizontal;
         _strengthGauge.progressTintColor = STRENGTH_COLOR;
+        _strengthGauge.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_strengthGauge];
 
         _strengthLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 80, parameterWidth, 20)];
@@ -81,9 +81,9 @@
         [self addSubview:_strengthLabel];
 
         _agilityGauge = [[DPMeterView alloc] init];
-        _agilityGauge.frame = CGRectMake(padding, 110, parameterWidth, 20);
         _agilityGauge.meterType = DPMeterTypeLinearHorizontal;
         _agilityGauge.progressTintColor = AGILIITY_COLOR;
+        _agilityGauge.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_agilityGauge];
 
         _agilityLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding * 1.5, 110, parameterWidth, 20)];
@@ -122,17 +122,24 @@
     [super updateConstraints];
 
     NSNumber *padding = @10;
-    NSDictionary *paddingDictionary = NSDictionaryOfVariableBindings(padding);
+    NSNumber *gaugeWidth = @([[UIScreen mainScreen] applicationFrame].size.width * 0.6 - 10 * 2);
+    NSDictionary *paddingDictionary = NSDictionaryOfVariableBindings(padding, gaugeWidth);
 
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(padding)-[_nameLabel(==_nameBorder)]-(padding)-|"
                                                                  options:0
                                                                  metrics:paddingDictionary
                                                                    views:NSDictionaryOfVariableBindings(_nameLabel, _nameBorder)]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_nameBorder attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_nameLabel attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(padding)-[_nameLabel][_nameBorder(==1)]"
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(padding)-[_lifeGauge(==_strengthGauge,==_agilityGauge,==gaugeWidth)]"
                                                                  options:0
                                                                  metrics:paddingDictionary
-                                                                   views:NSDictionaryOfVariableBindings(_nameLabel, _nameBorder)]];
+                                                                   views:NSDictionaryOfVariableBindings(_lifeGauge, _strengthGauge, _agilityGauge)]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_strengthGauge attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_lifeGauge attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:_agilityGauge attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_lifeGauge attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(padding)-[_nameLabel][_nameBorder(==1)]-(padding)-[_lifeGauge(==20)]-(padding)-[_strengthGauge(==20)]-(padding)-[_agilityGauge(==20)]-(padding)-|"
+                                                                 options:0
+                                                                 metrics:paddingDictionary
+                                                                   views:NSDictionaryOfVariableBindings(_nameLabel, _nameBorder, _lifeGauge, _strengthGauge, _agilityGauge)]];
 }
 
 - (void)setHeroInfo:(NSDictionary *)heroInfo;
