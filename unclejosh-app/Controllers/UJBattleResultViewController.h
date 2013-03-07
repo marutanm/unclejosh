@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UJBattleResultViewController : UIViewController
+@interface UJBattleResultViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, copy) NSString* battleId;
 
