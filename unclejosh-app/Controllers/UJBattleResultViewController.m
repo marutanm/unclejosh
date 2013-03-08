@@ -17,6 +17,8 @@
 @property (nonatomic) NSDictionary *challenger;
 @property (nonatomic) NSDictionary *master;
 
+@property (nonatomic) NSArray *lifesOfTurn;
+
 @end
 
 @implementation UJBattleResultViewController
@@ -49,6 +51,7 @@
         _challenger = [responseObject objectForKey:@"challenger"];
         _master = [responseObject objectForKey:@"master"];
 
+        _lifesOfTurn = [self lifesOfTurn];
         [_tableView reloadData];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -62,6 +65,23 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSArray *)lifesOfTurn
+{
+    NSDictionary *initialState = @{@"master": [_master objectForKey:@"life"], @"challenger": [_challenger objectForKey:@"life"]};
+    NSMutableArray *lifes = [NSMutableArray arrayWithObject:initialState];
+    for (NSDictionary *turn in _turns) {
+        NSDictionary *last = lifes.lastObject;
+        if ([[turn objectForKey:@"owner"] isEqualToString:@"master"]) {
+            [lifes addObject:@{@"master": [last objectForKey:@"master"], @"challenger": @([[last objectForKey:@"challenger"] intValue] - [[turn objectForKey:@"damage"] intValue])}];
+        } else {
+            [lifes addObject:@{@"master": @([[last objectForKey:@"master"] intValue] - [[turn objectForKey:@"damage"] intValue]), @"challenger": [last objectForKey:@"challenger"]}];
+        }
+    }
+    [lifes removeObjectAtIndex:0];
+
+    return lifes;
 }
 
 #pragma mark - Table view data source
@@ -81,8 +101,8 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-    NSDictionary *turn = [NSDictionary dictionaryWithDictionary:[_turns objectAtIndex:indexPath.section]];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@:%@", [turn objectForKey:@"owner"], [turn objectForKey:@"damage"]];
+    NSDictionary *life = [NSDictionary dictionaryWithDictionary:[_lifesOfTurn objectAtIndex:indexPath.section]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@:%@", [life objectForKey:@"challenger"], [life objectForKey:@"master"]];
 
     return cell;
 }
@@ -103,7 +123,8 @@
 {
     UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, tableView.rowHeight*0.5)];
     headerView.backgroundColor = ZURUI_LIGHT_COLOR;
-    headerView.text = [[_turns objectAtIndex:section] objectForKey:@"owner"];
+    NSDictionary *turn = [NSDictionary dictionaryWithDictionary:[_turns objectAtIndex:section]];
+    headerView.text = [NSString stringWithFormat:@"%@:%@", [turn objectForKey:@"owner"], [turn objectForKey:@"damage"]];
 
     return headerView;
 }
