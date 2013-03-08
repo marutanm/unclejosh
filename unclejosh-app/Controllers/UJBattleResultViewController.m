@@ -68,12 +68,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return _turns.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _turns.count;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -81,7 +81,7 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-    NSDictionary *turn = [NSDictionary dictionaryWithDictionary:[_turns objectAtIndex:indexPath.row]];
+    NSDictionary *turn = [NSDictionary dictionaryWithDictionary:[_turns objectAtIndex:indexPath.section]];
     cell.textLabel.text = [NSString stringWithFormat:@"%@:%@", [turn objectForKey:@"owner"], [turn objectForKey:@"damage"]];
 
     return cell;
@@ -92,6 +92,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return tableView.rowHeight * 0.5;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, tableView.rowHeight*0.5)];
+    headerView.backgroundColor = ZURUI_LIGHT_COLOR;
+    headerView.text = [[_turns objectAtIndex:section] objectForKey:@"owner"];
+
+    return headerView;
 }
 
 @end
