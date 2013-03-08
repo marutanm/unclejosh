@@ -25,7 +25,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _tableView = [[UITableView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame] style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
     }
@@ -36,6 +36,10 @@
 {
     [super viewDidLoad];
 
+    CGRect tableViewFrame = [[UIScreen mainScreen] bounds];
+    tableViewFrame.size.height -= [[UIApplication sharedApplication] statusBarFrame].size.height;
+    tableViewFrame.size.height -= self.navigationController.navigationBar.frame.size.height;
+    _tableView.frame = tableViewFrame;
     [self.view addSubview:_tableView];
 
     NSString *path = [NSString stringWithFormat:@"battles/%@", _battleId];
