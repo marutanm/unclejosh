@@ -102,8 +102,13 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
     NSDictionary *turn = [NSDictionary dictionaryWithDictionary:[_turns objectAtIndex:indexPath.section]];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@:%@", [turn objectForKey:@"owner"], [turn objectForKey:@"damage"]];
-
+    NSString *attackerName;
+    if ([[turn objectForKey:@"owner"] isEqualToString:@"owner"]) {
+        attackerName = [_master objectForKey:@"name"];
+    } else {
+        attackerName = [_challenger objectForKey:@"name"];
+    }
+    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@'s attack, %@ damages!", @"Message of each attack"), attackerName, [turn objectForKey:@"damage"]];
     return cell;
 }
 
