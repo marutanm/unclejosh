@@ -19,6 +19,8 @@
 		502863A016D4842900231855 /* UJResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5028639F16D4842900231855 /* UJResultTableViewController.m */; };
 		504AD33D16E5742E00CD28C6 /* UJResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 504AD33C16E5742E00CD28C6 /* UJResultTableViewCell.m */; };
 		504AD33F16E618B800CD28C6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504AD33E16E618B800CD28C6 /* QuartzCore.framework */; };
+		504AD34216ED551D00CD28C6 /* UJBattleResultTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 504AD34116ED551D00CD28C6 /* UJBattleResultTableHeader.m */; };
+		504AD34316ED551D00CD28C6 /* UJBattleResultTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 504AD34116ED551D00CD28C6 /* UJBattleResultTableHeader.m */; };
 		50743EE616CD1E3700EEE644 /* UJHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743EE516CD1E3700EEE644 /* UJHttpClient.m */; };
 		50743EEA16CD23A700EEE644 /* UJHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743EE916CD23A700EEE644 /* UJHomeViewController.m */; };
 		50743EED16CE4C6100EEE644 /* UJLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50743EEC16CE4C6100EEE644 /* UJLoginViewController.m */; };
@@ -60,6 +62,8 @@
 		504AD33B16E5742E00CD28C6 /* UJResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UJResultTableViewCell.h; path = Views/UJResultTableViewCell.h; sourceTree = "<group>"; };
 		504AD33C16E5742E00CD28C6 /* UJResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UJResultTableViewCell.m; path = Views/UJResultTableViewCell.m; sourceTree = "<group>"; };
 		504AD33E16E618B800CD28C6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		504AD34016ED551C00CD28C6 /* UJBattleResultTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UJBattleResultTableHeader.h; path = Views/UJBattleResultTableHeader.h; sourceTree = "<group>"; };
+		504AD34116ED551D00CD28C6 /* UJBattleResultTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UJBattleResultTableHeader.m; path = Views/UJBattleResultTableHeader.m; sourceTree = "<group>"; };
 		50743EE416CD1E3700EEE644 /* UJHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UJHttpClient.h; sourceTree = "<group>"; };
 		50743EE516CD1E3700EEE644 /* UJHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UJHttpClient.m; sourceTree = "<group>"; };
 		50743EE816CD23A700EEE644 /* UJHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UJHomeViewController.h; path = "unclejosh-app/Controllers/UJHomeViewController.h"; sourceTree = SOURCE_ROOT; };
@@ -211,6 +215,8 @@
 			children = (
 				509C34D116DC3B9200BF6A7A /* UJBattleResultViewController.h */,
 				509C34D216DC3B9200BF6A7A /* UJBattleResultViewController.m */,
+				504AD34016ED551C00CD28C6 /* UJBattleResultTableHeader.h */,
+				504AD34116ED551D00CD28C6 /* UJBattleResultTableHeader.m */,
 			);
 			name = BattleResultView;
 			sourceTree = "<group>";
@@ -385,6 +391,7 @@
 				509C34D316DC3B9200BF6A7A /* UJBattleResultViewController.m in Sources */,
 				50B68B7016E1CBD80067C828 /* UJHeroTableViewCell.m in Sources */,
 				504AD33D16E5742E00CD28C6 /* UJResultTableViewCell.m in Sources */,
+				504AD34216ED551D00CD28C6 /* UJBattleResultTableHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +405,7 @@
 				50C6663316D7A4120032D86E /* main.m in Sources */,
 				50C6666B16D8445C0032D86E /* UJLoginViewControllerTest.m in Sources */,
 				50B68B7116E1CBD80067C828 /* UJHeroTableViewCell.m in Sources */,
+				504AD34316ED551D00CD28C6 /* UJBattleResultTableHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

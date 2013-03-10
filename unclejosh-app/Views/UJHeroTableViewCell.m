@@ -7,6 +7,7 @@
 //
 
 #import "UJHeroTableViewCell.h"
+#import "DPMeterView.h"
 
 @interface UJHeroTableViewCell ()
 

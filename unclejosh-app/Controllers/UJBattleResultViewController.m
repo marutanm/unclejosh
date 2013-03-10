@@ -8,6 +8,7 @@
 
 #import "UJBattleResultViewController.h"
 #import "UJHttpClient.h"
+#import "UJBattleResultTableHeader.h"
 
 @interface UJBattleResultViewController ()
 
@@ -126,12 +127,14 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    UJBattleResultTableHeader *header = [[UJBattleResultTableHeader alloc] init];
+
     UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, tableView.rowHeight*0.5)];
     headerView.backgroundColor = ZURUI_LIGHT_COLOR;
     NSDictionary *life = [NSDictionary dictionaryWithDictionary:[_lifesOfTurn objectAtIndex:section]];
     headerView.text = [NSString stringWithFormat:@"%@:%@", [life objectForKey:@"challenger"], [life objectForKey:@"master"]];
 
-    return headerView;
+    return header;
 }
 
 @end
