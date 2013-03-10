@@ -101,8 +101,8 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-    NSDictionary *life = [NSDictionary dictionaryWithDictionary:[_lifesOfTurn objectAtIndex:indexPath.section]];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@:%@", [life objectForKey:@"challenger"], [life objectForKey:@"master"]];
+    NSDictionary *turn = [NSDictionary dictionaryWithDictionary:[_turns objectAtIndex:indexPath.section]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@:%@", [turn objectForKey:@"owner"], [turn objectForKey:@"damage"]];
 
     return cell;
 }
@@ -123,8 +123,8 @@
 {
     UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, tableView.rowHeight*0.5)];
     headerView.backgroundColor = ZURUI_LIGHT_COLOR;
-    NSDictionary *turn = [NSDictionary dictionaryWithDictionary:[_turns objectAtIndex:section]];
-    headerView.text = [NSString stringWithFormat:@"%@:%@", [turn objectForKey:@"owner"], [turn objectForKey:@"damage"]];
+    NSDictionary *life = [NSDictionary dictionaryWithDictionary:[_lifesOfTurn objectAtIndex:section]];
+    headerView.text = [NSString stringWithFormat:@"%@:%@", [life objectForKey:@"challenger"], [life objectForKey:@"master"]];
 
     return headerView;
 }
