@@ -17,6 +17,7 @@
 @property (nonatomic) NSArray *turns;
 @property (nonatomic) NSDictionary *challenger;
 @property (nonatomic) NSDictionary *master;
+@property (nonatomic) NSDictionary *winner;
 
 @property (nonatomic) NSArray *lifesOfTurn;
 
@@ -51,6 +52,7 @@
         _turns = [responseObject objectForKey:@"turns"];
         _challenger = [responseObject objectForKey:@"challenger"];
         _master = [responseObject objectForKey:@"master"];
+        _winner = [responseObject objectForKey:@"winner"];
 
         _lifesOfTurn = [self lifesOfTurn];
         [_tableView reloadData];
@@ -94,7 +96,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return _turns.count;
+    return _lifesOfTurn.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -107,14 +109,20 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-    NSDictionary *turn = [NSDictionary dictionaryWithDictionary:[_turns objectAtIndex:indexPath.section]];
-    NSString *attackerName;
-    if ([turn[@"owner"] isEqualToString:@"master"]) {
-        attackerName = [_master objectForKey:@"name"];
+    if (indexPath.section >= _turns.count) {
+        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ win!!", @"Message of winner name"), [_winner objectForKey:@"name"]];
+
     } else {
-        attackerName = [_challenger objectForKey:@"name"];
+        NSDictionary *turn = [NSDictionary dictionaryWithDictionary:[_turns objectAtIndex:indexPath.section]];
+        NSString *attackerName;
+        if ([turn[@"owner"] isEqualToString:@"master"]) {
+            attackerName = [_master objectForKey:@"name"];
+        } else {
+            attackerName = [_challenger objectForKey:@"name"];
+        }
+        cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@'s attack, %@ damages!", @"Message of each attack"), attackerName, [turn objectForKey:@"damage"]];
     }
-    cell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@'s attack, %@ damages!", @"Message of each attack"), attackerName, [turn objectForKey:@"damage"]];
+
     return cell;
 }
 
@@ -128,6 +136,14 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return tableView.rowHeight * 0.5;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == _lifesOfTurn.count-1) {
+        return tableView.frame.size.height;
+    }
+    return tableView.rowHeight;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
