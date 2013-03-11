@@ -10,4 +10,6 @@
 
 @interface UJBattleResultTableHeader : UIView
 
+- (void)setLifesLeft:(NSInteger)left right:(NSInteger)right;
+
 @end
