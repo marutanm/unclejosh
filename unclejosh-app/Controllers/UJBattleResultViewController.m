@@ -74,13 +74,18 @@
     NSMutableArray *lifes = [NSMutableArray arrayWithObject:initialState];
     for (NSDictionary *turn in _turns) {
         NSDictionary *last = lifes.lastObject;
-        if ([[turn objectForKey:@"owner"] isEqualToString:@"master"]) {
-            [lifes addObject:@{@"master": [last objectForKey:@"master"], @"challenger": @([[last objectForKey:@"challenger"] intValue] - [[turn objectForKey:@"damage"] intValue])}];
+        if ([turn[@"owner"] isEqualToString:@"master"]) {
+            [lifes addObject:@{
+             @"master": [last objectForKey:@"master"],
+             @"challenger": @([[last objectForKey:@"challenger"] intValue] - [[turn objectForKey:@"damage"] intValue])
+             }];
         } else {
-            [lifes addObject:@{@"master": @([[last objectForKey:@"master"] intValue] - [[turn objectForKey:@"damage"] intValue]), @"challenger": [last objectForKey:@"challenger"]}];
+            [lifes addObject:@{
+             @"master": @([[last objectForKey:@"master"] intValue] - [[turn objectForKey:@"damage"] intValue]),
+             @"challenger": [last objectForKey:@"challenger"]
+             }];
         }
     }
-    [lifes removeObjectAtIndex:0];
 
     return lifes;
 }
@@ -104,7 +109,7 @@
 
     NSDictionary *turn = [NSDictionary dictionaryWithDictionary:[_turns objectAtIndex:indexPath.section]];
     NSString *attackerName;
-    if ([[turn objectForKey:@"owner"] isEqualToString:@"owner"]) {
+    if ([turn[@"owner"] isEqualToString:@"master"]) {
         attackerName = [_master objectForKey:@"name"];
     } else {
         attackerName = [_challenger objectForKey:@"name"];
@@ -127,9 +132,16 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UJBattleResultTableHeader *header = [[UJBattleResultTableHeader alloc] init];
-    NSDictionary *life = [NSDictionary dictionaryWithDictionary:[_lifesOfTurn objectAtIndex:section]];
-    [header setLifesLeft:[[life objectForKey:@"challenger"] intValue] right:[[life objectForKey:@"master"] intValue]];
+    UJBattleResultTableHeader *header = [[UJBattleResultTableHeader alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] applicationFrame].size.width, tableView.rowHeight*0.5)];
+
+    NSMutableDictionary *lifes = [NSMutableDictionary dictionary];
+    NSInteger lastIndex = (section == 0) ? 0 : section-1;
+    for (NSString* key in @[@"challenger", @"master"]) {
+        lifes[key] = [NSMutableDictionary dictionary];
+        lifes[key][@"current"] = _lifesOfTurn[section][key];
+        lifes[key][@"last"] = _lifesOfTurn[lastIndex][key];
+    }
+    header.lifes = lifes;
 
     return header;
 }

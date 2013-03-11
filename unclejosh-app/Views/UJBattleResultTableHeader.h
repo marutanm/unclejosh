@@ -10,6 +10,6 @@
 
 @interface UJBattleResultTableHeader : UIView
 
-- (void)setLifesLeft:(NSInteger)left right:(NSInteger)right;
+@property (nonatomic, copy) NSDictionary* lifes;
 
 @end
