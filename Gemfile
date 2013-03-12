@@ -20,7 +20,7 @@ gem 'guard-minitest', :require => false, :group => "test"
 gem 'database_cleaner', :require => false, :group => "test"
 gem "simplecov", :require => false, :group => "test"
 gem "fabrication", :require => false, :group => "test"
-gem "faker", :require => false, :group => "test"
+gem "faker", :require => false
 
 # Padrino Edge
 gem 'padrino', :git => 'git://github.com/padrino/padrino-framework.git'
