@@ -7,6 +7,10 @@
 //
 
 #import "UJResultTableViewController.h"
+#import "UJBattleResultViewController.h"
+#import "UJResultTableViewCell.h"
+
+#import "UJHttpClient.h"
 
 @interface UJResultTableViewController ()
 
@@ -31,45 +35,28 @@ NSInteger resultOnOneRow = 5;
 {
     [super viewDidLoad];
 
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.dimBackground = YES;
+    NSString *path = [NSString stringWithFormat:@"heros/%@/challenges", _heroId];
+
+    [[UJHttpClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NIDPRINT(@"%@", responseObject);
+        _results = responseObject;
+        [self.tableView reloadData];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NIDPRINT(@"%@", error);
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }];
+
+    [self.tableView registerClass:[UJResultTableViewCell class] forCellReuseIdentifier:@"Cell"];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)setResults:(NSArray *)results
-{
-    NIDPRINT(@"%d = %d / %d + %d", results.count/resultOnOneRow, results.count, resultOnOneRow, results.count%resultOnOneRow);
-    NSMutableArray *copy = [NSMutableArray arrayWithArray:results];
-    NSMutableArray *temp = [NSMutableArray array];
-    for (int i = 0; i < results.count / resultOnOneRow; i++) {
-        [temp addObject:[copy subarrayWithRange:NSMakeRange(0, resultOnOneRow)]];
-        [copy removeObjectsInRange:NSMakeRange(0, resultOnOneRow)];
-    }
-    if (copy.count) {
-        [temp addObject:copy];
-    }
-    _results = [NSArray arrayWithArray:temp];
-}
-
-- (NSString *)resultsLabelOf:(NSInteger)index
-{
-    NIDPRINT(@"%d", index);
-    NSMutableString *string = [NSMutableString string];
-    if (_results) {
-        NIDPRINT(@"%@", _results[index]);
-        for (NSDictionary *result in _results[index]) {
-            if ([[result objectForKey:@"win"] boolValue]) {
-                [string appendString:@"O"];
-            } else {
-                [string appendString:@"X"];
-            }
-        }
-    }
-    return string;
 }
 
 #pragma mark - Table view data source
@@ -87,9 +74,9 @@ NSInteger resultOnOneRow = 5;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UJResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-    cell.textLabel.text = [self resultsLabelOf:indexPath.row];
+    cell.result = [_results objectAtIndex:indexPath.row];
 
     return cell;
 }
@@ -99,6 +86,10 @@ NSInteger resultOnOneRow = 5;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    UJBattleResultViewController *resultViewController = [[UJBattleResultViewController alloc] init];
+    resultViewController.battleId = [[_results objectAtIndex:indexPath.row] objectForKey:@"id"];
+    [self.navigationController pushViewController:resultViewController animated:YES];
 }
 
 @end

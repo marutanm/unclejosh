@@ -10,6 +10,6 @@
 
 @interface UJResultTableViewController : UITableViewController
 
-- (void)setResults:(NSArray *)results;
+@property (nonatomic, copy) NSString* heroId;
 
 @end

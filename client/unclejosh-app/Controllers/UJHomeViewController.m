@@ -11,18 +11,17 @@
 #import "UJHttpClient.h"
 #import "UJLoginViewController.h"
 #import "UJResultTableViewController.h"
-#import "UJHeroTableView.h"
+#import "UJHeroTableViewCell.h"
 
 @interface UJHomeViewController ()
 
 @property NSMutableArray *heros;
 @property UITableView* tableView;
+@property NSInteger selectedRow;
 
 @property UITextField *textField;
 @property UJHomeProfileView *profileView;
 @property UIView *clearView;
-
-@property NSDictionary *heroInfo;
 
 @end
 
@@ -40,10 +39,10 @@
         _textField.returnKeyType = UIReturnKeyGo;
         _textField.delegate = self;
 
-        _profileView = [[UJHomeProfileView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
+        _profileView = [[UJHomeProfileView alloc] initWithFrame:CGRectMake(0, 0, 320, 140)];
         _profileView.delegate = self;
 
-        _tableView = [[UJHeroTableView alloc] initWithFrame:CGRectMake(0, _profileView.frame.origin.y + _profileView.frame.size.height + self.navigationController.navigationBar.frame.size.height, 320, 480)];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, _profileView.frame.origin.y + _profileView.frame.size.height, 320, [[UIScreen mainScreen] applicationFrame].size.height - (44 + _profileView.frame.size.height))];
         _tableView.delegate = self;
         _tableView.dataSource = self;
 
@@ -58,14 +57,16 @@
 {
     [super viewDidLoad];
 
-    [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+    [_tableView registerClass:[UJHeroTableViewCell class] forCellReuseIdentifier:@"Cell"];
     [self.view addSubview:_tableView];
 
     self.navigationItem.titleView = _textField;
     [self.view addSubview:_profileView];
 
-    _heros = [[NSUserDefaults standardUserDefaults] mutableArrayValueForKey:@"HEROS"];
-
+    _heros = (__bridge_transfer NSMutableArray *)CFPropertyListCreateDeepCopy(NULL, (CFArrayRef)[[NSUserDefaults standardUserDefaults] arrayForKey:@"HEROS"], kCFPropertyListMutableContainers);
+    if (!_heros) {
+        _heros = [NSMutableArray array];
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasHidden) name:UIKeyboardDidHideNotification object:nil];
 }
@@ -98,12 +99,11 @@
 
     [[UJHttpClient sharedClient] postPath:@"heros" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NIDPRINT(@"%@", responseObject);
-        _heroInfo = responseObject;
-        [_profileView setHeroInfo:_heroInfo];
 
-        [_heros addObject:_heroInfo];
+        [_heros insertObject:[NSMutableDictionary dictionaryWithDictionary:responseObject] atIndex:0];
         [[NSUserDefaults standardUserDefaults] setObject:_heros forKey:@"HEROS"];
         [_tableView reloadData];
+        [self tableView:_tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NIDPRINT(@"%@", error);
@@ -131,31 +131,29 @@
 #pragma mark UJHomeProfileViewDelegate
 - (void)challengeRanking;
 {
-    NIDPRINTMETHODNAME();
-    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObject:[_heroInfo objectForKey:@"id"] forKey:@"hero_id"];
+    [_profileView setState:CHALLENGING];
+    NSMutableDictionary *selectedHero = [_heros objectAtIndex:_selectedRow];
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObject:[selectedHero objectForKey:@"id"] forKey:@"hero_id"];
 
     [[UJHttpClient sharedClient] postPath:@"rankings" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NIDPRINT(@"%@", responseObject);
-        NSString *localized = NSLocalizedString(@"win:%@ ranking:%@", @"Result of challenge ranking");
-        [_profileView setResult:[NSString stringWithFormat:localized, [responseObject objectForKey:@"win_point"], [responseObject objectForKey:@"rank"]]];
+        [selectedHero setObject:responseObject forKey:@"result"];
+        NIDPRINT(@"%@", selectedHero);
+        [_profileView setHeroInfo:selectedHero];
+        [[NSUserDefaults standardUserDefaults] setObject:_heros forKey:@"HEROS"];
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NIDPRINT(@"%@", error);
+        [_profileView setState:BEFORE_CHALLENGE];
     }];
 }
 
 - (void)showResults;
 {
-    NIDPRINTMETHODNAME();
-
-    NSString *path = [NSString stringWithFormat:@"heros/%@/challenges", [_heroInfo objectForKey:@"id"]];
-    [[UJHttpClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NIDPRINT(@"%@", responseObject);
-        UJResultTableViewController *resultTableViewController = [[UJResultTableViewController alloc] init];
-        resultTableViewController.results = responseObject;
-        [self.navigationController pushViewController:resultTableViewController animated:YES];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NIDPRINT(@"%@", error);
-    }];
+    UJResultTableViewController *resultTableViewController = [[UJResultTableViewController alloc] init];
+    NSMutableDictionary *selectedHero = [_heros objectAtIndex:_selectedRow];
+    resultTableViewController.heroId = [selectedHero objectForKey:@"id"];
+    resultTableViewController.title = [selectedHero objectForKey:@"name"];
+    [self.navigationController pushViewController:resultTableViewController animated:YES];
 }
 
 #pragma mark -
@@ -184,9 +182,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UJHeroTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-    cell.textLabel.text = [[_heros objectAtIndex:indexPath.row] objectForKey:@"name"];
+    cell.hero = [_heros objectAtIndex:indexPath.row];
 
     return cell;
 }
@@ -196,6 +194,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    _selectedRow = indexPath.row;
+
+    [_profileView setHeroInfo:[_heros objectAtIndex:indexPath.row]];
 }
 
 @end

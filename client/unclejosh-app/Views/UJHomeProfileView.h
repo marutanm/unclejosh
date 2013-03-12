@@ -15,11 +15,13 @@
 
 @end
 
+typedef enum { BEFORE_CHALLENGE, CHALLENGING, FINISHED } State;
+
 @interface UJHomeProfileView : UIView
 
 @property (nonatomic) id <UJHomeProfileViewDelegate> delegate;
 
 - (void)setHeroInfo:(NSDictionary *)heroInfo;
-- (void)setResult:(NSString *)result;
+- (void)setState:(State)state;
 
 @end

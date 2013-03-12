@@ -11,8 +11,15 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import <QuartzCore/QuartzCore.h>
 
     #import <NimbusCore.h>
+    #import <MBProgressHUD.h>
 #endif
 
 #define BASE_URL @"http://unclejosh.dev/"
+#define LIFE_COLOR      RGBCOLOR(255, 175, 57)
+#define STRENGTH_COLOR  RGBCOLOR(255, 57, 114)
+#define AGILIITY_COLOR  RGBCOLOR(70, 255, 215)
+#define ZURUI_LIGHT_COLOR RGBCOLOR(0xF8, 0xF8, 0xF8);
+#define ZURUI_DARK_COLOR RGBCOLOR(0x33, 0x33, 0x33);
