@@ -58,24 +58,18 @@ describe UnclejoshHelper do
   end
 
   describe "challenge_rank()" do
-    let(:count) { 10 }
     let(:challenger) { Fabricate(:hero) }
     before do
-      0.upto(count - 1) do |i|
-        hero = Fabricate(:hero) do |h|
-          h.name "#{Faker::Name.name} #{i}"
-          h.ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero, :win_point => i) }
-        end
-        helper.rank hero
+      hero = Fabricate(:hero) do |h|
+        h.ranking_info { |hero| Fabricate(:hero_ranking, :hero => hero) }
       end
+      helper.rank hero
     end
     subject { helper.challenge_rank challenger }
 
     specify do
-      count.must_equal 10
-      subject.rank.wont_be_nil
-      subject.win_point.wont_be_nil
-      subject.rank.must_equal 10 - subject.win_point + 1
+      subject.must_be_nil
+      challenger.ranking_info.wont_be_nil
     end
   end
 

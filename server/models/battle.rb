@@ -30,7 +30,7 @@ class Battle
 
   def self.challenges_of(challenger_id)
     regex = Regexp.new("#{challenger_id}$")
-    where(id: regex)
+    where(id: regex).order_by(:created_at.asc)
   end
 
   private

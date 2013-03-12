@@ -48,7 +48,9 @@ Unclejosh.controllers :rankings do
   post :index do
     user = current_user(request.env['HTTP_UID'])
     hero = user.heros.find(params[:hero_id])
-    result = challenge_rank hero, 100
+    challenge_rank hero, 100 unless hero.ranking_info
+
+    result = OpenStruct.new({ rank: Ranking.rank_of(hero), win_point: hero.ranking_info.win_point })
     render 'challenge_result', locals: { result: result }
   end
 end
