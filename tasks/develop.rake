@@ -5,24 +5,15 @@ namespace :develop do
     require 'faker'
     helper = Object.new; helper.extend UnclejoshHelper;
     count = 100
-    heros = (1..count).inject([]) do |heros, i|
-      win_count = 0
-      heros[i] ||= Hero.create_with_name "#{i} #{Faker::Name.name}"
-      challenger = heros[i]
-      (1..count).each do |j|
-        next if i == j
-        heros[j] ||= Hero.create_with_name "#{j} #{Faker::Name.name}"
-        master = heros[j]
-        result = helper.fight master, challenger
-        win_count += 1 if result.winner == challenger
+    100.times do |i|
+      begin
+        hero = Hero.create_with_name Faker::Name.name
+      rescue
+        retry
       end
-      challenger.create_ranking_info win_point: win_count, total_win: win_count
-      helper.rank challenger
-      heros
-    end
-    heros.each do |h|
-      next unless h
-      p "rank: #{Ranking.rank_of(h)}(win_count: #{h.ranking_info.win_point}), name: #{h.name}(#{h.id})"
+      hero.create_ranking_info win_point: i%10, total_win: i%10
+      helper.rank hero
+      p "rank: #{Ranking.rank_of(hero)}(win_count: #{hero.ranking_info.win_point}), name: #{hero.name}(#{hero.id})"
     end
   end
 
