@@ -1,5 +1,9 @@
 source :rubygems
 
+# on Heroku
+# https://blog.heroku.com/archives/2012/5/9/multiple_ruby_version_support_on_heroku
+ruby '1.9.3'
+
 # Server requirements
 # gem 'thin' # or mongrel
 # gem 'trinidad', :platform => 'jruby'
