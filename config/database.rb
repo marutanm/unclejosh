@@ -1,2 +1,2 @@
-Mongoid.load!(File.join(Padrino.root, 'config', 'database.yml'), Padrino.env)
+Mongoid.load!(File.join(Padrino.root, 'config', 'mongoid.yml'), Padrino.env)
 
